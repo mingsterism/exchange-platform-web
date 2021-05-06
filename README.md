@@ -6,7 +6,7 @@
     and people are constantly buying new clothes every month causing wastage.
 
 ## How the platform works
-1. When you register on the platform everyone gets 100 points (equal to USD100). 
+1. When you register on the platform everyone gets 100 points (equivalent value to USD100). This is a cashless marketplace. There is no cash transacted in the platform. 
 2. You list your clothing on the platform selling your clothes for 50 points. You can choose to sell your clothes at any points you wish
 3. Anyone can purcahse your clothes at the points you set. Once they purcahse you deliver the clothes to them at your cost
 4. You now have 150 points and you can purchase any clothes on the platform. 
