@@ -5,6 +5,13 @@
 3. The world is full of unused clothing and shoes that we no longer want to wear but still in good condition. We want to prevent wastage of clothes
     and people are constantly buying new clothes every month causing wastage.
 
+## How the platform works
+1. When you register on the platform everyone gets 100 points (equal to USD100). 
+2. You list your clothing on the platform selling your clothes for 50 points. You can choose to sell your clothes at any points you wish
+3. Anyone can purcahse your clothes at the points you set. Once they purcahse you deliver the clothes to them at your cost
+4. You now have 150 points and you can purchase any clothes on the platform. 
+
+# [Design Reference](https://www.figma.com/file/hkkJkLA9gODx1nb9YGAUY0/exchange-platform-team-library?node-id=312%3A2)
 # Todos
 - Complete wireframes of the MVP
   - [] Login 
