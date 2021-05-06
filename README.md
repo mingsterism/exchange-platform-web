@@ -1,8 +1,36 @@
 # What is it
 1. A platform where users are able to exchange products as they have second hand products that they no longer wish to use
 2. Example are clothes and shoes. Often we have extra things in our closet that we no longer wear. Instead of selling it for half the price, 
-we can exchange it on the marketplace at full price. 
+    we can exchange it on the marketplace at full price. 
+3. The world is full of unused clothing and shoes that we no longer want to wear but still in good condition. We want to prevent wastage of clothes
+    and people are constantly buying new clothes every month causing wastage.
 
+# Todos
+- Complete wireframes of the MVP
+  - [] Login 
+  - [] Registration 
+  - [] public-profile
+  - [] marketplace
+  - [] product-detail
+  - [] checkout
+  - [] settings
+- Complete Component Molecules For MVP 
+  - [] Card
+  - [] NavBar
+  - [] InputBox
+  - [] CheckBox
+  - [] RadioButton
+- Complete Pages For MVP
+  - [] Login 
+  - [] Registration 
+  - [] public-profile
+  - [] marketplace
+  - [] product-detail
+  - [] checkout
+  - [] settings
+
+# Suggested Requirements to Participate
+Complete either "HTML / CSS Developer Journey" or Complete "Vuejs Developer Journey" on pathforge
 # Frontend Overview
 **Pages**
 - login
@@ -12,8 +40,8 @@ we can exchange it on the marketplace at full price.
 - product info
 
 
-# How to contribute
-Propose your new feature idea in the issues tab. Follow this format
+# How to propose ideas using github issues
+Propose your new feature idea in the githugb issues tab. Follow this format
 ```
 What is your proposal about:
 Explain what is your feature proposal about
