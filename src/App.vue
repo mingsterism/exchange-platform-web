@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Card from "./components/organism/Card/Card.vue"
+import Card from "/@/components/organism/Card/Card.vue"
 
 export default {
   name: "App",
