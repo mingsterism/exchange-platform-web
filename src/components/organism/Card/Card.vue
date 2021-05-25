@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Button from "../../molecule/Button/Button.vue"
+import Button from "/@/components/molecule/Button/Button.vue"
 export default {
   name: "Card",
   components: {
