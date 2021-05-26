@@ -10,15 +10,18 @@
       <h3>Condition</h3>
     </div>
     <Button />
+    <Checkbox />
   </div>
 </template>
 
 <script>
 import Button from "../../molecule/Button/Button.vue"
+import Checkbox from "../../molecule/Checkbox/Checkbox.vue"
 export default {
   name: "Card",
   components: {
     Button,
+    Checkbox
   }
 }
 </script>
