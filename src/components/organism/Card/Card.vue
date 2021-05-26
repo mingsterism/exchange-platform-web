@@ -1,11 +1,20 @@
 <template>
   <div>
+    <img />
+    <div>
+      <h1>Product A</h1>
+      <span>Product A description</span>
+    </div>
+    <div>
+      <h3>Condition</h3><span>New</span>
+      <h3>Condition</h3>
+    </div>
     <Button />
   </div>
 </template>
 
 <script>
-import Button from "../../molecule/Button/Button.vue"
+import Button from "/@/components/molecule/Button/Button.vue"
 export default {
   name: "Card",
   components: {
