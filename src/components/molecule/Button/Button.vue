@@ -1,5 +1,5 @@
 <template>
-  <button>THIS IS BUTTON</button>
+  <button>Register</button>
 </template>
 
 <script>
@@ -8,6 +8,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="css" scoped>
+button {
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 0.8rem;
+  background-color: #0000CD;
+  color: #FFFFFF;
+}
 </style>
