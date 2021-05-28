@@ -1,5 +1,6 @@
 <template>
-  <button></button>
+<!--  <button></button>-->
+  <input type="checkbox" id="" name="" value=""/>
 </template>
 
 <script>
