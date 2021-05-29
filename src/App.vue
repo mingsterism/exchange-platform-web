@@ -1,17 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png"/>
+  <!--  <img alt="Vue logo" src="./assets/logo.png"/>-->
   <div>
     <Card />
+    <Textbox />
   </div>
 </template>
 
 <script>
+import NavBar from "/@/components/organism/NavBar/NavBar.vue"
 import Card from "/@/components/organism/Card/Card.vue"
+import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
 
 export default {
   name: "App",
   components: {
-    Card
+    Card,
+    NavBar,
+    ProfileCard
   }
 }
 </script>
