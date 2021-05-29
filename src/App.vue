@@ -2,6 +2,7 @@
   <!--  <img alt="Vue logo" src="./assets/logo.png"/>-->
   <div>
     <Card />
+    <NavBar />
     <Textbox />
   </div>
 </template>
@@ -10,13 +11,15 @@
 import NavBar from "/@/components/organism/NavBar/NavBar.vue"
 import Card from "/@/components/organism/Card/Card.vue"
 import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
+import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 
 export default {
   name: "App",
   components: {
     Card,
     NavBar,
-    ProfileCard
+    ProfileCard,
+    Textbox
   }
 }
 </script>
