@@ -1,9 +1,8 @@
 <template>
   <!--  <img alt="Vue logo" src="./assets/logo.png"/>-->
   <div>
-    <Card/>
-    <NavBar/>
-    <ProfileCard/>
+    <Card />
+    <Textbox />
   </div>
 </template>
 
