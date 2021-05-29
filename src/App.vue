@@ -2,16 +2,20 @@
   <img alt="Vue logo" src="./assets/logo.png"/>
   <div>
     <Card />
+    <Textbox />
   </div>
 </template>
 
 <script>
 import Card from "/@/components/organism/Card/Card.vue"
+import Textbox from "/@/components/molecule/TextBox/TextBox.vue"
+
 
 export default {
   name: "App",
   components: {
-    Card
+    Card,
+    Textbox
   }
 }
 </script>
