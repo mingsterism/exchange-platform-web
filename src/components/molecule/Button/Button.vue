@@ -1,5 +1,5 @@
 <template>
-  <button>Register</button>
+  <button>1400 Points</button>
 </template>
 
 <script>
