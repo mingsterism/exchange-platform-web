@@ -11,7 +11,7 @@
           <h3>Condition</h3><span>New</span>
           <h3>Owned By</h3>
         </div>
-        <Button className="container__button"/>
+        <Button className="container__button" label="1400 Points"/>
       </div>
     </div>
   </div>
@@ -63,5 +63,14 @@ export default {
 
 .container__button {
   margin: 0.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 700;
 }
 </style>
