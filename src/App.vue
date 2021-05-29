@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png"/>
+  <!--  <img alt="Vue logo" src="./assets/logo.png"/>-->
   <div>
     <Card />
     <Textbox />
@@ -7,18 +7,20 @@
 </template>
 
 <script>
+import NavBar from "/@/components/organism/NavBar/NavBar.vue"
 import Card from "/@/components/organism/Card/Card.vue"
-import Textbox from "/@/components/molecule/TextBox/TextBox.vue"
-
+import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
 
 export default {
   name: "App",
   components: {
     Card,
-    Textbox
+    NavBar,
+    ProfileCard
   }
 }
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
