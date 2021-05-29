@@ -7,7 +7,7 @@ import './button.css';
 import { reactive, computed } from 'vue';
 
 export default {
-  name: 'my-button',
+  name: 'Button',
 
   props: {
     label: {
@@ -50,3 +50,13 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+button {
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 0.8rem;
+  background-color: #0000CD;
+  color: #FFFFFF;
+}
+</style>
