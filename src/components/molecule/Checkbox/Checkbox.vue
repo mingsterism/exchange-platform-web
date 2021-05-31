@@ -1,7 +1,7 @@
 <template>
-  <li className="checkbox">
-    <input className="checkmark" type="checkbox" id="choice1" name="choice1" value="value1" />
-    <label for="choice1">Choice 1</label>
+  <li className="flex my-4 text-base items-center">
+    <input className="w-5 h-5 m-3" type="checkbox" id="choice1" name="choice1" value="value1" />
+    <label for="choice1" className="mt-0.5">Choice 1</label>
   </li>
 </template>
 
@@ -14,14 +14,6 @@ export default {
 <style lang="css" scoped>
 li {
   list-style-type: none;
-}
-
-.checkbox {
-  display: block;
-  position: relative;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  font-size: 1.5rem;
 }
 
 input.checkmark {
