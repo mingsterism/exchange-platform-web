@@ -8,7 +8,7 @@ module.exports = {
     maxWidth: {
       'sm': '18rem',
       'xs': '17rem',
-      "3xl": '38rem'
+      "screen-xl": '1280px'
     }
   },
   variants: {

@@ -1,5 +1,5 @@
 <template>
-  <div className="container flex flex-col p-1 m-3 bg-yellow-100 md:flex-row max-w-sm md:max-w-3xl">
+  <div className="container flex flex-col p-2 m-auto bg-yellow-100 md:flex-row max-w-sm md:max-w-screen-xl">
     <img src="https://i.imgur.com/hghfnW9.jpg" className="max-w-xs m-3" />
     <div className="m-3 flex flex-col justify-between text-left">
       <div className="pb-12 md:pb-0">
