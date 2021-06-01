@@ -1,13 +1,20 @@
 <template>
-  <li className="checkbox">
-    <input className="checkmark" type="checkbox" id="choice1" name="choice1" value="value1" />
-    <label for="choice1">Choice 1</label>
+  <li class="flex ml-2 mt-6 items-center" className="checkbox">
+    <input class="form-checkbox h-6 w-6 ml-2" className="checkmark" type="checkbox" id="choice1" name="choice1" value="value1"/>
+    <label class="text-lg ml-2" for="choice1">{{ choice }}</label>
   </li>
 </template>
 
 <script>
 export default {
-  name: "Checkbox"
+  name: "Checkbox",
+
+  props: {
+    choice: {
+      type: String,
+      required: true,
+    }
+  }
 }
 </script>
 
@@ -16,21 +23,5 @@ li {
   list-style-type: none;
 }
 
-.checkbox {
-  display: block;
-  position: relative;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-}
 
-input.checkmark {
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-right: 0.7rem;
-}
-
-.checkbox label {
-  padding-bottom: 1rem;
-}
 </style>
