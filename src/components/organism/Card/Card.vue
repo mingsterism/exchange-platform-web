@@ -1,18 +1,14 @@
 <template>
-  <div className="container">
-    <img src="https://i.imgur.com/hghfnW9.jpg" className="container__img" />
-    <div className="container__text">
-      <div className="container__title">
-        <h1>Product A</h1>
-        <span>Product A description</span>
+  <div className="shadow-md w-80">
+    <img src="https://i.imgur.com/hghfnW9.jpg" className="p-0"/>
+    <div>
+      <div className="py-4 p-3 text-left">
+        <p className="pb-2 text-2xl font-semibold">Product Name</p>
+        <p className="h-36">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et do...</p>
       </div>
-      <div>
-        <div className="container__description">
-          <h3>Condition</h3><span>New</span>
-          <h3>Owned By</h3>
-        </div>
-        <Button className="container__button" label="1400 Points"/>
-      </div>
+    <div className="pb-4">
+      <Button label="Button" :primary="true" size="medium" />
+    </div>
     </div>
   </div>
 </template>
@@ -27,50 +23,6 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-.container {
-  display: inline-flex;
-  background-color: blanchedalmond;
-  margin: 2rem;
-}
+<style scoped>
 
-.container__img {
-  width: 50%;
-  padding: 1rem;
-}
-
-.container__title {
-  padding: 0.5rem;
-}
-
-.container__text {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  column-count: 2;
-  justify-content: space-between;
-  text-align: left;
-  padding: 1rem;
-}
-
-.container__description {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 17rem;
-  justify-content: space-around;
-}
-
-.container__button {
-  margin: 0.5rem;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-weight: 700;
-}
 </style>

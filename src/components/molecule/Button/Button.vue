@@ -56,7 +56,5 @@ button {
   border-radius: 12px;
   font-size: 16px;
   padding: 0.8rem;
-  background-color: #0000CD;
-  color: #FFFFFF;
 }
 </style>
