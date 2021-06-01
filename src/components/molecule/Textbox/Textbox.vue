@@ -1,29 +1,25 @@
 <template>
-  <div class="flex flex-col items-start bg-red-200 border-4 border-black border-opacity-100">
-    <span>Name: </span>
-    <input type="text" value="large">
+  <div class="flex flex-col items-center">
+    <label for="name" class="text-gray-600 pr-40 mt-1">{{ text }}</label>
+    <input class="border-4 border-gray-400 rounded-lg p-1.5" type="text" placeholder="Name" id="name">
   </div>
 
 </template>
 
 <script>
 export default {
-  name: "Textbox"
+  name: "Textbox",
+
+  props: {
+    text: {
+      type: String,
+      required: true,
+    }
+  }
 }
+  
 </script>
 
 <style scoped>
-input {
-  padding: 10px;
-  margin-left: 5px;
-}
 
-span {
-  margin-top: 10px;
-}
-
-.flex {
-  display: flex;
-  justify-content: center;
-}
 </style>
