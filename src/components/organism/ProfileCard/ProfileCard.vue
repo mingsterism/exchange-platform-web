@@ -35,27 +35,5 @@ export default {
 
 <style lang="css" scoped>
 
-/*
-.container__description {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 17rem;
-  justify-content: space-around;
-  padding-bottom: 1rem;
-  padding-left: -2rem
-}
 
-.container__button {
-  margin: 0.5rem;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-weight: 700;
-} */
 </style>
