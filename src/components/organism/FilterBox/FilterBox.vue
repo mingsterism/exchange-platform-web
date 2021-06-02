@@ -1,7 +1,7 @@
 <template>
     <div className="absolute inset-y-0 left-0 w-auto text-left">
         <p className="m-3 text-xl font-bold">Filter</p>
-        <Checkbox />
+        <Checkbox choice="Choice 1" />
         <Slider />
     </div>
 </template>
