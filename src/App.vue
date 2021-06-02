@@ -3,9 +3,8 @@
   <div>
     <ProfileCard />
     <NavBar />
-    <Textbox />
     <Slider />
-    <Checkbox />
+    <LoginPage />
   </div>
 </template>
 
@@ -16,6 +15,7 @@ import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Slider from '/@/components/molecule/Slider/Slider.vue'
 import Checkbox from '/@/components/molecule/Checkbox/Checkbox.vue'
+import LoginPage from '/@/pages/login/LoginPage.vue'
 
 export default {
   name: "App",
@@ -25,7 +25,8 @@ export default {
     ProfileCard,
     Textbox,
     Slider,
-    Checkbox
+    Checkbox,
+    LoginPage
   }
 }
 </script>
