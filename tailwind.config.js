@@ -9,6 +9,9 @@ module.exports = {
       'sm': '18rem',
       'xs': '17rem',
       "screen-xl": '1280px'
+    },
+    minHeight: {
+      '36': '9rem'
     }
   },
   variants: {

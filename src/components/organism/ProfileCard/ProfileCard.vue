@@ -3,16 +3,16 @@
     <img src="https://i.imgur.com/hghfnW9.jpg" className="max-w-xs m-3" />
     <div className="m-3 flex flex-col justify-between text-left">
       <div className="pb-12 md:pb-0">
-        <p className="text-4xl md:pb-2 font-bold">Product A</p>
-        <span className="text-sm">Product A description</span>
+        <p className="text-4xl md:pb-2 font-bold">{{product}}</p>
+        <span className="text-sm">{{description}}</span>
       </div>
       <div>
         <div className="flex flex-row gap-x-10 w-90 pb-2">
           <div className="flex flex-row gap-x-3">
-            <h3 className="font-bold text-xs">Condition</h3><span className="text-xs">New</span>
+            <h3 className="font-bold text-xs">Condition</h3><span className="text-xs">{{condition}}</span>
           </div>
           <div className="flex flex-row gap-x-3">
-            <h3 className="font-bold text-xs">Owned By</h3><span className="text-xs">John Doe</span>
+            <h3 className="font-bold text-xs">Owned By</h3><span className="text-xs">{{owner}}</span>
           </div>
         </div>
         <div>
