@@ -1,11 +1,13 @@
 <template>
-    <h1 class="text-xl font-black">Login</h1>
-    <div class="mt-8">
-        <Textbox text="Email" />
-        <Textbox text="Password" />
-    </div>
-    <div class="mt-10">
-        <Button label="Login" :primary="true" size="medium"/>
+    <div class="flex flex-col items-center h-screen justify-center">
+        <h1 class="text-xl font-black">Login</h1>
+        <div class="mt-8">
+            <Textbox text="Email" />
+            <Textbox text="Password" />
+        </div>
+        <div class="mt-10">
+            <Button label="Login" :primary="true" size="medium" @click="clickToHome"/>
+        </div>
     </div>
 </template>
 <script>
@@ -17,6 +19,16 @@ export default {
     components: {
         Textbox,
         Button
+    },
+    methods: {
+        clickToHome() {
+            if (isAuthenticated) {
+                this.$router.push("/home")
+            }
+            else {
+                this.$router.push("/login")
+            }
+        }
     }
 }
 </script>
