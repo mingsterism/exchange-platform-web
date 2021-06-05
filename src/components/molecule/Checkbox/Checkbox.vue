@@ -1,6 +1,6 @@
 <template>
   <li className="flex ml-2 mt-6 items-center">
-    <input className="form-checkbox h-6 w-6 ml-1" type="checkbox" id="choice1" name="choice1" value="value1"/>
+    <input className="form-checkbox h-6 w-6 ml-1" type="checkbox" id={{name}} name={{name}} value={{value}}/>
     <label className="text-lg ml-2" for="choice1">{{ choice }}</label>
   </li>
 </template>
@@ -13,6 +13,14 @@ export default {
     choice: {
       type: String,
       required: true,
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
     }
   }
 }

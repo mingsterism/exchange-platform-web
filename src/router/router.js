@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Test from "/@/pages/Test.page.vue"
-import Test2 from "/@/pages/Test2.page.vue"
+import Home from "/@/pages/Home.vue"
+import Product from "/@/pages/Product.vue"
+import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login/Login.vue"
 import Register from "/@/pages/Register/Register.vue"
@@ -11,20 +12,16 @@ const routes = [
         component: NavLayout,
         children: [
             {
-                path: "/test1",
-                component: Test
+                path: "/home",
+                component: Home
             },
             {
-                path: "/test2",
-                component: Test2
+                path: "/product",
+                component: Product
             },
             {
-                path: "/login",
-                component: Login
-            },
-            {
-                path: "/register",
-                component: Register
+                path: "/profile",
+                component: Profile
             }
         ]
 
