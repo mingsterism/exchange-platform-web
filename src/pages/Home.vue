@@ -1,13 +1,13 @@
 <template>
 <div>
   <div className="text-left p-10 pt-24 pl-14">
-    <p className="text-3xl">MarketPlace</p>
+    <p className="text-5xl font-semibold">MarketPlace</p>
   </div>
   <div className="flex flex-col md:flex-row">
     <div className="pl-11">
       <FilterBox />
     </div>
-    <div className="px-20 pb-10 flex flex-wrap gap-9">
+    <div className="px-20 pb-10 flex flex-wrap gap-9 justify-evenly">
       <Card product="Product A" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
       <Card product="Product B" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
       <Card product="Product C" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$router.push("/test2")
+      this.$router.push("/profile")
     }
   }
 }
