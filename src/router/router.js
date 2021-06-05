@@ -3,6 +3,8 @@ import Home from "/@/pages/Home.vue"
 import Product from "/@/pages/Product.vue"
 import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
+import Login from "/@/pages/Login/Login.vue"
+import Register from "/@/pages/Register/Register.vue"
 
 const routes = [
     {
