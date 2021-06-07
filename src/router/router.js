@@ -33,8 +33,8 @@ const routes = [
                 component: Profile
             },
             {
-                path: "/playground",
-                component: Playground
+                path: "/checkout",
+                component: Checkout
             }
         ]
 
