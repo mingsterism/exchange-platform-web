@@ -10,6 +10,7 @@ import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Slider from '/@/components/molecule/Slider/Slider.vue'
 import Checkbox from '/@/components/molecule/Checkbox/Checkbox.vue'
 import Login from '/@/pages/Login.vue'
+import Dropdown from './components/molecule/Dropdown/Dropdown.vue'
 
 export default {
   name: "App",
@@ -20,7 +21,8 @@ export default {
     Textbox,
     Slider,
     Checkbox,
-    Login
+    Login,
+    Dropdown
   }
 }
 </script>
