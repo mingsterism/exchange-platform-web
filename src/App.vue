@@ -1,13 +1,5 @@
 <template>
-  <!--  <img alt="Vue logo" src="./assets/logo.png"/>-->
-  <div>
-<!--    <ProfileCard />-->
-<!--    <NavBar />-->
-<!--    <Textbox />-->
-<!--    <Slider />-->
-<!--    <Checkbox />-->
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -17,7 +9,8 @@ import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Slider from '/@/components/molecule/Slider/Slider.vue'
 import Checkbox from '/@/components/molecule/Checkbox/Checkbox.vue'
-import LoginPage from '/@/pages/login/LoginPage.vue'
+import Login from '/@/pages/Login.vue'
+import Dropdown from './components/molecule/Dropdown/Dropdown.vue'
 
 export default {
   name: "App",
@@ -28,7 +21,8 @@ export default {
     Textbox,
     Slider,
     Checkbox,
-    LoginPage
+    Login,
+    Dropdown
   }
 }
 </script>
