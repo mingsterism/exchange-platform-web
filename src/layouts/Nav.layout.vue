@@ -6,7 +6,7 @@
 <script>
 import NavBar from "/@/components/organism/NavBar/NavBar.vue";
 export default {
-  name: "Nav.layout",
+  name: "NavLayout",
   components: {
     NavBar
   }

@@ -3,9 +3,9 @@ import Home from "/@/pages/Home.vue"
 import Product from "/@/pages/Product.vue"
 import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
-import Login from "/@/pages/Login/Login.vue"
+import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
-import Playground from "/@/pages/Playground.vue"
+import Checkout from "/@/pages/Checkout.vue"
 
 const routes = [
     {
