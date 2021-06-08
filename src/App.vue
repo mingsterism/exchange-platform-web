@@ -8,19 +8,20 @@ import Card from "/@/components/organism/Card/Card.vue"
 import ProfileCard from "/@/components/organism/ProfileCard/ProfileCard.vue"
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Slider from '/@/components/molecule/Slider/Slider.vue'
-import Checkbox from '/@/components/molecule/Checkbox/Checkbox.vue'
+import Checkout from '/@/pages/Checkout.vue'
 import Login from '/@/pages/Login.vue'
 
 export default {
   name: "App",
   components: {
-    Card,
-    NavBar,
-    ProfileCard,
-    Textbox,
-    Slider,
-    Checkbox,
-    Login
+    // Card
+    // NavBar,
+    // ProfileCard,
+    // Textbox,
+    // Slider,
+    // Checkbox,
+    // Login
+    // Checkout
   }
 }
 </script>

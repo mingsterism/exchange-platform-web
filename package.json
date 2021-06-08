@@ -9,6 +9,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "firebase": "^8.6.5",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8"
   },
