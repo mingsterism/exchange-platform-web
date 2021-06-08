@@ -3,7 +3,7 @@
   ---------------
   <button @click="handleBack" class="bg-red-400">BACK</button> -->
   <button class="bg-red-300" @click="handleAdd">ADD PRODUCT</button>
-  {{ products }} ----------
+  {{ products }}
   {{ name }}
   {{ age }}
   <p className="p-12 px-52 pb-0 text-left font-semibold text-5xl">User Profile</p>
@@ -33,17 +33,7 @@
     <p className="p-12 px-52 text-left font-semibold text-5xl">My Products</p>
   </div>
   <div className="px-48 pb-10 flex flex-wrap gap-9 justify-evenly">
-    <Card :product="p.name"
-          :description="p.description"
-          v-for="(p, index) in products"
-    />
-<!--    <Card product="Product B" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product C" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product D" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
-<!--    <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>-->
+    <Card :product="p.name" :description="p.description" v-for="p in products" v-bind:key="p" />
   </div>
 </template>
 

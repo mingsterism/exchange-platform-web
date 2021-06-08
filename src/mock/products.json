@@ -1,12 +1,14 @@
 [
   {
-    "name": ">LOOOOO",
-    "condition": "",
-    "description": "",
+    "id": "1",
+    "name": "Product 1",
+    "condition": "New",
+    "description": "Product nice",
+    "shipping": "Shipping",
     "photos": [
       {
         "url": "",
-        "isPrimary": false,
+        "isPrimary": true,
         "meta": "front"
       },
       {
@@ -27,9 +29,10 @@
     ]
   },
   {
-    "name": "Product B",
-    "condition": "",
-    "description": "",
+    "id": "2",
+    "name": "Product 2",
+    "condition": "Old",
+    "description": "Product not nice",
     "photos": [
       {
         "url": "",
@@ -39,9 +42,10 @@
     ]
   },
   {
-    "name": "",
-    "condition": "",
-    "description": "",
+    "id": "3",
+    "name": "Product 3",
+    "condition": "quite new",
+    "description": "Product quite good",
     "photos": [
       {
         "url": "",
@@ -51,9 +55,10 @@
     ]
   },
   {
-    "name": "AAAAA",
-    "condition": "",
-    "description": "",
+    "id": "4",
+    "name": "Product 4",
+    "condition": "new",
+    "description": "Product ok ok",
     "photos": [
       {
         "url": "",
@@ -63,9 +68,10 @@
     ]
   },
   {
-    "name": "AAAAA",
-    "condition": "",
-    "description": "",
+    "id": "5",
+    "name": "Product 5",
+    "condition": "old",
+    "description": "Product cute",
     "photos": [
       {
         "url": "",
@@ -75,9 +81,10 @@
     ]
   },
   {
-    "name": "AAAAA",
-    "condition": "",
-    "description": "",
+    "id": "6",
+    "name": "Product 6",
+    "condition": "new",
+    "description": "product cute",
     "photos": [
       {
         "url": "",
