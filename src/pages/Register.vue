@@ -2,8 +2,8 @@
     <div class="flex flex-col items-center h-screen justify-center">
         <h1 class="text-xl font-black">Register</h1>
         <div class="mt-8">
-            <Textbox text="Name" />
-            <Textbox text="Email" />
+            <Textbox text="Name" name="Name" />
+            <Textbox text="Email" name="Email" />
             <Textbox text="Password" />
             <Textbox text="Re-type Password" />
         </div>
