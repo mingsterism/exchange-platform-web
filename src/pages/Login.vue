@@ -10,9 +10,11 @@
     </div>
   </div>
 </template>
+
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
+import isAuthenticated from "../mixins/mixins";
 
 export default {
   name: "Login",
@@ -20,14 +22,15 @@ export default {
     Textbox,
     Button
   },
+  mixins: [isAuthenticated],
   methods: {
     clickToHome() {
-      if (isAuthenticated) {
+      if (isAuthenticated()) {
         this.$router.push("/home")
       } else {
         this.$router.push("/login")
       }
-    }
+    },
   }
 }
 </script>
