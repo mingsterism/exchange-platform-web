@@ -1,7 +1,7 @@
 <template>
   <div className="flex flex-col">
-    <label for="name" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">{{ text }}</label>
-    <input :placeholder="name" :class="classes" :id="id" />
+    <label :for="id" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">{{ text }}</label>
+    <input :type="type" :placeholder="name" :class="classes" :v-model="model" :id="id" />
   </div>
 
 </template>
@@ -25,6 +25,17 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['password', 'text'].indexOf(value) !== -1;
+      }
+    },
+    model: {
+      type: String,
+      required: false
     },
     size: String,
     validator: function (value) {
