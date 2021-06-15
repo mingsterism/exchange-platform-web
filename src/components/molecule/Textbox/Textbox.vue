@@ -7,6 +7,9 @@
 </template>
 
 <script>
+import './textbox.css'
+import {reactive, computed} from 'vue'
+
 export default {
   name: "Textbox",
 
@@ -19,14 +22,27 @@ export default {
       type: String,
       required: false
     },
-    idName: {
+    id: {
       type: String,
+      required: true
+    },
+    size: String,
+    validator: function (value) {
+      return ['normal', 'long', 'large'].indexOf(value) !== -1;
+    }
+  },
+  setup(props) {
+    props = reactive(props);
+    return {
+      classes: computed(() => ({
+        'storybook-textbox': true,
+        [`storybook-textbox--${props.size || 'normal'}`]: true
+      })),
     }
   }
 }
 
 </script>
 
-<style scoped>
-
+<style lang="postcss" scoped>
 </style>
