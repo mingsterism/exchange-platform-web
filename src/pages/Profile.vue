@@ -2,31 +2,27 @@
   <!-- <router-link to="test1" class="bg-green-400">GO TO TEST1</router-link>
   ---------------
   <button @click="handleBack" class="bg-red-400">BACK</button> -->
-  <button class="bg-red-300" @click="handleAdd">ADD PRODUCT</button>
-  {{ products }}
-  {{ name }}
-  {{ age }}
   <p className="p-12 px-52 pb-0 text-left font-semibold text-5xl">User Profile</p>
   <div className="flex flex-col items-start p-12 px-52">
     <div className="flex flex-col items-start pb-8">
-      <Textbox name="Name" text="Name"/>
+        <Textbox text="Name" :name="name" :id="name" size="normal" />
     </div>
     <div className="flex flex-row gap-20 pb-8">
       <div className="flex flex-col items-start">
-        <Textbox text="Old Password" :name="name"/>
+        <Textbox text="Old Password" :name="old_pass" :id="old_pass" size="normal" />
       </div>
       <div className="flex flex-col items-start">
-        <Textbox name="Name" text="New Password"/>
+        <Textbox text="New Password" :name="new_pass" :id="new_pass" size="normal" />
       </div>
       <div className="flex flex-col items-start">
-        <Textbox name="Name" text="Retype New Password"/>
+        <Textbox text="Retype New Password" :name="retype" :id="retype" size="normal" />
       </div>
     </div>
     <div className="flex flex-col items-start pb-8">
-      <Textbox name="Name" text="About Me"/>
+      <Textbox text="About Me" :name="about" :id="about" size="large" />
     </div>
     <div className="flex flex-col items-start">
-      <Textbox name="Name" text="Shipping Address"/>
+      <Textbox text="Shipping Address" :name="shipping" :id="shipping" size="large" />
     </div>
   </div>
   <div>
@@ -47,7 +43,12 @@ export default {
   data() {
     return {
       products: [],
-      name: "JOEMA",
+      name: "Name",
+      old_pass: 'Old Password',
+      new_pass: 'New Password',
+      retype: 'Retype New Password',
+      about: "About Me",
+      shipping: 'Shipping Address',
       age: 10
     }
   },
