@@ -6,6 +6,7 @@ import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
+import Profileadd from "/@/pages/Profileadd.vue"
 
 const routes = [
     {
@@ -35,6 +36,10 @@ const routes = [
             {
                 path: "/checkout",
                 component: Checkout
+            },
+            {
+                path: "/profile_add",
+                component: Profileadd
             }
         ]
 
