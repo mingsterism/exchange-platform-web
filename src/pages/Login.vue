@@ -1,12 +1,23 @@
 <template>
   <div class="flex flex-col items-center h-screen justify-center">
     <h1 class="text-xl font-black">Login</h1>
-    <div class="mt-8">
-      <Textbox text="Email" name="Some placeholder"/>
-      <Textbox text="Password"/>
-    </div>
-    <div class="mt-10">
-      <Button label="Login" :primary="true" size="medium" @click="clickToHome"/>
+    <div>
+      <div class="mt-8">
+        <div className="flex flex-col">
+            <label for="email" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Email</label>
+            <input type="text" placeholder="Email" className="storybook-textbox" v-model="email" />
+        </div>
+        <div className="flex flex-col">
+            <label for="password" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Password</label>
+            <input type="password" placeholder="Password" className="storybook-textbox" v-model="password" />
+        </div>
+        <!-- <Textbox type="text" text="Email" name="Email" model="email" id="email" />
+        <Textbox type="password" text="Password" name="Password" model="password" id="password" /> -->
+      </div>
+      <div class="mt-10">
+        <Button type="submit" @click="login" label="Login" :primary=true size="medium"/>
+        <p className="mt-8">Need an Account? <router-link to="/register">Register Here</router-link></p>
+      </div>
     </div>
   </div>
 </template>
@@ -14,7 +25,8 @@
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import isAuthenticated from "../mixins/mixins";
+import {ref} from 'vue';
+import firebase from 'firebase';
 
 export default {
   name: "Login",
@@ -22,16 +34,44 @@ export default {
     Textbox,
     Button
   },
-  mixins: [isAuthenticated],
+  data() {
+    return {
+      email: "",
+      password: ""
+    }
+  },
   methods: {
-    clickToHome() {
-      if (isAuthenticated()) {
-        this.$router.push("/home")
-      } else {
-        this.$router.push("/login")
-      }
-    },
+    login: function(e) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch(err => alert(err.message))
+
+      e.preventDefault();
+    }
   }
+  // mixins: [isAuthenticated],
+  // setup() {
+  //   const email = ref("");
+  //   const password = ref("");
+
+  //   const Login = () => {
+  //     firebase
+  //       .auth()
+  //       .signInWithEmailAndPassword(email.value, password.value)
+  //       .then(data => console.log(data))
+  //       .catch(err => alert(err.message));
+  //   }
+
+  //   return {
+  //     Login,
+  //     email,
+  //     password
+  //   }
+  // }
 }
 </script>
 <style scoped>

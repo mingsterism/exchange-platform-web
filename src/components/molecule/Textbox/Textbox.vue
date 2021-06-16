@@ -26,6 +26,17 @@ export default {
       type: String,
       required: true
     },
+    type: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['password', 'text'].indexOf(value) !== -1;
+      }
+    },
+    model: {
+      type: String,
+      required: false
+    },
     size: String,
     validator: function (value) {
       return ['normal', 'long', 'large'].indexOf(value) !== -1;
