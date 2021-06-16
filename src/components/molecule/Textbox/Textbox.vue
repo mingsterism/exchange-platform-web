@@ -1,7 +1,7 @@
 <template>
-  <div className="flex flex-col">
-    <label :for="id" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">{{ text }}</label>
-    <input :type="type" :placeholder="name" :class="classes" :v-model="model" :id="id" />
+  <div class="flex flex-col">
+    <label for="name" class="text-gray-600 mt-3 h-auto w-52 text-left p-2">{{ text }}</label>
+    <input class="border-4 border-gray-400 rounded-lg p-1.5" type="text" :placeholder="name" :id="idName">
   </div>
 
 </template>
