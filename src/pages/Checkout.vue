@@ -15,24 +15,24 @@
             </div>
             <div className="flex flex-col items-start pt-10">
                 <div className="flex flex-col items-start pb-8">
-                    <Textbox text="Address Line 1" :name="address1"/>
+                    <Textbox text="Address Line 1" :name="address1" :id="name" size="long" />
                 </div>
                 <div className="flex flex-col items-start pb-8">
-                    <Textbox text="Address Line 2" :name="address2"/>
+                    <Textbox text="Address Line 2" :name="address2" :id="name" size="long" />
                 </div>
                 <div className="flex flex-row gap-20 pb-8">
                     <div className="flex flex-col items-start">
-                        <Textbox text="Postcode" :name="postcode"/>
+                        <Textbox text="Postcode" :name="postcode" :id="name" size="normal" />
                     </div>
                     <div className="flex flex-col items-start">
-                        <Textbox text="City" :name="city"/>
+                        <Textbox text="City" :name="city" :id="name" size="normal" />
                     </div>
                     <div className="flex flex-col items-start">
-                        <Textbox text="Country" :name="country"/>
+                        <Textbox text="Country" :name="country" :id="name" size="normal" />
                     </div>
                 </div>
                 <div className="flex flex-col items-start pb-8">
-                    <Textbox text="Additional Note" :name="note"/>
+                    <Textbox text="Additional Note" :name="note" :id="name" size="large" />
                 </div>
             </div>
         </div>
@@ -77,4 +77,4 @@ export default {
 
 </style>
 
-  
+

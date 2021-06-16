@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button :type="type" :class="classes" @click="onClick" :style="style">{{ label }}</button>
 </template>
 
 <script>
@@ -27,6 +27,12 @@ export default {
     backgroundColor: {
       type: String,
     },
+    type: {
+      type: String,
+      validator: function (value) {
+        return ['button', 'submit'].indexOf(value) !== -1;
+      }
+    }
   },
 
   emits: ['click'],

@@ -6,6 +6,7 @@ import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
+import Profileadd from "/@/pages/Profileadd.vue"
 
 const routes = [
     {
@@ -13,28 +14,56 @@ const routes = [
         component: NavLayout,
         children: [
             {
+                path: "/",
+                name: 'Home',
+                component: Home,
+                // meta: {
+                //     requireAuth: true
+                // }
+            },
+            {
                 path: "/login",
-                component: Login
+                name: 'Login',
+                component: Login,
+                // meta: {
+                //     requiresGuest: true
+                // }
             },
             {
                 path: "/register",
-                component: Register
-            },
-            {
-                path: "/home",
-                component: Home
+                name: 'Register',
+                component: Register,
+                // meta: {
+                //     requiresGuest: true
+                // }
             },
             {
                 path: "/product",
-                component: Product
+                name: 'Product',
+                component: Product,
+                // meta: {
+                //     requireAuth: true
+                // }
             },
             {
                 path: "/profile",
-                component: Profile
+                name: 'Name',
+                component: Profile,
+                // meta: {
+                //     requireAuth: true
+                // }
             },
             {
                 path: "/checkout",
-                component: Checkout
+                name: 'Checkout',
+                component: Checkout,
+                // meta: {
+                //     requireAuth: true
+                // }
+            },
+            {
+                path: "/profile_add",
+                component: Profileadd
             }
         ]
 
@@ -48,4 +77,32 @@ const router = createRouter({
     routes
 })
 
-export default router
+// router.beforeEach(((to, from, next) => {
+//     if(to.matched.some(record => record.meta.requireAuth)) {
+//         if (!firebase.auth().currentUser) {
+//             next({
+//                 path: '/login',
+//                 query: {
+//                     redirect: to.fullPath
+//                 }
+//             });
+//         } else {
+//             next();
+//         }
+//     } else if(to.matched.some(record => record.meta.requiresGuest)) {
+//         if (firebase.auth().currentUser) {
+//             next({
+//                 path: '/',
+//                 query: {
+//                     redirect: to.fullPath
+//                 }
+//             });
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next();
+//     }
+// }))
+
+export default router;
