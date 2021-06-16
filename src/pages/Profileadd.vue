@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center ml-52 mt-12">
-    <Image class="rounded-full" />
+    <Image class="rounded-full"/>
     <p className="px-20 pb-0 text-left font-semibold text-5xl">User Profile</p>
   </div>
   <div className="flex flex-col items-start p-12 px-52">
@@ -9,7 +9,7 @@
     </div>
     <div className="flex flex-row gap-20 pb-8">
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="Old Password" />
+        <Textbox :name="name" text="Old Password"/>
       </div>
       <div className="flex flex-col items-start">
         <Textbox :name="name" text="New Password"/>
@@ -32,25 +32,25 @@
       <a className="pr-40 text-left font-semibold text-4xl">Add Product</a>
     </div>
     <div class="flex flex-wrap px-52 gap-10">
-        <Image id="image1" />
-        <Image id="image2" />
-        <Image id="image3" />
-        <Image id="image4" />
-        <Image id="image5" />
-        <Image id="image6" />
-        <!-- Need to add a 'add image' feature later -->
+      <Image id="image1"/>
+      <Image id="image2"/>
+      <Image id="image3"/>
+      <Image id="image4"/>
+      <Image id="image5"/>
+      <Image id="image6"/>
+      <!-- Need to add a 'add image' feature later -->
     </div>
   </div>
   <form action="">
     <div class="flex flex-col items-start px-52">
-      <Textbox text="Name" name="Name" idName="productName" />
+      <Textbox text="Name" name="Name" idName="productName"/>
       <div class="flex">
-          <Textbox text="Points" name="Points" idName="productPoints" />
-          <Dropdown class="pl-10 pt-7" />
+        <Textbox text="Points" name="Points" idName="productPoints"/>
+        <Dropdown class="pl-10 pt-7"/>
       </div>
-      <Textbox text="Description" name="Please enter item descriptions here." idName="productDescription" />
+      <Textbox text="Description" name="Please enter item descriptions here." idName="productDescription"/>
       <div class="mt-7">
-          <Button label="Add" primary=true @click="handleSubmit($event)" />
+        <Button label="Add" :primary="true" @click="handleSubmit($event)"/>
       </div>
     </div>
   </form>
@@ -66,7 +66,7 @@ import Products from "/@/mock/products.json"
 import Image from "/@/components/molecule/Image/Image.vue"
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import { warn } from '@vue/runtime-core'
+import {warn} from '@vue/runtime-core'
 import Playground from "/@/mock/playground.json"
 
 export default {
@@ -101,7 +101,7 @@ export default {
       document.querySelector('form').reset();
 
       console.warn('added', {productList});
-      
+
       let pre = document.querySelector("#msg pre");
       pre.textContent = '\n' + JSON.stringify(productList, '\t', 2);
     },
@@ -135,7 +135,7 @@ export default {
     //         ]
     //       })
     // //  write this.products to the json file using nodejs fs.writeFile
-  //   }
+    //   }
   },
   components: {
     Card,

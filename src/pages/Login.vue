@@ -15,7 +15,7 @@
         <Textbox type="password" text="Password" name="Password" model="password" id="password" /> -->
       </div>
       <div class="mt-10">
-        <Button type="submit" @click="login" label="Login" :primary=true size="medium"/>
+        <Button type="submit" @click="login" label="Login" :primary="true" size="medium"/>
         <p className="mt-8">Need an Account? <router-link to="/register">Register Here</router-link></p>
       </div>
     </div>
