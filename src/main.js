@@ -3,6 +3,10 @@ import router from "/@/router/router.js"
 import App from './App.vue'
 import './index.css'
 import firebase from 'firebase'
+// import * as dotenv from 'dotenv'
+
+// dotenv.config()
+
 
 const firebaseConfig = ({
     apiKey: "AIzaSyCC7Yie3RZhusyEDS1U4Erp_pD3JTFBU1g",
