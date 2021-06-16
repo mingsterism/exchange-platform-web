@@ -21,7 +21,7 @@
                 <!-- <Textbox type="password" text="Re-type Password" name="Re-Type Password" v-model="retype" id="retype" /> -->
             </div>
             <div class="mt-10">
-                <Button type="submit" @click="register" label="Register" :primary=true size="medium"/>
+                <Button type="submit" @click="register" label="Register" :primary="true" size="medium"/>
                 <p className="mt-8">Have an Account? <router-link to="/login">Login Here</router-link></p>
             </div>
         </div>
