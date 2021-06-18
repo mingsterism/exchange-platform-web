@@ -82,7 +82,7 @@ export default {
               }
             ]
           })
-    //  write this.products to the json file using nodejs fs.writeFile
+    //  write this.products to fetch from firebase
     }
   },
   components: {

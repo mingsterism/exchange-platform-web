@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <label for="name" class="text-gray-600 mt-3 h-auto w-52 text-left p-2">{{ text }}</label>
-    <input class="border-4 border-gray-400 rounded-lg p-1.5" type="text" :placeholder="name" :id="id">
+    <input class="border-4 border-gray-400 rounded-lg p-1.5" type="text" :placeholder="name" :id="id" :name="nametag">
   </div>
 
 </template>
@@ -23,6 +23,10 @@ export default {
       required: false
     },
     id: {
+      type: String,
+      required: false
+    },
+    nametag: {
       type: String,
       required: false
     },
