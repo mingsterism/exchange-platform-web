@@ -41,14 +41,16 @@
       <!-- Need to add a 'add image' feature later -->
     </div>
   </div>
-  <form action="">
+  <form @submit.prevent="handleSubmit">
     <div class="flex flex-col items-start px-52">
-      <Textbox text="Name" name="Name" idName="productName"/>
-      <div class="flex">
-        <Textbox text="Points" name="Points" idName="productPoints"/>
-        <Dropdown class="pl-10 pt-7"/>
+      <!-- <Textbox text="Name" name="Name" idName="productName" /> -->
+      <label for="name" className="mt-3 p-2 h-auto w-52 text-gr0 text-left">Name</label>
+      <input type="text" name="name" placeholder="Name" className="storybook-textbox" v-model="form.name" />
+      <!-- <div class="flex">
+          <Textbox text="Points" name="Points" idName="productPoints" />
+          <Dropdown class="pl-10 pt-7" />
       </div>
-      <Textbox text="Description" name="Please enter item descriptions here." idName="productDescription"/>
+      <Textbox text="Description" name="Please enter item descriptions here." idName="productDescription" /> -->
       <div class="mt-7">
         <Button label="Add" :primary="true" @click="handleSubmit($event)"/>
       </div>
@@ -68,6 +70,8 @@ import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
 import {warn} from '@vue/runtime-core'
 import Playground from "/@/mock/playground.json"
+import {createProfile} from "../../firebase"
+import {reactive} from 'vue'
 
 export default {
   name: "Profileadd",
@@ -83,28 +87,24 @@ export default {
   methods: {
     handleBack() {
       this.$router.go(-1)
-    },
-    handleSubmit: function (event) {
-      // event.preventDefault();
-      this.playground = Playground;
-      let productList = [];
-      // testing whether it can grab the input
-      let addProductDetail = {
-        id: Date.now(),
-        name: document.querySelector("#productName").value,
-        points: document.querySelector("#productPoints").value,
-        condition: document.querySelector("#condition").value,
-        description: document.querySelector("#productDescription").value
-      };
-      console.log(addProductDetail);
-      productList.push(addProductDetail);
-      document.querySelector('form').reset();
+    }
+  },
+  setup() {
+    const form = reactive({name: ''}) // form.name
 
-      console.warn('added', {productList});
+    const handleSubmit = async () => {
+      await createProfile({...form})
+      form.name = ''
+    }
 
-      let pre = document.querySelector("#msg pre");
-      pre.textContent = '\n' + JSON.stringify(productList, '\t', 2);
-    },
+    return {
+      form,
+      handleSubmit
+    }
+    // handleSubmit: async () => {
+    //   await createProfile({...form})
+    //   form.name = ''
+    // },
     // handleAdd() {
     //   const fs = require('fs');
     //   let addProductDetail = {

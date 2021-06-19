@@ -53,7 +53,12 @@ export default {
                     .auth()
                     .createUserWithEmailAndPassword(this.email, this.password)
                     .then(() => {
-                        this.$router.push('/')
+                        const user = firebase.auth().currentUser;
+                        const actionsCodeSettings = {
+                            url: `http://localhost:3000`
+                        };
+                        user.sendEmailVerification(actionsCodeSettings)
+                        // this.$router.push('/')
                     })
                     .catch(err => alert(err))
             } else {
