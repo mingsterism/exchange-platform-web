@@ -2,7 +2,8 @@ import {createApp} from 'vue'
 import router from "/@/router/router.js"
 import App from './App.vue'
 import './index.css'
-import firebase from 'firebase'
+require('dotenv').config()
+
 // import * as dotenv from 'dotenv'
 
 // dotenv.config()

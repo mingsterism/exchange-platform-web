@@ -1,15 +1,15 @@
 // import firebaseConfig from '/@/main.js'
-import {ref, onUnmounted} from 'vue'
-import firebase from 'firebase'
+require('dotenv').config()
+const firebase = require('firebase')
 
 const firebaseConfig = ({
-    apiKey: "AIzaSyCC7Yie3RZhusyEDS1U4Erp_pD3JTFBU1g",
-    authDomain: "exchange-platform-92854.firebaseapp.com",
-    projectId: "exchange-platform-92854",
-    storageBucket: "exchange-platform-92854.appspot.com",
-    messagingSenderId: "32159966574",
-    appId: "1:32159966574:web:c85a16e2071999b7f00d7f",
-    measurementId: "G-8LCWP241BR"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID
 })
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -18,13 +18,33 @@ const db = firebaseApp.firestore()
 const profileCollection = db.collection('profile')
 const productCollection = db.collection('addproduct')
 
-export const createProfile = profile => {
+const getUserProducts = async (document) => {
+    const products = await productCollection.get(document)
+    return products.data()
+}
+
+const createProfile = profile => {
     return profileCollection.add(profile)
 }
 
-export const createProduct = addproduct => {
-    return productCollection.add(addproduct)
+const createProduct = product => {
+    return profileCollection.doc("0FKptr4acbO1raAH0cFb").collection('created_products').add(product)
 }
+
+module.exports = {
+    createProduct, createProfile, getUserProducts
+}
+
+const main = async () => {
+    const productCreated = await createProduct({ name: "test Prodcut" })
+    console.log("ADDING")
+    console.log(productCreated.id)
+    // const products = await getUserProducts("")
+    // console.log(products)
+
+}
+
+main()
 
 // export const getProduct = async id => {
 //     const product = await productCollection.doc(id).get()
