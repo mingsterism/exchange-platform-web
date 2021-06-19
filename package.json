@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "dotenv": "^10.0.0",
+    "browserify": "^17.0.0",
+    "dotenv-webpack": "^1.7.0",
     "firebase": "^8.6.5",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8"

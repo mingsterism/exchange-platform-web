@@ -45,7 +45,7 @@
         <label class="border-2 border-gray-400 p-2 rounded-md" for="uploadProductImg" style="cursor: pointer;">Upload</label>
         <input class="hidden" type="button" name="popImage" id="popProductImage" @click="popProductImage($event)">
         <label class="border-2 border-gray-400 p-2 rounded-md" for="popProductImage" style="cursor: pointer;">Delete</label>
-      </div> 
+      </div>
       <!-- always create an array to store the src/data instead of using raw DOMs -->
     </div>
   </div>
@@ -76,8 +76,9 @@ import Textbox from '/@/components/molecule/Textbox/Textbox.vue'
 import Image from "/@/components/molecule/Image/Image.vue"
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {createProduct} from "../../firebase"
+import {createProduct} from "../../utils/firebase_test"
 import {getCurrentInstance, reactive} from 'vue'
+// const {createProduct} = require('../../firebase')
 
 export default {
   name: "Profileadd",
@@ -123,7 +124,7 @@ export default {
       })
       // to check whether it is stored into addProductDetails
       console.log(this.addProductDetails);
-      
+
       createProduct({
         id: Date.now(),
         name: this.productName,
@@ -152,7 +153,7 @@ export default {
         this.images.push(
           {
             id: Date.now(),
-            src: URL.createObjectURL(event.target.files[0]) 
+            src: URL.createObjectURL(event.target.files[0])
           }
           )
         // this.images.push(addImage);
