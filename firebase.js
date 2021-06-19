@@ -16,9 +16,14 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const db = firebaseApp.firestore()
 const profileCollection = db.collection('profile')
+const productCollection = db.collection('addproduct')
 
 export const createProfile = profile => {
     return profileCollection.add(profile)
+}
+
+export const createProduct = addproduct => {
+    return productCollection.add(addproduct)
 }
 
 // export const getProduct = async id => {

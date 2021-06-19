@@ -1,5 +1,5 @@
 <template>
-    <img class="h-48 w-48" src="https://thumbs.dreamstime.com/b/small-sleeping-australian-sea-lion-neophoca-cinerea-kangaroo-island-coastline-south-australia-seal-bay-small-sleeping-134787193.jpg" alt="seal" >
+    <img class="h-48 w-48 border-2" alt="an image">
 </template>
 <script>
 export default {
