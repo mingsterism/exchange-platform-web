@@ -3,32 +3,48 @@
     <div>
       <Image :src="profilePicture" class="rounded-full" />
       <div class="relative left-10 bottom-5">
-        <p><input class="hidden" type="file" accept="image/*" name="image" id="file" @change="loadProfileImg($event)"></p>
-        <p><label class="opacity-0 border-2 border-gray-500 rounded-md p-1 bg-gray-200 text-xs font-semibold hover:opacity-100" for="file" style="cursor: pointer;">Upload Image</label></p>
+        <p>
+          <input
+            class="hidden"
+            type="file"
+            accept="image/*"
+            name="image"
+            id="file"
+            @change="loadProfileImg($event)"
+          />
+        </p>
+        <p>
+          <label
+            class="opacity-0 border-2 border-gray-500 rounded-md p-1 bg-gray-200 text-xs font-semibold hover:opacity-100"
+            for="file"
+            style="cursor: pointer"
+            >Upload Image</label
+          >
+        </p>
       </div>
     </div>
     <p className="px-20 pb-0 text-left font-semibold text-5xl">User Profile</p>
   </div>
   <div className="flex flex-col items-start p-12 px-52">
     <div className="flex flex-col items-start pb-8">
-      <Textbox name="Name" text="Name"/>
+      <Textbox :name="userName" text="Name" />
     </div>
     <div className="flex flex-row gap-20 pb-8">
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="Old Password"/>
+        <Textbox :name="name" text="Old Password" />
       </div>
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="New Password"/>
+        <Textbox :name="name" text="New Password" />
       </div>
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="Retype New Password"/>
+        <Textbox :name="name" text="Retype New Password" />
       </div>
     </div>
     <div className="flex flex-col items-start pb-8">
-      <Textbox name="Name" text="About Me"/>
+      <Textbox :name="aboutUser" text="About Me" />
     </div>
     <div className="flex flex-col items-start">
-      <Textbox name="Name" text="Shipping Address"/>
+      <Textbox :name="shipAdd" text="Shipping Address" />
     </div>
   </div>
   <div>
@@ -37,14 +53,40 @@
       <a className="px-40 text-left text-4xl">My Purchase</a>
       <a className="pr-40 text-left font-semibold text-4xl">Add Product</a>
     </div>
-    <div class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2" id="productImgCont">
+    <div
+      class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2"
+      id="productImgCont"
+    >
       <!-- index to point at the items -->
-      <Image v-for="(image) in images" :key="image.id" :src="image.src" />
+      <Image v-for="image in images" :key="image.id" :src="image.src" />
       <div class="flex flex-col justify-around h-48">
-        <input class="hidden" type="file" accept="image/*" name="image" id="uploadProductImg" @change="uploadProductImage($event)">
-        <label class="border-2 border-gray-400 p-2 rounded-md" for="uploadProductImg" style="cursor: pointer;">Upload</label>
-        <input class="hidden" type="button" name="popImage" id="popProductImage" @click="popProductImage($event)">
-        <label class="border-2 border-gray-400 p-2 rounded-md" for="popProductImage" style="cursor: pointer;">Delete</label>
+        <input
+          class="hidden"
+          type="file"
+          accept="image/*"
+          name="image"
+          id="uploadProductImg"
+          @change="uploadProductImage($event)"
+        />
+        <label
+          class="border-2 border-gray-400 p-2 rounded-md"
+          for="uploadProductImg"
+          style="cursor: pointer"
+          >Upload</label
+        >
+        <input
+          class="hidden"
+          type="button"
+          name="popImage"
+          id="popProductImage"
+          @click="popProductImage($event)"
+        />
+        <label
+          class="border-2 border-gray-400 p-2 rounded-md"
+          for="popProductImage"
+          style="cursor: pointer"
+          >Delete</label
+        >
       </div>
       <!-- always create an array to store the src/data instead of using raw DOMs -->
     </div>
@@ -56,10 +98,15 @@
       <!-- <label for="name" className="mt-3 p-2 h-auto w-52 text-gr0 text-left">Name</label>
       <input type="text" name="name" placeholder="Name" className="storybook-textbox" v-model="form.name" /> -->
       <div class="flex">
-          <Textbox text="Points" name="Points" nametag="productPoints" />
-          <Dropdown class="pl-10 pt-7" />
+        <Textbox text="Points" name="Points" nametag="productPoints" />
+        <Dropdown class="pl-10 pt-7" />
       </div>
-      <Textbox text="Description" name="Please enter item descriptions here." nametag="productDescription" size="large" />
+      <Textbox
+        text="Description"
+        name="Please enter item descriptions here."
+        nametag="productDescription"
+        size="large"
+      />
       <div class="mt-7">
         <Button type="submit" label="Add" :primary="true" />
       </div>
@@ -76,8 +123,10 @@ import Textbox from '/@/components/molecule/Textbox/Textbox.vue'
 import Image from "/@/components/molecule/Image/Image.vue"
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {createProduct} from "../../utils/firebase_test"
-import {getCurrentInstance, reactive} from 'vue'
+import {createProduct} from "../../firebase"
+import firebase from 'firebase'
+import {getCurrentInstance, onBeforeMount, reactive, ref} from 'vue'
+// import { createProduct } from 'utils/firebase'
 // const {createProduct} = require('../../firebase')
 
 export default {
@@ -97,6 +146,9 @@ export default {
       productPoints: "",
       productDescription: "",
       condition: "",
+      userName: "",
+      shipAdd: "",
+      aboutUser: "",
     }
   },
   methods: {
@@ -107,6 +159,7 @@ export default {
       // takes the data from the form and put it into a suitable format using
       // Object.fromentries to grab individual input and destructure it
       // name attribute must be given in each input
+      let testProduct;
       const {productName, productPoints, condition, productDescription} = Object.fromEntries(new FormData(event.target));
       this.productName = productName;
       this.productPoints = productPoints;
@@ -120,46 +173,55 @@ export default {
         points: this.productPoints,
         conditions: this.condition,
         description: this.productDescription,
+        status: "true",
         photos: this.images
       })
       // to check whether it is stored into addProductDetails
       console.log(this.addProductDetails);
-
-      createProduct({
+      // adding objects into testProduct variable
+      testProduct = {
         id: Date.now(),
         name: this.productName,
         points: this.productPoints,
         conditions: this.condition,
         description: this.productDescription,
+        status: "true",
         photos: this.images
-      })
+      }
+      // storing the data into the firestore
+      // for status, true means product is available
+      // false means product is in shipping, shipped or paid
+      const user = firebase.auth().currentUser;
+      
+      if (user !== null) {
+        const uid = user.uid;
+        // const newProduct = db.collection("userProfile").doc(uid).collection('products').add(this.addProductDetails)
+        // create new document with info from testProduct into the subCollection
+        createProduct(testProduct, uid).then(function() {
+        console.log("product created.");
+        })
+      }
+
+      // need to add in a pop-up msg to show is successfully added
+      // and refresh the entire entry to initial state
+      // need create a storage link to store images
+      // link the user ID with their products
     },
     loadProfileImg: function(event) {
-      // grabing the profile picture id
-      // let profileImage = this.$refs.profilePic;
-      // let newImg = profileImage.getAttribute("src");
-      // let imgAddress = URL.createObjectURL(event.target.file[0]);
-      // replacing the src file with the new file
       this.profilePicture = URL.createObjectURL(event.target.files[0])
       console.log(this.profilePicture);
-      // newImg.setAttribute("src", imgAddress);
 
       // need to store the image and load it when user logins
     },
     uploadProductImage: function(event) {
-      // let i = 1;
       if (this.images.length <= 6) {
-        // let addImage = prompt("Please add in the source: ");
         this.images.push(
           {
             id: Date.now(),
             src: URL.createObjectURL(event.target.files[0])
           }
           )
-        // this.images.push(addImage);
         console.log(this.images);
-        // able to add into images array but it won't display correctly
-        // return i++
       }
     },
     popProductImage: function(event) {
@@ -169,7 +231,24 @@ export default {
       console.log(this.images);
     }
   },
-  // setup() {
+  setup() {
+    
+    // const user = firebase.auth().currentUser;
+    // if (user) {
+    //   this.shipAdd = user.shippingAddress;
+    //   this.userName = user.name;
+    //   this.aboutUser = user.aboutMe;
+    // }
+
+    onBeforeMount(() => {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        this.shipAdd = user.shippingAddress;
+        this.userName = user.name;
+        this.aboutUser = user.aboutMe;
+      }
+    });
+
   //   // const form = reactive({id: '', name: '', points: '', condition: '', description: '', productImages: ''}) // form.name
 
   //   const handleSubmit = async () => {
@@ -177,15 +256,16 @@ export default {
   //     form.name = ''
   //   }
 
-  //   return {
-  //     form,
-  //     handleSubmit
-  //   }
+    // return {
+    //   shipAdd,
+    //   userName,
+    //   aboutUser
+    // }
   //   // handleSubmit: async () => {
   //   //   await createProfile({...form})
   //   //   form.name = ''
   //   // },
-  // },
+  },
   components: {
     Card,
     Textbox,
@@ -196,6 +276,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
