@@ -15,7 +15,7 @@
         <Textbox type="password" text="Password" name="Password" model="password" id="password" /> -->
       </div>
       <div class="mt-10">
-        <Button type="submit" @click="login" label="Login" :primary="true" size="medium"/>
+        <Button type="submit" @click="handleLogin" label="Login" :primary="true" size="medium"/>
         <p className="mt-8">Need an Account?
           <router-link to="/register">Register Here</router-link>
         </p>
@@ -27,7 +27,6 @@
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {ref} from 'vue';
 import {login} from '/@/utils/firebase.js'
 
 export default {
@@ -45,8 +44,11 @@ export default {
   methods: {
     async handleLogin() {
       const isLoggedIn = await login(this.email, this.password).catch(err => alert(err.message))
-      this.$router.push('/')
-
+      if (!isLoggedIn) {
+        this.$router.push('/login')
+      } else {
+        this.$router.push('/home')
+      }
     }
   }
 }

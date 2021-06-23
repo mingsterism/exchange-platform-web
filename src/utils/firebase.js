@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 
+console.log("FIREBASE")
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN + '.firebaseapp.com',
@@ -34,7 +35,7 @@ export const currentUser = () => {
 }
 
 export const login = (email, password) => {
-    firebase
+    return firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
 }
