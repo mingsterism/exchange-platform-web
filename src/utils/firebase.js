@@ -28,3 +28,13 @@ export const createProfile = profile => {
 export const createProduct = product => {
     return profileCollection.doc("0FKptr4acbO1raAH0cFb").collection('created_products').add(product)
 }
+
+export const currentUser = () => {
+    return firebase.auth().currentUser;
+}
+
+export const login = (email, password) => {
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+}
