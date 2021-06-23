@@ -1,6 +1,3 @@
-// import firebaseConfig from '/@/main.js'
-// require('dotenv').config()
-// const firebase = require('firebase')
 import firebase from 'firebase/app'
 
 const firebaseConfig = {

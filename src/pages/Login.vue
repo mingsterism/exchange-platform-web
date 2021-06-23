@@ -53,25 +53,6 @@ export default {
       e.preventDefault();
     }
   }
-  // mixins: [isAuthenticated],
-  // setup() {
-  //   const email = ref("");
-  //   const password = ref("");
-
-  //   const Login = () => {
-  //     firebase
-  //       .auth()
-  //       .signInWithEmailAndPassword(email.value, password.value)
-  //       .then(data => console.log(data))
-  //       .catch(err => alert(err.message));
-  //   }
-
-  //   return {
-  //     Login,
-  //     email,
-  //     password
-  //   }
-  // }
 }
 </script>
 <style scoped>
