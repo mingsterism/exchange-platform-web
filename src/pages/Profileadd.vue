@@ -76,7 +76,7 @@ import Textbox from '/@/components/molecule/Textbox/Textbox.vue'
 import Image from "/@/components/molecule/Image/Image.vue"
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {createProduct} from "../../utils/firebase_test"
+import {createProduct} from "../../utils/firebase"
 import {getCurrentInstance, reactive} from 'vue'
 // const {createProduct} = require('../../firebase')
 
