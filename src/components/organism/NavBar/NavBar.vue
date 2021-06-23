@@ -6,8 +6,10 @@
     <div className="flex flex-row items-center gap-4">
       <Button label="Cart" className="border-opacity-0 font-semibold" />
       <Button label="Messages" className="border-opacity-0 font-semibold" />
-      <Button label="Logout" @click="logout" className="border-opacity-0 font-semibold" />
-      <img src="https://i.imgur.com/hghfnW9.jpg" className="rounded-full h-11 w-11" />
+    <div @click="ifUserMenu">
+        <img src="https://i.imgur.com/hghfnW9.jpg" className="rounded-full h-11 w-11 cursor-pointer"/>
+        <UserMenu v-if="userMenuShown" />
+    </div>
     </div>
   </nav>
 
@@ -16,22 +18,20 @@
 <script>
 import Button from "/@/components/molecule/Button/Button.vue"
 import firebase from 'firebase';
-// import {onBeforeMount} from 'vue'
+import UserMenu from '/@/components/molecule/UserMenu/UserMenu.vue'
 
 export default {
   name: "NavBar",
   components: {
-    Button
+    Button,
+    UserMenu
+  },
+  data() {
+    return {
+      userMenuShown: false
+    }
   },
   methods: {
-    logout: function() {
-
-      firebase
-        .auth()
-        .signOut()
-        .then(() => this.$router.push('/login'))
-        .catch(err => alert(err.message))
-    },
     check: async function () {
       await firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -40,6 +40,16 @@ export default {
           this.$router.push('/login')
         }
       });
+    },
+    ifUserMenu: async function() {
+      await firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.userMenuShown = !this.userMenuShown;
+        } else {
+          this.userMenuShown = false;
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }

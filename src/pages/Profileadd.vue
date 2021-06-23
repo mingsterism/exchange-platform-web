@@ -127,6 +127,7 @@ import {createProduct} from "../../firebase"
 import firebase from 'firebase'
 import {getCurrentInstance, onBeforeMount, reactive, ref} from 'vue'
 // import { createProduct } from 'utils/firebase'
+
 // const {createProduct} = require('../../firebase')
 
 export default {
