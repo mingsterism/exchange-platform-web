@@ -19,6 +19,10 @@
         <p className="mt-8">Need an Account?
           <router-link to="/register">Register Here</router-link>
         </p>
+        <p className="mt-2">Forgot Your Password?
+          <router-link to="/forgotpass">Click Here</router-link>
+          <!-- <router-link to="/register">Click Here</router-link> -->
+        </p>
       </div>
     </div>
   </div>
@@ -27,7 +31,9 @@
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {login} from '/@/utils/firebase.js'
+import {login, forgotPassword} from '/@/utils/firebase.js'
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 export default {
   name: "Login",
@@ -47,7 +53,17 @@ export default {
       if (!isLoggedIn) {
         this.$router.push('/login')
       } else {
-        this.$router.push('/home')
+        Swal.fire({
+
+                title: "You Have Logged In!",
+                icon: "success",
+                confirmButtonColor: "#1ea7fd"
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$router.push('/')
+                }
+            })
       }
     }
   }

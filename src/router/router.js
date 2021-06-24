@@ -7,6 +7,7 @@ import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
 import Profileadd from "/@/pages/Profileadd.vue"
+import ForgotPass from "/@/pages/ForgotPass.vue"
 
 const routes = [
     {
@@ -64,6 +65,10 @@ const routes = [
             {
                 path: "/profile_add",
                 component: Profileadd
+            },
+            {
+                path: "/forgotpass",
+                component: ForgotPass
             }
         ]
 
