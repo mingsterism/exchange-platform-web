@@ -1,13 +1,13 @@
 const firebase = require('firebase')
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCC7Yie3RZhusyEDS1U4Erp_pD3JTFBU1g",
-    authDomain: "exchange-platform-92854.firebaseapp.com",
-    projectId: "exchange-platform-92854",
-    storageBucket: "exchange-platform-92854.appspot.com",
-    messagingSenderId: "32159966574",
-    appId: "1:32159966574:web:c85a16e2071999b7f00d7f",
-    measurementId: "G-8LCWP241BR"
+    apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN + '.firebaseapp.com',
+    projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET + '.appspot.com',
+    messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID
 }
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);

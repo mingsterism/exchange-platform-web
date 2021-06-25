@@ -41,10 +41,36 @@
       </div>
     </div>
     <div className="flex flex-col items-start pb-8">
-      <Textbox nametag="aboutUser" text="About Me" />
+      <!-- <Textbox nametag="aboutUser" text="About Me" /> -->
+      <label
+        for="aboutMe"
+        class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+        >About Me</label
+      >
+      <textarea
+        name="aboutMe"
+        class="border-4 border-gray-400 rounded-lg p-1.5"
+        id="aboutMe"
+        cols="60"
+        rows="5"
+        v-model="aboutMe"
+      ></textarea>
     </div>
     <div className="flex flex-col items-start">
-      <Textbox nametag="shipAdd" text="Shipping Address" />
+      <!-- <Textbox nametag="shipAdd" text="Shipping Address" /> -->
+      <label
+        for="shippingAddress"
+        class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+        >Shipping Address</label
+      >
+      <textarea
+        name="shippingAddress"
+        class="border-4 border-gray-400 rounded-lg p-1.5"
+        id="shippingAddress"
+        cols="60"
+        rows="5"
+        v-model="shippingAddress"
+      ></textarea>
     </div>
   </div>
   <div>
@@ -88,28 +114,62 @@
           >Delete</label
         >
       </div>
-      <!-- always create an array to store the src/data instead of using raw DOMs -->
     </div>
   </div>
   <form @submit.prevent="handleSubmit">
-    <!-- need to add in require in the input -->
     <!-- .prevent prevents the default submission of the form -->
-    <div class="flex flex-col items-start px-52">
-      <Textbox text="Name" name="Name" nametag="productName" />
-      <!-- <label for="name" className="mt-3 p-2 h-auto w-52 text-gr0 text-left">Name</label>
-      <input type="text" name="name" placeholder="Name" className="storybook-textbox" v-model="form.name" /> -->
-      <div class="flex">
-        <Textbox text="Points" name="Points" nametag="productPoints" />
-        <Dropdown class="pl-10 pt-7" />
+    <div class="flex px-52">
+      <div class="flex flex-col items-start mr-20">
+        <label
+          for="productName"
+          class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+          >Product Name</label
+        >
+        <input
+          class="border-4 border-gray-400 rounded-lg p-1.5"
+          type="text"
+          name="productName"
+          placeholder="Enter product name"
+          v-model="productName"
+          required
+        />
       </div>
-      <Textbox
-        text="Description"
-        name="Please enter item descriptions here."
-        nametag="productDescription"
-        size="large"
-      />
+      <div class="flex flex-col items-start mr-20">
+        <label
+          for="productPoints"
+          class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+          >Product Points</label
+        >
+        <input
+          class="border-4 border-gray-400 rounded-lg p-1.5"
+          type="number"
+          name="productPoints"
+          placeholder="Enter product value"
+          v-model="productPoints"
+          required
+        />
+      </div>
+      <div class="flex justify-start">
+        <Dropdown class="" />
+      </div>
+    </div>
+    <div class="flex flex-col items-start px-52">
+      <label
+        for="productDescription"
+        class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+        >Description</label
+      >
+      <textarea
+        name="productDescription"
+        class="border-4 border-gray-400 rounded-lg p-1.5"
+        id="productDescription"
+        cols="90"
+        rows="10"
+        v-model="productDescription"
+      ></textarea>
       <div class="mt-7">
-        <Button type="submit" label="Add" :primary="true" />
+        <Button class="mb-10" type="submit" label="Add Product" :primary="true" />
+        <!-- <button type="submit" class="border-2 p-3 rounded-lg bg-blue-400 border-gray-300 text-white mb-28">Add Product</button> -->
       </div>
     </div>
   </form>
@@ -123,11 +183,9 @@ import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
 import { getCurrentInstance, onBeforeMount, reactive, ref } from "vue";
 import { createProduct, currentUser } from "/@/utils/firebase";
-import router from '../router/router';
-
 
 export default {
-  name: "Profileadd",
+  name: "Dummypage",
   data() {
     return {
       name: "*********",
@@ -212,14 +270,14 @@ export default {
           })
           .then(function () {
             alert("Successfully added the product");
-          })
+          });
       }
       // clear the inputs after adding product
       // this.productName = "";
       // this.productPoints = "";
       // this.condition = "almostNew";
       // this.productDescription = "";
-      this.$router.push('/profile_add')
+      this.$router.push("/profile_add");
       this.images = [];
 
       // need create a storage link to store images
@@ -277,7 +335,7 @@ export default {
       // shipAdd,
       // usersName,
       // aboutUser
-    }
+    };
     //   // handleSubmit: async () => {
     //   //   await createProfile({...form})
     //   //   form.name = ''
