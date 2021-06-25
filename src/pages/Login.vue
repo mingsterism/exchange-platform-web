@@ -49,21 +49,20 @@ export default {
   },
   methods: {
     async handleLogin() {
-      const isLoggedIn = await login(this.email, this.password).catch(err => alert(err.message))
+      const isLoggedIn = await login(this.email, this.password).catch(err => {
+        Swal.fire({
+
+                title: "Uh Oh!",
+                text: err.message,
+                icon: "error",
+                confirmButtonColor: "#1ea7fd"
+
+            })
+      })
       if (!isLoggedIn) {
         this.$router.push('/login')
       } else {
-        Swal.fire({
-
-                title: "You Have Logged In!",
-                icon: "success",
-                confirmButtonColor: "#1ea7fd"
-
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$router.push('/')
-                }
-            })
+        this.$router.push('/')
       }
     }
   }

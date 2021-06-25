@@ -24,22 +24,32 @@ export default {
     },
     methods: {
         logout: function() {
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        Swal.fire({
 
-            Swal.fire({
+                            title: "You Have Logged Out!",
+                            icon: "success",
+                            confirmButtonColor: "#1ea7fd"
 
-                title: "You Have Logged Out!",
-                icon: "success",
-                confirmButtonColor: "#1ea7fd"
+                        })
 
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    firebase
-                        .auth()
-                        .signOut()
-                        .then(() => this.$router.push('/login'))
-                        .catch(err => alert(err.message))
-                }
-            })
+                        this.$router.push('/login')
+
+
+                        })
+                    .catch(err => {
+                        Swal.fire({
+
+                            title: "Uh Oh!",
+                            text: err.message,
+                            icon: "error",
+                            confirmButtonColor: "#1ea7fd"
+
+                        })
+                    })
         }
     }
 }
