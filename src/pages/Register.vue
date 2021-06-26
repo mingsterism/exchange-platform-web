@@ -61,7 +61,7 @@
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
-import {createProfile} from '../../utils/firebase'
+import {createProfile} from '../utils/firebase'
 import firebase from "firebase";
 
 export default {

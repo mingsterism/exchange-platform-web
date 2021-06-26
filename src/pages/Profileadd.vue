@@ -1,24 +1,24 @@
 <template>
   <div class="flex items-center ml-52 mt-12">
     <div>
-      <Image :src="profilePicture" class="rounded-full" />
+      <Image :src="profilePicture" class="rounded-full"/>
       <div class="relative left-10 bottom-5">
         <p>
           <input
-            class="hidden"
-            type="file"
-            accept="image/*"
-            name="image"
-            id="file"
-            @change="loadProfileImg($event)"
+              class="hidden"
+              type="file"
+              accept="image/*"
+              name="image"
+              id="file"
+              @change="loadProfileImg($event)"
           />
         </p>
         <p>
           <label
-            class="opacity-0 border-2 border-gray-500 rounded-md p-1 bg-gray-200 text-xs font-semibold hover:opacity-100"
-            for="file"
-            style="cursor: pointer"
-            >Upload Image</label
+              class="opacity-0 border-2 border-gray-500 rounded-md p-1 bg-gray-200 text-xs font-semibold hover:opacity-100"
+              for="file"
+              style="cursor: pointer"
+          >Upload Image</label
           >
         </p>
       </div>
@@ -27,24 +27,24 @@
   </div>
   <div className="flex flex-col items-start p-12 px-52">
     <div className="flex flex-col items-start pb-8">
-      <Textbox :name="userName" text="Name" />
+      <Textbox :name="userName" text="Name"/>
     </div>
     <div className="flex flex-row gap-20 pb-8">
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="Old Password" />
+        <Textbox :name="name" text="Old Password"/>
       </div>
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="New Password" />
+        <Textbox :name="name" text="New Password"/>
       </div>
       <div className="flex flex-col items-start">
-        <Textbox :name="name" text="Retype New Password" />
+        <Textbox :name="name" text="Retype New Password"/>
       </div>
     </div>
     <div className="flex flex-col items-start pb-8">
-      <Textbox :name="aboutUser" text="About Me" />
+      <Textbox :name="aboutUser" text="About Me"/>
     </div>
     <div className="flex flex-col items-start">
-      <Textbox :name="shipAdd" text="Shipping Address" />
+      <Textbox :name="shipAdd" text="Shipping Address"/>
     </div>
   </div>
   <div>
@@ -54,38 +54,38 @@
       <a className="pr-40 text-left font-semibold text-4xl">Add Product</a>
     </div>
     <div
-      class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2"
-      id="productImgCont"
+        class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2"
+        id="productImgCont"
     >
       <!-- index to point at the items -->
-      <Image v-for="image in images" :key="image.id" :src="image.src" />
+      <Image v-for="image in images" :key="image.id" :src="image.src"/>
       <div class="flex flex-col justify-around h-48">
         <input
-          class="hidden"
-          type="file"
-          accept="image/*"
-          name="image"
-          id="uploadProductImg"
-          @change="uploadProductImage($event)"
+            class="hidden"
+            type="file"
+            accept="image/*"
+            name="image"
+            id="uploadProductImg"
+            @change="uploadProductImage($event)"
         />
         <label
-          class="border-2 border-gray-400 p-2 rounded-md"
-          for="uploadProductImg"
-          style="cursor: pointer"
-          >Upload</label
+            class="border-2 border-gray-400 p-2 rounded-md"
+            for="uploadProductImg"
+            style="cursor: pointer"
+        >Upload</label
         >
         <input
-          class="hidden"
-          type="button"
-          name="popImage"
-          id="popProductImage"
-          @click="popProductImage($event)"
+            class="hidden"
+            type="button"
+            name="popImage"
+            id="popProductImage"
+            @click="popProductImage($event)"
         />
         <label
-          class="border-2 border-gray-400 p-2 rounded-md"
-          for="popProductImage"
-          style="cursor: pointer"
-          >Delete</label
+            class="border-2 border-gray-400 p-2 rounded-md"
+            for="popProductImage"
+            style="cursor: pointer"
+        >Delete</label
         >
       </div>
       <!-- always create an array to store the src/data instead of using raw DOMs -->
@@ -94,28 +94,26 @@
   <form @submit.prevent="handleSubmit">
     <!-- .prevent prevents the default submission of the form -->
     <div class="flex flex-col items-start px-52">
-      <Textbox text="Name" name="Name" nametag="productName" />
+      <Textbox text="Name" name="Name" nametag="productName"/>
       <!-- <label for="name" className="mt-3 p-2 h-auto w-52 text-gr0 text-left">Name</label>
       <input type="text" name="name" placeholder="Name" className="storybook-textbox" v-model="form.name" /> -->
       <div class="flex">
-        <Textbox text="Points" name="Points" nametag="productPoints" />
-        <Dropdown class="pl-10 pt-7" />
+        <Textbox text="Points" name="Points" nametag="productPoints"/>
+        <Dropdown class="pl-10 pt-7"/>
       </div>
       <Textbox
-        text="Description"
-        name="Please enter item descriptions here."
-        nametag="productDescription"
-        size="large"
+          text="Description"
+          name="Please enter item descriptions here."
+          nametag="productDescription"
+          size="large"
       />
       <div class="mt-7">
-        <Button type="submit" label="Add" :primary="true" />
+        <Button type="submit" label="Add" :primary="true"/>
       </div>
     </div>
   </form>
-  <!-- <div id="msg">
-    <pre></pre>
-  </div> -->
 </template>
+
 
 <script>
 import Card from '/@/components/organism/Card/Card.vue'
@@ -123,12 +121,8 @@ import Textbox from '/@/components/molecule/Textbox/Textbox.vue'
 import Image from "/@/components/molecule/Image/Image.vue"
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue"
 import Button from "/@/components/molecule/Button/Button.vue"
-import {createProduct} from "../../firebase"
-import firebase from 'firebase'
 import {getCurrentInstance, onBeforeMount, reactive, ref} from 'vue'
-// import { createProduct } from 'utils/firebase'
-
-// const {createProduct} = require('../../firebase')
+import {createProduct, currentUser} from '/@/utils/firebase'
 
 export default {
   name: "Profileadd",
@@ -156,12 +150,17 @@ export default {
     handleBack() {
       this.$router.go(-1)
     },
-    handleSubmit(event){
+    handleSubmit(event) {
       // takes the data from the form and put it into a suitable format using
       // Object.fromentries to grab individual input and destructure it
       // name attribute must be given in each input
       let testProduct;
-      const {productName, productPoints, condition, productDescription} = Object.fromEntries(new FormData(event.target));
+      const {
+        productName,
+        productPoints,
+        condition,
+        productDescription
+      } = Object.fromEntries(new FormData(event.target));
       this.productName = productName;
       this.productPoints = productPoints;
       this.condition = condition;
@@ -192,14 +191,14 @@ export default {
       // storing the data into the firestore
       // for status, true means product is available
       // false means product is in shipping, shipped or paid
-      const user = firebase.auth().currentUser;
-      
+      // const user = currentUser();
+
       if (user !== null) {
         const uid = user.uid;
         // const newProduct = db.collection("userProfile").doc(uid).collection('products').add(this.addProductDetails)
         // create new document with info from testProduct into the subCollection
-        createProduct(testProduct, uid).then(function() {
-        console.log("product created.");
+        createProduct(testProduct, uid).then(function () {
+          console.log("product created.");
         })
       }
 
@@ -208,24 +207,24 @@ export default {
       // need create a storage link to store images
       // link the user ID with their products
     },
-    loadProfileImg: function(event) {
+    loadProfileImg: function (event) {
       this.profilePicture = URL.createObjectURL(event.target.files[0])
       console.log(this.profilePicture);
 
       // need to store the image and load it when user logins
     },
-    uploadProductImage: function(event) {
+    uploadProductImage: function (event) {
       if (this.images.length <= 6) {
         this.images.push(
-          {
-            id: Date.now(),
-            src: URL.createObjectURL(event.target.files[0])
-          }
-          )
+            {
+              id: Date.now(),
+              src: URL.createObjectURL(event.target.files[0])
+            }
+        )
         console.log(this.images);
       }
     },
-    popProductImage: function(event) {
+    popProductImage: function (event) {
       if (this.images.length > -1) {
         this.images.pop()
       }
@@ -233,7 +232,7 @@ export default {
     }
   },
   setup() {
-    
+
     // const user = firebase.auth().currentUser;
     // if (user) {
     //   this.shipAdd = user.shippingAddress;
@@ -242,7 +241,8 @@ export default {
     // }
 
     onBeforeMount(() => {
-      const user = firebase.auth().currentUser;
+      const user = currentUser();
+      console.log("USER: ", user)
       if (user) {
         this.shipAdd = user.shippingAddress;
         this.userName = user.name;
@@ -250,22 +250,22 @@ export default {
       }
     });
 
-  //   // const form = reactive({id: '', name: '', points: '', condition: '', description: '', productImages: ''}) // form.name
+    //   // const form = reactive({id: '', name: '', points: '', condition: '', description: '', productImages: ''}) // form.name
 
-  //   const handleSubmit = async () => {
-  //     await createProduct({...form})
-  //     form.name = ''
-  //   }
+    //   const handleSubmit = async () => {
+    //     await createProduct({...form})
+    //     form.name = ''
+    //   }
 
     // return {
     //   shipAdd,
     //   userName,
     //   aboutUser
     // }
-  //   // handleSubmit: async () => {
-  //   //   await createProfile({...form})
-  //   //   form.name = ''
-  //   // },
+    //   // handleSubmit: async () => {
+    //   //   await createProfile({...form})
+    //   //   form.name = ''
+    //   // },
   },
   components: {
     Card,
@@ -275,6 +275,5 @@ export default {
     Button
   },
 }
-</script>
 
-<style scoped></style>
+</script>
