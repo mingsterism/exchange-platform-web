@@ -43,7 +43,4 @@ export const forgotPassword = (email) => {
     return firebase
             .auth()
             .sendPasswordResetEmail(email)
-            .then(() => {
-                console.log("working")
-            })
 }
