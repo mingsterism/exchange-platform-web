@@ -73,7 +73,7 @@ const routes = [
                 name: 'Dummypage',
                 component: Dummypage
             },
-          {
+            {
                 path: "/forgotpass",
                 name: 'ForgotPass',
                 component: ForgotPass
