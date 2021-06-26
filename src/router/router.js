@@ -8,6 +8,7 @@ import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
 import Profileadd from "/@/pages/Profileadd.vue"
 import Dummypage from "/@/pages/dummypage.vue"
+import ForgotPass from "/@/pages/ForgotPass.vue"
 
 const routes = [
     {
@@ -71,6 +72,11 @@ const routes = [
                 path: "/dummypage",
                 name: 'Dummypage',
                 component: Dummypage
+            },
+          {
+                path: "/forgotpass",
+                name: 'ForgotPass',
+                component: ForgotPass
             }
         ]
 

@@ -6,7 +6,7 @@
                     <p>{{item.title}}</p>
                 </router-link>
             </div> -->
-            <Button label="Logout" @click="logout" className="border-opacity-0 font-semibold pt-2 pb-2"/>
+            <Button label="Logout" v-on:click="logout" className="border-opacity-0 font-semibold pt-2 pb-2"/>
         </div>
     </div>
 </template>
@@ -14,6 +14,8 @@
 <script>
 import Button from '/@/components/molecule/Button/Button.vue'
 import firebase from 'firebase';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 export default {
     name: 'UserMenu',
@@ -22,12 +24,32 @@ export default {
     },
     methods: {
         logout: function() {
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        Swal.fire({
 
-            firebase
-                .auth()
-                .signOut()
-                .then(() => this.$router.push('/login'))
-                .catch(err => alert(err.message))
+                            title: "You Have Logged Out!",
+                            icon: "success",
+                            confirmButtonColor: "#1ea7fd"
+
+                        })
+
+                        this.$router.push('/login')
+
+
+                        })
+                    .catch(err => {
+                        Swal.fire({
+
+                            title: "Uh Oh!",
+                            text: err.message,
+                            icon: "error",
+                            confirmButtonColor: "#1ea7fd"
+
+                        })
+                    })
         }
     }
 }
