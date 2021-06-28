@@ -29,12 +29,12 @@ export default {
   name: "Home",
   components: {
     FilterBox,
-    Card
+    Card,
   },
   methods: {
     handleClick() {
       this.$router.push("/profile")
-    }
+    },
   }
 }
 </script>
