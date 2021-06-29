@@ -5,6 +5,19 @@
       <div class="mt-8">
         <div className="flex flex-col">
           <label
+            for="userName"
+            className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
+            >Username</label
+          >
+          <input
+            type="text"
+            placeholder="Username"
+            className="storybook-textbox"
+            v-model="userName"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label
             for="email"
             className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
             >Email</label
@@ -61,7 +74,7 @@
 <script>
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
-import {createProfile} from '../utils/firebase'
+import { createProfile } from "../utils/firebase";
 import firebase from "firebase";
 
 export default {
@@ -75,37 +88,46 @@ export default {
       email: "",
       password: "",
       retype: "",
+      userName: "",
     };
   },
   methods: {
-    register: function () {
+    async register() {
       if (this.password === this.retype) {
+        // firebase
+        //   .auth()
+        //   .createUserWithEmailAndPassword(this.email, this.password)
+        //   .then(() => {
+        //     const user = firebase.auth().currentUser;
+        //     const actionsCodeSettings = {
+        //       url: `${import.meta.env.VITE_APP_BASE_URL}`,
+        //     };
+        //     user.sendEmailVerification(actionsCodeSettings);
+        //   })
+        //   .catch((err) => alert(err));
 
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            const user = firebase.auth().currentUser;
-            const actionsCodeSettings = {
-              url: `${import.meta.env.VITE_APP_BASE_URL}`,
-            };
-            user.sendEmailVerification(actionsCodeSettings);
-          })
-          .catch((err) => alert(err));
-
-        createProfile({
-          name: "",
-          email: "",
-          about: "",
-          address: "",
-          password: this.password,
-        });
-
+        const firebaseAuth = await firebase.auth();
+        const createUser = await firebaseAuth.createUserWithEmailAndPassword(
+          this.email,
+          this.password
+        ).then(cred => {
+          console.log(cred.user);
+        })
+        const userData = {
+          name: this.userName,
+          email: this.email,
+          about: "default",
+          store_address: "default",
+          points: 123,
+        };
+        await createProfile(createUser.user.uid, userData);
+        this.$router.push({ name: "Home" });
+        return;
       } else {
         alert("Wrong Password");
       }
     },
-  }
+  },
 };
 </script>
 
