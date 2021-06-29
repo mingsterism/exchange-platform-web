@@ -36,6 +36,10 @@ export default {
                 {
                     title: "Profile Add",
                     component_name: "/profile_add"
+                },
+                {
+                    title: "Top Up",
+                    component_name: "/topup"
                 }
             ]
         }
