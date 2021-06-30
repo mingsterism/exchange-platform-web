@@ -1,12 +1,12 @@
 <template>
     <div className="absolute shadow-lg rounded-lg bg-white w-60 -ml-48 mt-3">
-        <div class>
-            <!-- <div v-for="(item, i) in menu_items" :key="i">
-                <router-link :to="{name: item.component.name}">
+        <div className="pt-1">
+            <div v-for="(item, i) in menu_items" :key="i" className="font-semibold pt-2 pb-2">
+                <router-link :to="item.component_name">
                     <p>{{item.title}}</p>
                 </router-link>
-            </div> -->
-            <Button label="Logout" v-on:click="logout" className="border-opacity-0 font-semibold pt-2 pb-2"/>
+            </div>
+            <Button label="Logout" v-on:click="logout" className="border-opacity-0 font-semibold pb-2"/>
         </div>
     </div>
 </template>
@@ -21,6 +21,28 @@ export default {
     name: 'UserMenu',
     components: {
         Button
+    },
+    data() {
+        return {
+            menu_items: [
+                {
+                    title: "Home",
+                    component_name: "/"
+                },
+                {
+                    title: "Profile",
+                    component_name: "/profile"
+                },
+                {
+                    title: "Profile Add",
+                    component_name: "/profile_add"
+                },
+                {
+                    title: "Top Up",
+                    component_name: "/topup"
+                }
+            ]
+        }
     },
     methods: {
         logout: function() {

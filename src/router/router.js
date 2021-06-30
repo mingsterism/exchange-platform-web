@@ -9,6 +9,7 @@ import Checkout from "/@/pages/Checkout.vue"
 import Profileadd from "/@/pages/Profileadd.vue"
 import Dummypage from "/@/pages/dummypage.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
+import Topup from "/@/pages/Topup.vue"
 
 const routes = [
     {
@@ -19,49 +20,31 @@ const routes = [
                 path: "/",
                 name: 'Home',
                 component: Home,
-                // meta: {
-                //     requireAuth: true
-                // }
             },
             {
                 path: "/login",
                 name: 'Login',
                 component: Login,
-                // meta: {
-                //     requiresGuest: true
-                // }
             },
             {
                 path: "/register",
                 name: 'Register',
                 component: Register,
-                // meta: {
-                //     requiresGuest: true
-                // }
             },
             {
                 path: "/product",
                 name: 'Product',
                 component: Product,
-                // meta: {
-                //     requireAuth: true
-                // }
             },
             {
                 path: "/profile",
                 name: 'Name',
                 component: Profile,
-                // meta: {
-                //     requireAuth: true
-                // }
             },
             {
                 path: "/checkout",
                 name: 'Checkout',
                 component: Checkout,
-                // meta: {
-                //     requireAuth: true
-                // }
             },
             {
                 path: "/profile_add",
@@ -77,6 +60,11 @@ const routes = [
                 path: "/forgotpass",
                 name: 'ForgotPass',
                 component: ForgotPass
+            },
+            {
+                path: "/topup",
+                NAME: 'Topup',
+                component: Topup
             }
         ]
 
