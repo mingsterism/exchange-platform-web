@@ -1,4 +1,7 @@
 import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/firebase-storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -20,26 +23,37 @@ const profileCollection = db.collection("userProfile");
 // const productCollection = db.collection('addproduct')
 // Get a reference to the storage service, which is used to create references in your storage bucket
 const storageRef = firebase.storage().ref(); // Points to root reference
-const imageRef = storageRef.child("images"); // Point to folder name images
+const imageRef = storageRef.child("images"); // Points to folder name images
 // const spaceRef = imageRef.child(fileName);
 
 // file path
 // const pathName = spaceRef.fullPath; // 'images/fileName'
 // const name = spaceRef.name; // 'fileName'
 
-export const getUserProducts = async (document) => {
-  const products = await productCollection
-    .doc(userId)
-    .collection("products")
-    .get(document);
-  return products.data();
+export const getUserProducts = async (userId) => {
+  return await profileCollection.doc(userId).collection("products").get();
 };
+
+// export const getUserProducts = async (userId) => {
+//   return await profileCollection
+//     .doc(userId)
+//     .collection("products")
+//     .get().then((snapshot) => {
+//     console.log(snapshot.docs);
+//     const listOfProducts = snapshot.docs;
+//     listOfProducts.forEach((docs) => {
+//       const list = docs.data();
+//       console.log(list);
+//     })
+//   })
+//   // return products.data();
+// };
 
 export const createProfile = (userId, userInfo) => {
   return profileCollection.doc(userId).set(userInfo);
 };
 
-// current this function grabs the entire list of document in userProfile collection
+// currently this function grabs the entire list of document in userProfile collection
 export const getUserProfile = async () => {
   return await profileCollection.get().then((snapshot) => {
     console.log(snapshot.docs);
@@ -92,12 +106,18 @@ export const forgotPassword = (email) => {
 //     })
 // }
 
-export const updateUserProfile = async (userId, newAbout, newAddress, newFirstName, newLastName) => {
-    const userProfile = await profileCollection.doc(userId);
-    return userProfile.update({
-        about: newAbout,
-        address: newAddress,
-        first_name: newFirstName,
-        last_name: newLastName
-    })
-}
+export const updateUserProfile = async (
+  userId,
+  newAbout,
+  newAddress,
+  newFirstName,
+  newLastName
+) => {
+  const userProfile = await profileCollection.doc(userId);
+  return userProfile.update({
+    about: newAbout,
+    address: newAddress,
+    first_name: newFirstName,
+    last_name: newLastName,
+  });
+};
