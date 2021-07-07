@@ -6,8 +6,7 @@ import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
-import Profileadd from "/@/pages/Profileadd.vue"
-import Dummypage from "/@/pages/dummypage.vue"
+import ProfileAdd from "/@/pages/Profileadd.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
 import Topup from "/@/pages/Topup.vue"
 
@@ -49,12 +48,7 @@ const routes = [
             {
                 path: "/profile_add",
                 name: 'ProfileAdd',
-                component: Profileadd
-            },
-            {
-                path: "/dummypage",
-                name: 'Dummypage',
-                component: Dummypage
+                component: ProfileAdd
             },
             {
                 path: "/forgotpass",

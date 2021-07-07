@@ -7,7 +7,7 @@
           <p className="text-2xl font-semibold">{{product}}</p>
           <p className="mr-2 text-lg font-semibold self-center bg-red-100">{{shipping}}</p>
         </div>
-        <p className="min-h-36">{{description}}</p>
+        <p className="min-h-36 break-words">{{description}}</p>
       </div>
     <div className="pb-4">
       <Button label="Button" :primary="true" size="medium" />
