@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col items-center h-screen justify-center">
-    <h1 class="text-xl font-black">Top Up</h1>
-    <div>
-      <div class="mt-8">
+    <h1 class="text-xl pb-3 font-black">Top Up</h1>
+    <h1 class="text-xl font-black">Please Choose Specified Amount</h1>
+      <div class="flex flex-row w-screen mt-8 gap-x-9 justify-center">
         <div>
           <stripe-checkout
             ref="checkoutRef"
@@ -13,7 +13,7 @@
             :cancel-url="cancelURL"
             @loading="(v) => (loading = v)"
           />
-          <button @click="submit_10">Pay now!</button>
+          <button @click="submit_10" class="topup-button">RM10</button>
         </div>
         <div>
           <stripe-checkout
@@ -25,7 +25,7 @@
             :cancel-url="cancelURL"
             @loading="(v) => (loading = v)"
           />
-          <button @click="submit_20">Pay now!</button>
+          <button @click="submit_20" class="topup-button">RM20</button>
         </div>
         <div>
           <stripe-checkout
@@ -37,7 +37,7 @@
             :cancel-url="cancelURL"
             @loading="(v) => (loading = v)"
           />
-          <button @click="submit_30">Pay now!</button>
+          <button @click="submit_30" class="topup-button">RM30</button>
         </div>
         <div>
           <stripe-checkout
@@ -49,10 +49,9 @@
             :cancel-url="cancelURL"
             @loading="(v) => (loading = v)"
           />
-          <button @click="submit_50">Pay now!</button>
-        </div>
+          <button @click="submit_50" class="topup-button">RM50</button>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -113,4 +112,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="css">
+.topup-button {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    border: 0;
+    border-radius: 3em;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    color: white;
+    background-color: #1ea7fd;
+    font-size: 1.5rem;
+    padding: 10px 16px;
+}
+</style>
