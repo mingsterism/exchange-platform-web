@@ -7,7 +7,8 @@ export const usersStore = defineStore({
     state() {
         return {
             role: "",
-            apparel: []
+            apparel: [],
+            rounds: 0
         }
     },
     getters: {
@@ -17,11 +18,9 @@ export const usersStore = defineStore({
     },
     actions: {
         addApparel(name) {
-            console.log("ADD APPAREL")
             console.log([...this.apparel, name])
-            // this.apparel = ['heello', 'sdfsdf']
-            this.apparel.push(name)
-            // this.apparel = [...this.apparel, name]
+            this.rounds += 1
+            this.apparel = [...this.apparel, name]
         }
     },
 })
