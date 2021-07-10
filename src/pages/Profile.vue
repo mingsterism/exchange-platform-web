@@ -1,4 +1,9 @@
 <template>
+  <p>hello</p>
+  {{ users.apparel }}
+  {{ users.role }}
+  {{ numberOfApparel }}
+  <button @click="handleClick">ADD APPAREL</button>
   <div class="flex items-center ml-52 mt-12">
     <Image class="rounded-full" />
     <p className="px-20 pb-0 text-left font-semibold text-5xl">User Profile</p>
@@ -70,9 +75,17 @@ import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 import Image from "/@/components/molecule/Image/Image.vue";
 import { getUserProducts } from "../utils/firebase";
 import firebase from "firebase";
+import { usersStore } from "/@/store/users.store";
+import { mapActions, mapState } from "pinia";
 
 export default {
   name: "Profile",
+  setup() {
+    const users = usersStore();
+    return {
+      users
+    };
+  },
   data() {
     return {
       products: [],
@@ -103,9 +116,17 @@ export default {
       }
     });
   },
+  computed: {
+    ...mapState(usersStore, ["numberOfApparel"]),
+  },
   methods: {
+    ...mapActions(usersStore, ["addApparel"]),
     handleBack() {
       this.$router.go(-1);
+    },
+    handleClick() {
+      console.log("HANDLE CLICK");
+      this.addApparel("Jennyboy");
     },
   },
   components: {
