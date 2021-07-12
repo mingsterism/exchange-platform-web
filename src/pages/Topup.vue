@@ -11,6 +11,7 @@
             :line-items="lineItems1"
             :success-url="successURL"
             :cancel-url="cancelURL"
+            :session-id="sessionId"
             @loading="(v) => (loading = v)"
           />
           <button @click="submit_10" class="topup-button">RM10</button>
@@ -91,8 +92,8 @@ export default {
           quantity: 1,
         },
       ],
-      successURL: `${import.meta.env.VITE_APP_BASE_URL}`,
-      cancelURL: `${import.meta.env.VITE_APP_BASE_URL}/topup`,
+      successURL: `${import.meta.env.VITE_APP_BASE_URL}?success=true`,
+      cancelURL: `${import.meta.env.VITE_APP_BASE_URL}/topup?cancelled=true`,
     };
   },
   methods: {
