@@ -10,6 +10,8 @@ import Profileadd from "/@/pages/Profileadd.vue"
 import Dummypage from "/@/pages/dummypage.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
 import Topup from "/@/pages/Topup.vue"
+import Terms from "/@/pages/Terms.vue"
+import Policy from "/@/pages/Policy.vue"
 
 const routes = [
     {
@@ -63,8 +65,18 @@ const routes = [
             },
             {
                 path: "/topup",
-                NAME: 'Topup',
+                name: 'Topup',
                 component: Topup
+            },
+            {
+                path: '/terms',
+                name: 'Terms',
+                component: Terms
+            },
+            {
+                path: '/policy',
+                name: 'Policy',
+                component: Policy
             }
         ]
 

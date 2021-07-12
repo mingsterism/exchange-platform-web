@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center h-screen justify-center">
     <h1 class="text-xl pb-3 font-black">Top Up</h1>
     <h1 class="text-xl font-black">Please Choose Specified Amount</h1>
-      <div class="flex flex-row w-screen mt-8 gap-x-9 justify-center">
+      <div class="flex flex-col md:flex-row w-screen mt-8 gap-y-9 md:gap-x-9 justify-center">
         <div>
           <stripe-checkout
             ref="checkoutRef"
