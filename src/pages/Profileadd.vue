@@ -79,7 +79,7 @@
           class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
           >Shipping Address</label
         >
-        <textarea
+        <textarea 
           name="shippingAddress"
           class="border-4 border-gray-400 rounded-lg p-1.5"
           id="shippingAddress"
@@ -224,7 +224,6 @@ import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 import Image from "/@/components/molecule/Image/Image.vue";
 import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
-import { getCurrentInstance, onBeforeMount, reactive, ref } from "vue";
 import {
   createProduct,
   currentUser,
@@ -286,12 +285,17 @@ export default {
     async updateUser() {
       const user = currentUser();
       if (user) {
-        await updateUserProfile(user.uid, this.aboutMe, this.shippingAddress, this.firstName, this.lastName);
+        await updateUserProfile(
+          user.uid,
+          this.aboutMe,
+          this.shippingAddress,
+          this.firstName,
+          this.lastName
+        );
         console.log("successfully updated user profile!");
       } else {
         console.log("failed to update user profile...");
       }
-      
     },
     handleBack() {
       this.$router.go(-1);
@@ -321,7 +325,6 @@ export default {
         this.productDescription
       );
       this.addProductDetails.push({
-        id: Date.now(),
         uploadedBy: user.uid,
         name: this.productName,
         points: this.productPoints,
@@ -349,11 +352,14 @@ export default {
       // for status, true means product is available
       // false means product is in shipping, shipped or paid
       // const user = currentUser();
-
+      const prodId = String(testProduct.id);
+      console.log(prodId);
+      // createProduct(prodId, user.uid, testProduct)
+      // console.log("product created.");
       if (user !== null) {
         // const newProduct = db.collection("userProfile").doc(uid).collection('products').add(this.addProductDetails)
         // create new document with info from testProduct into the subCollection
-        createProduct(testProduct, user.uid)
+        createProduct(prodId, user.uid, testProduct)
           .then(function () {
             console.log("product created.");
             // clear the inputs after adding product
@@ -395,16 +401,7 @@ export default {
     },
   },
   setup() {
-    onBeforeMount(() => {
-      const user = currentUser();
-      // user display null...maybe something is missing
-      console.log("USER: ", user);
-      if (user) {
-        this.shipAdd = user.shippingAddress;
-        this.userName = user.name;
-        this.aboutUser = user.aboutMe;
-      }
-    });
+
 
     //   // const form = reactive({id: '', name: '', points: '', condition: '', description: '', productImages: ''}) // form.name
 
@@ -413,11 +410,6 @@ export default {
     //     form.name = ''
     //   }
 
-    return {
-      // shipAdd,
-      // usersName,
-      // aboutUser
-    };
     //   // handleSubmit: async () => {
     //   //   await createProfile({...form})
     //   //   form.name = ''
