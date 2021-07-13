@@ -1,17 +1,20 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from "/@/pages/Home.vue"
 import Product from "/@/pages/Product.vue"
-import Profile from "/@/pages/Profile.vue"
+// import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
-import Profileadd from "/@/pages/Profileadd.vue"
-import Dummypage from "/@/pages/dummypage.vue"
+import ProfileAdd from "/@/pages/Profileadd.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
 import Topup from "/@/pages/Topup.vue"
 import Terms from "/@/pages/Terms.vue"
 import Policy from "/@/pages/Policy.vue"
+import AddProduct from '/@/pages/AddProduct.vue';
+import MyProduct from '/@/pages/MyProduct.vue';
+import ProfileMod from '/@/pages/ProfileMod.vue';
+import MyPurchase from '/@/pages/MyPurchase.vue';
 
 const routes = [
     {
@@ -40,8 +43,24 @@ const routes = [
             },
             {
                 path: "/profile",
-                name: 'Name',
-                component: Profile,
+                component: ProfileMod,
+                children: [
+                    {
+                        path: "/profile",
+                        NAME: 'MyProduct',
+                        component: MyProduct
+                    },
+                    {
+                        path: "/profile/add-product",
+                        NAME: 'AddProduct',
+                        component: AddProduct
+                    },
+                    {
+                        path: "/profile/my-purchase",
+                        NAME: 'MyPurchase',
+                        component: MyPurchase
+                    },
+                ]
             },
             {
                 path: "/checkout",
@@ -51,12 +70,7 @@ const routes = [
             {
                 path: "/profile_add",
                 name: 'ProfileAdd',
-                component: Profileadd
-            },
-            {
-                path: "/dummypage",
-                name: 'Dummypage',
-                component: Dummypage
+                component: ProfileAdd
             },
             {
                 path: "/forgotpass",
@@ -78,6 +92,7 @@ const routes = [
                 name: 'Policy',
                 component: Policy
             }
+
         ]
 
     }
