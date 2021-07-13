@@ -6,25 +6,44 @@
 
   <div className="flex flex-col items-start p-12 px-52">
     <div className="flex flex-col items-start pb-8">
-        <Textbox text="Name" :name="name" :id="name" size="normal" />
+      <Textbox text="Name" :name="name" :id="name" size="normal" />
     </div>
     <div className="flex flex-row gap-20 pb-8">
       <div className="flex flex-col items-start">
-        <Textbox text="Old Password" :name="old_pass" :id="old_pass" size="normal" />
+        <Textbox
+          text="Old Password"
+          :name="old_pass"
+          :id="old_pass"
+          size="normal"
+        />
       </div>
       <div className="flex flex-col items-start">
-
-        <Textbox text="New Password" :name="new_pass" :id="new_pass" size="normal" />
+        <Textbox
+          text="New Password"
+          :name="new_pass"
+          :id="new_pass"
+          size="normal"
+        />
       </div>
       <div className="flex flex-col items-start">
-        <Textbox text="Retype New Password" :name="retype" :id="retype" size="normal" />
+        <Textbox
+          text="Retype New Password"
+          :name="retype"
+          :id="retype"
+          size="normal"
+        />
       </div>
     </div>
     <div className="flex flex-col items-start pb-8">
       <Textbox text="About Me" :name="about" :id="about" size="large" />
     </div>
     <div className="flex flex-col items-start">
-      <Textbox text="Shipping Address" :name="shipping" :id="shipping" size="large" />
+      <Textbox
+        text="Shipping Address"
+        :name="shipping"
+        :id="shipping"
+        size="large"
+      />
     </div>
   </div>
   <div>
@@ -33,17 +52,24 @@
       <a className="px-40 text-left text-4xl">My Purchase</a>
       <a className="pr-40 text-left text-4xl">Add Product</a>
     </div>
-    <div className="px-48 pb-10 flex flex-wrap gap-9 justify-evenly">
-      <Card :product="p.name" :description="p.description" v-for="p in products" v-bind:key="p" />
+    <div className="px-48 pb-10 flex flex-wrap gap-9 justify-evenly mb-10">
+      <Card
+        :product="p.name"
+        :description="p.description"
+        :shipping="p.shipping"
+        v-for="p in products"
+        :key="p"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Card from '/@/components/organism/Card/Card.vue'
-import Textbox from '/@/components/molecule/Textbox/Textbox.vue'
-import Products from "/@/mock/products.json"
-import Image from "/@/components/molecule/Image/Image.vue"
+import Card from "/@/components/organism/Card/Card.vue";
+import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
+import Image from "/@/components/molecule/Image/Image.vue";
+import { getUserProducts } from "../utils/firebase";
+import firebase from "firebase";
 
 export default {
   name: "Profile",
@@ -51,48 +77,43 @@ export default {
     return {
       products: [],
       name: "Name",
-      old_pass: 'Old Password',
-      new_pass: 'New Password',
-      retype: 'Retype New Password',
+      old_pass: "Old Password",
+      new_pass: "New Password",
+      retype: "Retype New Password",
       about: "About Me",
-      shipping: 'Shipping Address',
-      age: 10
-    }
+      shipping: "Shipping Address",
+      age: 10,
+    };
   },
   created() {
-    console.log("PRODUCTS: ", Products)
-    this.products = Products
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("user is logged in: ", user);
+        console.log(user.displayName);
+        const uid = user.uid;
+        const listOfProducts = getUserProducts(uid);
+        const productDocs = (await listOfProducts).docs;
+        productDocs.forEach((docs) => {
+          const product = docs.data();
+          console.log(product);
+          this.products.push(product);
+        });
+      } else {
+        console.log("user is logged out.");
+      }
+    });
   },
   methods: {
     handleBack() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
-    handleAdd() {
-      this.name = Math.random()
-      this.products.push(
-          {
-            "name": "AAAAA",
-            "condition": "",
-            "description": "",
-            "photos": [
-              {
-                "url": "",
-                "isPrimary": false,
-                "meta": "front"
-              }
-            ]
-          })
-    //  write this.products to fetch from firebase
-    }
   },
   components: {
     Card,
     Textbox,
-    Image
+    Image,
   },
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
