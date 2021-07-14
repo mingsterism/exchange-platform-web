@@ -22,8 +22,11 @@
 </template>
 
 <script>
+import { onBeforeMount } from 'vue'
 import FilterBox from '/@/components/organism/FilterBox/FilterBox.vue'
 import Card from '/@/components/organism/Card/Card.vue'
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 export default {
   name: "Home",
@@ -34,7 +37,24 @@ export default {
   methods: {
     handleClick() {
       this.$router.push("/profile")
-    },
+    }
+  },
+  setup() {
+    onBeforeMount(() => {
+      const route = new URLSearchParams(window.location.search);
+
+      if (route.get("success")) {
+        Swal.fire({
+
+                  title: "Payment Success",
+                  text: "You may continue shopping :D",
+                  icon: "success",
+                  confirmButtonColor: "#1ea7fd"
+
+              })
+      }
+    })
+
   }
 }
 </script>
