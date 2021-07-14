@@ -41,26 +41,30 @@ export default {
     Button,
   },
   props: ["post"],
-  // props: {
-  //   product: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   description: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   shipping: {
-  //     type: String,
-  //     required: true,
-  //     validator: function (value) {
-  //       return ["Shipping", "Shipped", "Paid"].indexOf(value) !== -1;
-  //     },
-  //   },
-  //   itemid: {
-  //     type: Number
-  //   }
-  // },
+  props: {
+    name: {
+      type: String,
+      required: false
+    },
+    product: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    shipping: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ["Shipping", "Shipped", "Paid"].indexOf(value) !== -1;
+      },
+    },
+    itemid: {
+      type: Number
+    }
+  },
   methods: {
     deleteProd() {
       deleteProduct(String(this.post.id))

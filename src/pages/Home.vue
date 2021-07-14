@@ -8,14 +8,14 @@
       <FilterBox />
     </div>
     <div className="px-20 pb-10 flex flex-wrap gap-9 justify-evenly">
-      <Card product="Product A" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product B" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product C" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product D" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+      <Card product="Product A" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped" />
+      <Card product="Product B" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product C" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product D" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
+      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry." shipping="Shipped"/>
     </div>
   </div>
 </div>

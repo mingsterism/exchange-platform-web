@@ -47,17 +47,17 @@ const routes = [
                 children: [
                     {
                         path: "/profile",
-                        NAME: 'MyProduct',
+                        name: 'MyProduct',
                         component: MyProduct
                     },
                     {
                         path: "/profile/add-product",
-                        NAME: 'AddProduct',
+                        name: 'AddProduct',
                         component: AddProduct
                     },
                     {
                         path: "/profile/my-purchase",
-                        NAME: 'MyPurchase',
+                        name: 'MyPurchase',
                         component: MyPurchase
                     },
                 ]
@@ -66,11 +66,6 @@ const routes = [
                 path: "/checkout",
                 name: 'Checkout',
                 component: Checkout,
-            },
-            {
-                path: "/profile_add",
-                name: 'ProfileAdd',
-                component: ProfileAdd
             },
             {
                 path: "/forgotpass",
