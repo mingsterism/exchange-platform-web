@@ -8,14 +8,7 @@
       <FilterBox />
     </div>
     <div className="px-20 pb-10 flex flex-wrap gap-9 justify-evenly">
-      <Card product="Product A" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product B" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product C" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product D" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product E" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-      <Card product="Product F" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+      <Card :post="post" v-for="post, index in productShowcase" :key="index" />
     </div>
   </div>
 </div>
@@ -33,6 +26,36 @@ export default {
   components: {
     FilterBox,
     Card,
+  },
+  data() {
+    return {
+      productShowcase: [
+      {
+        name: "Product A",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        name: "Product B",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        name: "Product C",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        name: "Product D",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        name: "Product E",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      {
+        name: "Product F",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+    ]
+    }
   },
   methods: {
     handleClick() {
