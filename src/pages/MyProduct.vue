@@ -2,13 +2,7 @@
   <div>
     <div className="px-48 pb-10 flex flex-wrap gap-9 justify-evenly mb-10">
       <transition-group name="card">
-      <Card
-        :product="p.name"
-        :description="p.description"
-        :shipping="p.shipping"
-        v-for="p in products"
-        :key="p"
-      />
+      <Card :post="post" v-for="post, index in products" :key="index" />
       </transition-group>
     </div>
   </div>

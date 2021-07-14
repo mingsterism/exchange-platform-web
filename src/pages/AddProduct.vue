@@ -189,11 +189,12 @@ export default {
       // for status, true means product is available
       // false means product is in shipping, shipped or paid
       // const user = currentUser();
-
+      const prodId = String(testProduct.id);
+      console.log(prodId);
       if (user !== null) {
         // const newProduct = db.collection("userProfile").doc(uid).collection('products').add(this.addProductDetails)
         // create new document with info from testProduct into the subCollection
-        createProduct(testProduct, user.uid)
+        createProduct(prodId, user.uid, testProduct)
           .then(function () {
             console.log("product created.");
             // clear the inputs after adding product
