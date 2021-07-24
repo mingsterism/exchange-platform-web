@@ -1,6 +1,6 @@
 <template>
   <div class="h-auto bg-gradient-to-r from-blue-700 via-green-400 to-blue-700 text-white p-10">
-    <div class="w-96">
+    <div class="w-22">
       <div class="flex mb-5">
         <svg
           class="w-6 h-6 mr-4"

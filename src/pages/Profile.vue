@@ -113,6 +113,7 @@ export default {
         const productDocs = (await listOfProducts).docs;
         productDocs.forEach((docs) => {
           const product = docs.data();
+          console.log(docs.id);
           console.log(product);
           this.products.push(product);
         });
