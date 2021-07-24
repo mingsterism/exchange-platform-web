@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from "/@/pages/Home.vue"
 import Product from "/@/pages/Product.vue"
-import Profile from "/@/pages/Profile.vue"
+// import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
@@ -9,6 +9,12 @@ import Checkout from "/@/pages/Checkout.vue"
 import ProfileAdd from "/@/pages/Profileadd.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
 import Topup from "/@/pages/Topup.vue"
+import Terms from "/@/pages/Terms.vue"
+import Policy from "/@/pages/Policy.vue"
+import AddProduct from '/@/pages/AddProduct.vue';
+import MyProduct from '/@/pages/MyProduct.vue';
+import ProfileMod from '/@/pages/ProfileMod.vue';
+import MyPurchase from '/@/pages/MyPurchase.vue';
 
 const routes = [
     {
@@ -37,18 +43,29 @@ const routes = [
             },
             {
                 path: "/profile",
-                name: 'Name',
-                component: Profile,
+                component: ProfileMod,
+                children: [
+                    {
+                        path: "/profile",
+                        name: 'MyProduct',
+                        component: MyProduct
+                    },
+                    {
+                        path: "/profile/add-product",
+                        name: 'AddProduct',
+                        component: AddProduct
+                    },
+                    {
+                        path: "/profile/my-purchase",
+                        name: 'MyPurchase',
+                        component: MyPurchase
+                    },
+                ]
             },
             {
                 path: "/checkout",
                 name: 'Checkout',
                 component: Checkout,
-            },
-            {
-                path: "/profile_add",
-                name: 'ProfileAdd',
-                component: ProfileAdd
             },
             {
                 path: "/forgotpass",
@@ -57,9 +74,20 @@ const routes = [
             },
             {
                 path: "/topup",
-                NAME: 'Topup',
+                name: 'Topup',
                 component: Topup
+            },
+            {
+                path: '/terms',
+                name: 'Terms',
+                component: Terms
+            },
+            {
+                path: '/policy',
+                name: 'Policy',
+                component: Policy
             }
+
         ]
 
     }
@@ -71,33 +99,5 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-
-// router.beforeEach(((to, from, next) => {
-//     if(to.matched.some(record => record.meta.requireAuth)) {
-//         if (!firebase.auth().currentUser) {
-//             next({
-//                 path: '/login',
-//                 query: {
-//                     redirect: to.fullPath
-//                 }
-//             });
-//         } else {
-//             next();
-//         }
-//     } else if(to.matched.some(record => record.meta.requiresGuest)) {
-//         if (firebase.auth().currentUser) {
-//             next({
-//                 path: '/',
-//                 query: {
-//                     redirect: to.fullPath
-//                 }
-//             });
-//         } else {
-//             next();
-//         }
-//     } else {
-//         next();
-//     }
-// }))
 
 export default router;
