@@ -63,15 +63,13 @@
       <a className="pr-40 text-left text-4xl">Add Product</a>
     </div>
     <div className="px-48 pb-10 flex flex-wrap gap-9 justify-evenly mb-10">
-      <!-- <Card
-        :product="p.name"
-        :description="p.description"
-        :shipping="p.shipping"
-        :itemid="p.id"
-        v-for="p in products"
-        :key="p"
-      /> -->
-      <Card :post="post" v-for="post, index in products" :key="index" />
+      <Card
+          :product="p.name"
+          :description="p.description"
+          :shipping="p.shipping"
+          v-for="p in products"
+          :key="p"
+      />
     </div>
   </div>
 </template>
@@ -80,7 +78,7 @@
 import Card from "/@/components/organism/Card/Card.vue";
 import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 import Image from "/@/components/molecule/Image/Image.vue";
-import { deleteProduct, getUserProducts } from "../utils/firebase";
+import {getUserProducts} from "../utils/firebase";
 import firebase from "firebase";
 import {usersStore} from "/@/store/users.store";
 import {mapActions, mapState} from "pinia";
