@@ -1,7 +1,7 @@
 <template>
   <div className="shadow-md w-80">
     <div class="relative">
-      <a href="#" @click="deleteProd" class="absolute -right-2 -top-3 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-red-500">
+      <a href="#" @click="store.deleteProductDoc(post.id)" class="absolute -right-2 -top-3 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-red-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -34,41 +34,25 @@
 
 <script>
 import Button from "../../molecule/Button/Button.vue";
-import { currentUser, deleteProduct } from '/@/utils/firebase';
+import { userProduct } from '/@/store/user.product.js';
+// import { deleteProduct } from '/@/utils/firebase';
 export default {
   name: "Card",
   components: {
     Button,
   },
   props: ["post"],
-  props: {
-    name: {
-      type: String,
-      required: false
-    },
-    product: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    shipping: {
-      type: String,
-      required: true,
-      validator: function (value) {
-        return ["Shipping", "Shipped", "Paid"].indexOf(value) !== -1;
-      },
-    },
-    itemid: {
-      type: Number
-    }
-  },
+  
   methods: {
-    deleteProd() {
-      deleteProduct(String(this.post.id))
-    }
+    // deleteProd() {
+    //   deleteProduct(String(this.post.id))
+    //   location.reload()
+    },
+  
+  setup() {
+    const store = userProduct()
+
+    return { store }
   }
 };
 </script>

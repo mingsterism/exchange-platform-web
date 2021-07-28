@@ -1,21 +1,21 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from "/@/pages/Home.vue"
 import Product from "/@/pages/Product.vue"
-// import Profile from "/@/pages/Profile.vue"
 import NavLayout from "/@/layouts/Nav.layout.vue"
 import Login from "/@/pages/Login.vue"
 import Register from "/@/pages/Register.vue"
 import Checkout from "/@/pages/Checkout.vue"
-import ProfileAdd from "/@/pages/Profileadd.vue"
 import ForgotPass from "/@/pages/ForgotPass.vue"
 import Topup from "/@/pages/Topup.vue"
 import Terms from "/@/pages/Terms.vue"
 import Policy from "/@/pages/Policy.vue"
 import AddProduct from '/@/pages/AddProduct.vue';
 import MyProduct from '/@/pages/MyProduct.vue';
-import ProfileMod from '/@/pages/ProfileMod.vue';
+import Profile from '/@/pages/ProfileMod.vue';
 import MyPurchase from '/@/pages/MyPurchase.vue';
 
+
+// TODO: Need to add route guard
 const routes = [
     {
         path: "/",
@@ -43,7 +43,7 @@ const routes = [
             },
             {
                 path: "/profile",
-                component: ProfileMod,
+                component: Profile,
                 children: [
                     {
                         path: "/profile",
