@@ -126,113 +126,15 @@
 
 <script>
 import Image from "/@/components/molecule/Image/Image.vue";
-// import Dropdown from "/@/components/molecule/Dropdown/Dropdown.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
-import { createProduct, currentUser } from "/@/utils/firebase";
 import { userProduct } from '../store/user.product.js';
 
 export default {
   name: "AddProduct",
-  data() {
-    return {
-      // images: [
-      //   {
-      //     id: "1",
-      //     src:
-      //       "https://images.theconversation.com/files/371985/original/file-20201130-13-xieqc.jpg?ixlib=rb-1.1.0&rect=0%2C0%2C5129%2C2560&q=45&auto=format&w=668&h=324&fit=crop",
-      //   },
-      // ],
-      // addProductDetails: [],
-      // productName: "",
-      // productPoints: "",
-      // productDescription: "",
-      // productQty: "",
-      // condition: ""
-    };
-  },
   methods: {
     handleBack() {
       this.$router.go(-1);
     },
-    // handleSubmit() {
-    //   let testProduct;
-    //   const user = currentUser();
-    //   // to see the values generated
-    //   console.log(
-    //     this.productName,
-    //     this.productPoints,
-    //     this.productQty,
-    //     this.condition,
-    //     this.productDescription
-    //   );
-    //   this.addProductDetails.push({
-    //     id: Date.now(),
-    //     uploadedBy: user.uid,
-    //     name: this.productName,
-    //     points: this.productPoints,
-    //     quanity: this.productQty,
-    //     conditions: this.condition,
-    //     description: this.productDescription,
-    //     status: "true",
-    //     photos: this.images,
-    //   });
-    //   // to check whether it is stored into addProductDetails
-    //   console.log(this.addProductDetails);
-    //   // adding objects into testProduct variable
-    //   testProduct = {
-    //     id: Date.now(),
-    //     uploadedBy: user.uid,
-    //     name: this.productName,
-    //     points: this.productPoints,
-    //     quanity: this.productQty,
-    //     conditions: this.condition,
-    //     description: this.productDescription,
-    //     status: "true",
-    //     photos: this.images,
-    //   };
-    //   // storing the data into the firestore
-    //   // for status, true means product is available
-    //   // false means product is in shipping, shipped or paid
-    //   // const user = currentUser();
-    //   const prodId = String(testProduct.id);
-    //   console.log(prodId);
-    //   if (user !== null) {
-    //     // const newProduct = db.collection("userProfile").doc(uid).collection('products').add(this.addProductDetails)
-    //     // create new document with info from testProduct into the subCollection
-    //     createProduct(prodId, user.uid, testProduct)
-    //       .then(function () {
-    //         console.log("product created.");
-    //         // clear the inputs after adding product
-    //       })
-    //       .then(function () {
-    //         alert("Successfully added the product");
-    //       });
-    //   }
-    //   this.productName = "";
-    //   this.productPoints = "";
-    //   this.condition = "";
-    //   this.productDescription = "";
-    //   this.productQty = "";
-    //   this.images = [];
-    //   // this.$router.push("/profile_add");
-    //   // need create a storage link to store images
-    //   // link the user ID with their products
-    // },
-    // uploadProductImage: function (event) {
-    //   if (this.images.length <= 6) {
-    //     this.images.push({
-    //       id: Date.now(),
-    //       src: URL.createObjectURL(event.target.files[0]),
-    //     });
-    //     console.log(this.images);
-    //   }
-    // },
-    // popProductImage: function (event) {
-    //   if (this.images.length > -1) {
-    //     this.images.pop();
-    //   }
-    //   console.log(this.images);
-    // },
   },
   components: {
     Image,

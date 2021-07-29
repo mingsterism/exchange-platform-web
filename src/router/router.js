@@ -13,6 +13,7 @@ import AddProduct from '/@/pages/AddProduct.vue';
 import MyProduct from '/@/pages/MyProduct.vue';
 import Profile from '/@/pages/ProfileMod.vue';
 import MyPurchase from '/@/pages/MyPurchase.vue';
+import playground from '/@/pages/playground.vue';
 
 
 // TODO: Need to add route guard
@@ -40,6 +41,11 @@ const routes = [
                 path: "/product",
                 name: 'Product',
                 component: Product,
+            },
+            {
+                path: "/playground",
+                name: 'playground',
+                component: playground,
             },
             {
                 path: "/profile",
