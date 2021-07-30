@@ -29,6 +29,9 @@ export default {
   },
   data() {
     return {
+      // TODO: Create a function:
+      // TODO: To access every available products from every user and
+      // TODO: and randomly pick 20(?) to displace at Home page.
       productShowcase: [
       {
         name: "Product A",
