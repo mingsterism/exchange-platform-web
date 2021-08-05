@@ -14,6 +14,7 @@
             placeholder="Username"
             className="storybook-textbox"
             v-model="userName"
+            required
           />
         </div>
         <div className="flex flex-col">
@@ -27,6 +28,7 @@
             placeholder="Email"
             className="storybook-textbox"
             v-model="email"
+            required
           />
         </div>
         <div className="flex flex-col">
@@ -40,6 +42,7 @@
             placeholder="Password"
             className="storybook-textbox"
             v-model="password"
+            required
           />
         </div>
         <div className="flex flex-col">
@@ -53,6 +56,7 @@
             placeholder="Retype Password"
             className="storybook-textbox"
             v-model="retype"
+            required
           />
         </div>
       </div>
@@ -112,15 +116,19 @@ export default {
           this.password
         ).then(cred => {
           console.log(cred.user);
+          console.log(cred.user.uid);
+          return cred.user.uid
         })
+        console.log("Created user: ", createUser);
         const userData = {
+          id: createUser,
           name: this.userName,
           email: this.email,
           about: "default",
           store_address: "default",
           points: 123,
         };
-        await createProfile(createUser.user.uid, userData);
+        await createProfile(createUser, userData);
         this.$router.push({ name: "Home" });
         return;
       } else {
