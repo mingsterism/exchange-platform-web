@@ -3,6 +3,7 @@ import {
   createProduct,
   currentUser,
   deleteProduct,
+  getOtherUserProduct,
   getSpecificProduct,
   getUserProducts,
   updateProductDoc,
@@ -33,28 +34,37 @@ export const userProduct = defineStore({
       editProductQty: "",
       editProductCondition: "",
       editProductDescription: "",
+      userTempId: "",
+      emptyStatus: true // use to show that there is no products in current user account
     };
   },
   getters: {
     async displayUserProduct() {
       this.productDisplay = [];
-      const user = await currentUser();
-      const uid = user.uid;
-      //   console.log(uid);
-      const listOfProducts = await getUserProducts(uid);
-      const productDocs = listOfProducts.docs;
-      //   console.log(productDocs);
+      const listOfProducts = await getUserProducts();
+      const productDocs = listOfProducts;
+      console.log(productDocs);
       if (productDocs !== null) {
-        productDocs.forEach((docs) => {
-          const product = docs.data();
-          console.log(product);
-          this.productDisplay.push(product);
-        });
-      }
+        this.emptyStatus = false
+        this.productDisplay = productDocs
+      }   
     },
     async displayForEdit() {
-      const productId = String(this.productTempId);
+      const productId = this.productTempId;
       const productCurrentDetail = await getSpecificProduct(productId);
+      if (productCurrentDetail !== null) {
+        console.log("Product Document: ", productCurrentDetail);
+        this.editProductName = productCurrentDetail.name;
+        this.editProductPoints = productCurrentDetail.points;
+        this.editProductQty = productCurrentDetail.quanity;
+        this.editProductCondition = productCurrentDetail.conditions;
+        this.editProductDescription = productCurrentDetail.description;
+      }
+    },
+    async displayProductView() {
+      const productId = this.productTempId;
+      const usersId = this.userTempId
+      const productCurrentDetail = await getOtherUserProduct(usersId, productId);
       if (productCurrentDetail !== null) {
         console.log("Product Document: ", productCurrentDetail);
         this.editProductName = productCurrentDetail.name;
@@ -81,7 +91,7 @@ export const userProduct = defineStore({
       console.log(this.productPhotos);
     },
     async createUserProduct() {
-      const user = currentUser();
+      const user = await currentUser();
       const productDetails = {
         id: Date.now(),
         uploadedBy: user.uid,
@@ -110,14 +120,20 @@ export const userProduct = defineStore({
         console.log(error);
       }
     },
-    async storeProdId(productId) {
-      this.productTempId = await parseInt(productId);
+    goToEditorPage(productId) {
+      this.productTempId = String(productId);
       console.log(this.productTempId);
-      router.push("/playground");
+      router.push("/edit-product");
+      return router;
+    },
+    goToProductPage(userId, productId) {
+      this.productTempId = String(productId);
+      this.userTempId = userId
+      console.log(this.productTempId);
+      router.push("/view-product");
       return router;
     },
     async editProductDetail() {
-      // TODO: create edit product detail function
         const tempProdId = String(this.productTempId);
         const updatingDoc = await updateProductDoc(
           this.editProductName,

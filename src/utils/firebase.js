@@ -30,14 +30,41 @@ const imageRef = storageRef.child("images"); // Points to folder name images
 // const pathName = spaceRef.fullPath; // 'images/fileName'
 // const name = spaceRef.name; // 'fileName'
 
-export const getUserProducts = async (userID) => {
-  return await profileCollection.doc(userID).collection("products").get();
+export const getUserProducts = async () => {
+  const user = await currentUser();
+  const listOfDocument = await profileCollection
+    .doc(user.uid)
+    .collection("products")
+    .get();
+  const snapshot = listOfDocument.docs;
+  const docContainer = [];
+  if (snapshot !== null) {
+    snapshot.forEach((docs) => {
+      const product = docs.data();
+      console.log(product);
+      docContainer.push(product);
+    });
+  }
+  return docContainer;
 };
 
 export const getSpecificProduct = async (prodID) => {
   const user = await currentUser();
   const productDoc = await profileCollection
     .doc(user.uid)
+    .collection("products")
+    .doc(prodID)
+    .get();
+  const productData = productDoc.data();
+  console.log(productData);
+  console.log("Product name: ", productData.name);
+  return productData;
+};
+
+export const getOtherUserProduct = async (prodUserId, prodID) => {
+  const user = await currentUser();
+  const productDoc = await profileCollection
+    .doc(prodUserId)
     .collection("products")
     .doc(prodID)
     .get();
@@ -85,8 +112,9 @@ export const getUserProfileDoc = async () => {
 };
 
 export const createProduct = async (productId, productDetails) => {
-  const user = currentUser();
+  const user = await currentUser();
   const uid = user.uid;
+  console.log(uid);
   await profileCollection
     .doc(uid) // with the ID from the root collection
     .collection("products") // access to the subcollection
@@ -125,18 +153,38 @@ export const forgotPassword = (email) => {
   return firebase.auth().sendPasswordResetEmail(email);
 };
 
-// this function is just to change the displayName
-// note that displayName is not store in firestore
-// export const updateUserProfile = async (newName) => {
-//     const user = await firebase.auth().currentUser;
-//     return user.updateProfile({
-//         displayName: newName,
-//     }).then(function () {
-//         console.log("User Profile successfullly updated.");
-//     }).catch((err) => {
-//         console.log("Error occur. Failed to update user profile.");
-//     })
-// }
+export const getAllUserProducts = async () => {
+  const user = await currentUser();
+  const allUser = await profileCollection.get();
+  console.log(allUser);
+  const userContainer = [];
+  const productDocContainer = [];
+  if (allUser !== null) {
+    allUser.forEach((docs) => {
+      const userProfile = docs.data();
+      // console.log(userProfile);
+      userContainer.push(userProfile);
+    });
+    for (let i = 0; i <= userContainer.length - 1; i++) {
+      let userId = userContainer[i].id;
+      if (userId !== user.uid) {
+        let userProducts = await profileCollection
+          .doc(userId)
+          .collection("products")
+          .get();
+        if (userProducts !== null) {
+          userProducts.forEach((docs) => {
+            const product = docs.data();
+            // console.log(product);
+            productDocContainer.push(product);
+          });
+        }
+      }
+    }
+  }
+  console.log(productDocContainer);
+  return productDocContainer;
+};
 
 export const updateUserProfile = async (
   newAbout,

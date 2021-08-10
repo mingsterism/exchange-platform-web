@@ -9,7 +9,7 @@
         </div>
         <div className="flex flex-col">
           <label for="password" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Password</label>
-          <input type="password" placeholder="Password" className="storybook-textbox" v-model="password"/>
+          <input @keypress.enter="handleLogin" type="password" placeholder="Password" className="storybook-textbox" v-model="password"/>
         </div>
         <!-- <Textbox type="text" text="Email" name="Email" model="email" id="email" />
         <Textbox type="password" text="Password" name="Password" model="password" id="password" /> -->
