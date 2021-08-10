@@ -13,7 +13,8 @@ import AddProduct from '/@/pages/AddProduct.vue';
 import MyProduct from '/@/pages/MyProduct.vue';
 import Profile from '/@/pages/ProfileMod.vue';
 import MyPurchase from '/@/pages/MyPurchase.vue';
-import playground from '/@/pages/playground.vue';
+import EditProduct from '../pages/EditProduct.vue';
+import ViewProduct from '../pages/ViewProduct.vue';
 
 
 // TODO: Need to add route guard
@@ -43,9 +44,14 @@ const routes = [
                 component: Product,
             },
             {
-                path: "/playground",
-                name: 'playground',
-                component: playground,
+                path: "/edit-Product",
+                name: 'EditProduct',
+                component: EditProduct,
+            },
+            {
+                path: "/view-product",
+                name: 'ViewProduct',
+                component: ViewProduct,
             },
             {
                 path: "/profile",

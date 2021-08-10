@@ -51,11 +51,10 @@
 </template>
 
 <script>
-// import { mapState } from 'pinia';
 import Button from "../../molecule/Button/Button.vue";
-import router from '/@/router/router.js';
 import { userProduct } from "/@/store/user.product.js";
-// import { deleteProduct } from '/@/utils/firebase';
+import { usersStore } from '/@/store/users.store';
+
 export default {
   name: "Card",
   components: {
@@ -73,8 +72,9 @@ export default {
 
   setup() {
     const store = userProduct();
+    const forUser = usersStore();
     function goToEditor(prodId) {
-      const storeId = store.storeProdId(prodId)
+      const storeId = store.goToEditorPage(prodId)
       if (storeId !== null) {
         // router.push({path: "/playground"})
         console.log("Getting product Id...");
@@ -83,7 +83,7 @@ export default {
       }
     }
 
-    return { store, goToEditor };
+    return { store, goToEditor, forUser };
   },
 };
 </script>
