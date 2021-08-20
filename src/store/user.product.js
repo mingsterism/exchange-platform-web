@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import {
   createProduct,
-  currentUser,
   deleteProduct,
   getOtherUserProduct,
   getSpecificProduct,
@@ -35,7 +34,7 @@ export const userProduct = defineStore({
       editProductCondition: "",
       editProductDescription: "",
       userTempId: "",
-      emptyStatus: true // use to show that there is no products in current user account
+      emptyStatus: true, // use to show that there is no products in current user account
     };
   },
   getters: {
@@ -45,9 +44,9 @@ export const userProduct = defineStore({
       const productDocs = listOfProducts;
       console.log(productDocs);
       if (productDocs !== null) {
-        this.emptyStatus = false
-        this.productDisplay = productDocs
-      }   
+        this.emptyStatus = false;
+        this.productDisplay = productDocs;
+      }
     },
     async displayForEdit() {
       const productId = this.productTempId;
@@ -63,8 +62,11 @@ export const userProduct = defineStore({
     },
     async displayProductView() {
       const productId = this.productTempId;
-      const usersId = this.userTempId
-      const productCurrentDetail = await getOtherUserProduct(usersId, productId);
+      const usersId = this.userTempId;
+      const productCurrentDetail = await getOtherUserProduct(
+        usersId,
+        productId
+      );
       if (productCurrentDetail !== null) {
         console.log("Product Document: ", productCurrentDetail);
         this.editProductName = productCurrentDetail.name;
@@ -128,28 +130,28 @@ export const userProduct = defineStore({
     },
     goToProductPage(userId, productId) {
       this.productTempId = String(productId);
-      this.userTempId = userId
+      this.userTempId = userId;
       console.log(this.productTempId);
       router.push("/view-product");
       return router;
     },
     async editProductDetail() {
-        const tempProdId = String(this.productTempId);
-        const updatingDoc = await updateProductDoc(
-          this.editProductName,
-          this.editProductPoints,
-          this.editProductQty,
-          this.editProductCondition,
-          this.editProductDescription,
-          tempProdId
-        );
-        if(updatingDoc !== null) {
-          console.log("Successfully updated product document!");
-          alert("Successfully updated product document!")
-          router.push('/profile')
-        } else {
-          console.log("Failed to update product details...");
-        }
+      const tempProdId = String(this.productTempId);
+      const updatingDoc = await updateProductDoc(
+        this.editProductName,
+        this.editProductPoints,
+        this.editProductQty,
+        this.editProductCondition,
+        this.editProductDescription,
+        tempProdId
+      );
+      if (updatingDoc !== null) {
+        console.log("Successfully updated product document!");
+        alert("Successfully updated product document!");
+        router.push("/profile");
+      } else {
+        console.log("Failed to update product details...");
+      }
     },
     async deleteProductDoc(productId) {
       await deleteProduct(String(productId));

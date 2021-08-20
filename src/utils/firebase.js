@@ -31,12 +31,10 @@ const imageRef = storageRef.child("images"); // Points to folder name images
 // const name = spaceRef.name; // 'fileName'
 
 export const getUserProducts = async () => {
-  const user = await currentUser();
-  const listOfDocument = await profileCollection
-    .doc(user.uid)
-    .collection("products")
-    .get();
-  const snapshot = listOfDocument.docs;
+  const user = currentUser();
+  const listOfDocument = profileCollection.doc(user).collection("products");
+  const getList = await listOfDocument.get();
+  const snapshot = getList.docs;
   const docContainer = [];
   if (snapshot !== null) {
     snapshot.forEach((docs) => {
@@ -49,9 +47,9 @@ export const getUserProducts = async () => {
 };
 
 export const getSpecificProduct = async (prodID) => {
-  const user = await currentUser();
+  const user = currentUser();
   const productDoc = await profileCollection
-    .doc(user.uid)
+    .doc(user)
     .collection("products")
     .doc(prodID)
     .get();
@@ -62,7 +60,7 @@ export const getSpecificProduct = async (prodID) => {
 };
 
 export const getOtherUserProduct = async (prodUserId, prodID) => {
-  const user = await currentUser();
+  const user = currentUser();
   const productDoc = await profileCollection
     .doc(prodUserId)
     .collection("products")
@@ -106,15 +104,22 @@ export const getUserProfile = async () => {
 };
 
 // this function grabs the user documents by matching the user email.
-export const getUserProfileDoc = async () => {
-  const user = await currentUser();
-  return await profileCollection.where("email", "==", user.email).get();
+export const getUserProfileDoc = async (uid) => {
+  const userDoc = profileCollection.doc(uid);
+  const getDoc = await userDoc.get();
+  // console.log(getDoc);
+  if (!getDoc.exists) {
+    console.log("No such document!");
+  } else {
+    console.log("Document data:", getDoc.data());
+    const data = getDoc.data();
+    return data;
+  }
 };
 
 export const createProduct = async (productId, productDetails) => {
-  const user = await currentUser();
-  const uid = user.uid;
-  console.log(uid);
+  const user = currentUser();
+  console.log(user);
   await profileCollection
     .doc(uid) // with the ID from the root collection
     .collection("products") // access to the subcollection
@@ -127,9 +132,8 @@ export const createProduct = async (productId, productDetails) => {
 
 export const deleteProduct = async (productId) => {
   const user = currentUser();
-  const uid = user.uid;
   const getProduct = profileCollection
-    .doc(uid)
+    .doc(user)
     .collection("products")
     .doc(productId);
   console.log(getProduct.id);
@@ -141,8 +145,19 @@ export const deleteProduct = async (productId) => {
   }
 };
 
-export const currentUser = async () => {
-  return firebase.auth().currentUser;
+export const currentUser = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      console.log("User is logged in.");
+      let uid = user.uid;
+      // console.log(uid);
+      return uid;
+    } else {
+      console.log("User is logged out.");
+    }
+  });
 };
 
 export const login = (email, password) => {
@@ -154,7 +169,7 @@ export const forgotPassword = (email) => {
 };
 
 export const getAllUserProducts = async () => {
-  const user = await currentUser();
+  const user = currentUser();
   const allUser = await profileCollection.get();
   console.log(allUser);
   const userContainer = [];
@@ -186,22 +201,23 @@ export const getAllUserProducts = async () => {
   return productDocContainer;
 };
 
-export const updateUserProfile = async (
-  newAbout,
-  newAddress,
-  newFirstName,
-  newLastName
-) => {
-  const user = await currentUser();
-  if (user !== null) {
-    const userProfile = profileCollection.doc(user.uid);
-    return userProfile.update({
-      about: newAbout,
-      address: newAddress,
-      first_name: newFirstName,
-      last_name: newLastName,
-    });
-  }
+export const updateUserProfile = async (newFirstName, newLastName, newAboutMe, newShippingAddress, uid) => {
+  const userProfile = profileCollection.doc(uid);
+  console.log("Accessing profile document");
+  // console.log("user is: ", userProfile);
+  const updating = await userProfile.update({
+    first_name: newFirstName,
+    last_name: newLastName,
+    about: newAboutMe,
+    address: newShippingAddress,
+  });
+  console.log("Update in progress...");
+  // if (updating !== null) {
+  //   console.log("Update in progress");
+  // } else {
+  //   console.log("Update failed...");
+  // }
+  return updating;
 };
 
 export const updateProductDoc = async (

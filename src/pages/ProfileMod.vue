@@ -37,8 +37,7 @@
           class="border-4 border-gray-400 rounded-lg p-1.5"
           type="text"
           name="firstName"
-          placeholder="Enter your name"
-          v-model="store.firstName"
+          v-model="firstName"
         />
       </div>
       <div className="flex flex-col items-start pb-8">
@@ -51,8 +50,7 @@
           class="border-4 border-gray-400 rounded-lg p-1.5"
           type="text"
           name="lastName"
-          placeholder="Enter your name"
-          v-model="store.lastName"
+          v-model="lastName"
         />
       </div>
     </div>
@@ -68,7 +66,7 @@
         id="aboutMe"
         cols="60"
         rows="5"
-        v-model="store.aboutMe"
+        v-model="aboutMe"
       ></textarea>
     </div>
     <div className="flex items-end">
@@ -85,13 +83,13 @@
           id="shippingAddress"
           cols="60"
           rows="5"
-          v-model="store.shippingAddress"
+          v-model="shippingAddress"
         ></textarea>
       </div>
       <div
         class="p-2 border-2 border-black bg-blue-600 text-white rounded-lg ml-20 hover:bg-white hover:text-black transition ease-out duration-300"
       >
-        <button @click="store.updateProfile">Update Profile</button>
+        <button @click="updateProfileDetail">Update Profile</button>
       </div>
     </div>
   </div>
@@ -121,6 +119,7 @@
 <script>
 import Image from "/@/components/molecule/Image/Image.vue";
 import { userProfile } from "../store/user.profile.js";
+import { onMounted } from "@vue/runtime-core";
 
 export default {
   name: "ProfileMod",
@@ -129,6 +128,40 @@ export default {
       profilePicture:
         "https://images.csmonitor.com/csm/2020/10/1109550_1_1005-seal-maine_standard.jpg?alias=standard_900x600",
     };
+  },
+  computed: {
+    firstName: {
+      get() {
+        return userProfile().setFirstName;
+      },
+      set(payload) {
+        return userProfile().changedFirstName(payload);
+      },
+    },
+    lastName: {
+      get() {
+        return userProfile().setLastName;
+      },
+      set(payload) {
+        return userProfile().changedLastName(payload);
+      },
+    },
+    aboutMe: {
+      get() {
+        return userProfile().setAboutMe;
+      },
+      set(payload) {
+        return userProfile().changedAboutMe(payload);
+      },
+    },
+    shippingAddress: {
+      get() {
+        return userProfile().setShippingAddress;
+      },
+      set(payload) {
+        return userProfile().changedShippingAddress(payload);
+      },
+    },
   },
   methods: {
     loadProfileImg: function (event) {
@@ -140,15 +173,31 @@ export default {
     handleBack() {
       this.$router.go(-1);
     },
+    async updateProfileDetail() {
+      console.log(this.lastName);
+      await userProfile().updateProfile(
+        this.firstName,
+        this.lastName,
+        this.aboutMe,
+        this.shippingAddress
+      );
+    },
   },
   components: {
     Image,
   },
   setup() {
     const store = userProfile();
-    const displayInfo = store.displayProfileInfo;
+    // const firstName = ref(store.setFirstName)
+    // const lastName = ref(store.setLastName)
+    // const aboutMe = ref(store.setAboutMe)
+    // const shippingAddress = ref(store.setShippingAddress)
+    // const displayInfo = store.getProfile();
+    const displayInfo = onMounted(() => {
+      store.getProfile();
+    });
 
-    return { store, displayInfo };
+    return { displayInfo };
   },
 };
 </script>
