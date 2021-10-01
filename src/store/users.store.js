@@ -8,21 +8,13 @@ export const usersStore = defineStore({
   id: Math.random(),
   state() {
     return {
-      apparel: [],
+      apparel: null,
       hideIcon: true,
     };
   },
   getters: {
-    async displayAllProducts() {
-      this.apparel = [];
-      const listOfProducts = await getAllUserProducts();
-      const productDocs = listOfProducts;
-      console.log(productDocs);
-      if (productDocs !== null) {
-        //   this.emptyStatus = false
-        // this.hideIcon = false;
-        this.apparel = productDocs;
-      }
+    getApparels:(state) => {
+      return state.apparel;
     },
   },
   actions: {
@@ -30,6 +22,18 @@ export const usersStore = defineStore({
       console.log([...this.apparel, name]);
       this.rounds += 1;
       this.apparel = [...this.apparel, name];
+    },
+    async displayAllProducts() {
+      this.apparel = [];
+      const listOfProducts = await getAllUserProducts();
+      const productDocs = listOfProducts;
+      // console.log(productDocs);
+      if (productDocs !== null) {
+        //   this.emptyStatus = false
+        // this.hideIcon = false;
+        this.apparel = productDocs;
+        console.log("Successfully read from all items directory...");
+      }
     },
   },
 });
