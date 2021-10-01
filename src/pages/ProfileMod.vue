@@ -23,9 +23,9 @@
         </p>
       </div>
     </div>
-    <p className="px-20 pb-0 text-left font-semibold text-5xl">User Profile</p>
+    <p className="pl-10 pb-0 text-left font-semibold text-5xl">User Profile</p>
   </div>
-  <div className="flex flex-col items-start p-12 px-52">
+  <div className="flex flex-col items-start pb-12 pl-52">
     <div className="flex">
       <div className="flex flex-col items-start pb-8 pr-16">
         <label
@@ -37,8 +37,7 @@
           class="border-4 border-gray-400 rounded-lg p-1.5"
           type="text"
           name="firstName"
-          placeholder="Enter your name"
-          v-model="store.firstName"
+          v-model="firstName"
         />
       </div>
       <div className="flex flex-col items-start pb-8">
@@ -51,8 +50,7 @@
           class="border-4 border-gray-400 rounded-lg p-1.5"
           type="text"
           name="lastName"
-          placeholder="Enter your name"
-          v-model="store.lastName"
+          v-model="lastName"
         />
       </div>
     </div>
@@ -68,7 +66,7 @@
         id="aboutMe"
         cols="60"
         rows="5"
-        v-model="store.aboutMe"
+        v-model="aboutMe"
       ></textarea>
     </div>
     <div className="flex items-end">
@@ -85,28 +83,30 @@
           id="shippingAddress"
           cols="60"
           rows="5"
-          v-model="store.shippingAddress"
+          v-model="shippingAddress"
         ></textarea>
       </div>
-      <div
-        class="p-2 border-2 border-black bg-blue-600 text-white rounded-lg ml-20 hover:bg-white hover:text-black transition ease-out duration-300"
-      >
-        <button @click="store.updateProfile">Update Profile</button>
+      <div>
+        <!-- <button @click="updateProfileDetail">Update Profile</button> -->
+        <Button
+          class="ml-5 transform hover:scale-110 hover:opacity-75 transition ease-out duration-300"
+          type="submit"
+          @click="updateProfileDetail"
+          label="Update Profile"
+          :primary="true"
+        />
       </div>
     </div>
   </div>
   <div>
-    <div class="flex p-12 justify-around">
-      <!-- <a className="pl-40 text-left font-semibold text-4xl">My Products</a>
-      <a className="px-40 text-left text-4xl">My Purchase</a>
-      <a className="pr-40 text-left text-4xl">Add Product</a> -->
-      <router-link to="/profile" class="pl-40 text-left text-4xl"
+    <div class="flex px-24 py-10 justify-around">
+      <router-link to="/profile" class="text-left text-3xl"
         >My Products</router-link
       >
-      <router-link to="/profile/my-purchase" class="px-40 text-left text-4xl"
+      <router-link to="/profile/my-purchase" class="text-left text-3xl"
         >My Purchase</router-link
       >
-      <router-link to="/profile/add-product" class="px-40 text-left text-4xl"
+      <router-link to="/profile/add-product" class="text-left text-3xl"
         >Add Product</router-link
       >
     </div>
@@ -120,35 +120,77 @@
 
 <script>
 import Image from "/@/components/molecule/Image/Image.vue";
+import Button from '/@/components/molecule/Button/Button.vue';
 import { userProfile } from "../store/user.profile.js";
 
 export default {
   name: "ProfileMod",
-  data() {
-    return {
-      profilePicture:
-        "https://images.csmonitor.com/csm/2020/10/1109550_1_1005-seal-maine_standard.jpg?alias=standard_900x600",
-    };
+  computed: {
+    firstName: {
+      get() {
+        return userProfile().getFirstName;
+      },
+      set(payload) {
+        return userProfile().changedFirstName(payload);
+      },
+    },
+    lastName: {
+      get() {
+        return userProfile().getLastName;
+      },
+      set(payload) {
+        return userProfile().changedLastName(payload);
+      },
+    },
+    aboutMe: {
+      get() {
+        return userProfile().getAboutMe;
+      },
+      set(payload) {
+        return userProfile().changedAboutMe(payload);
+      },
+    },
+    shippingAddress: {
+      get() {
+        return userProfile().getShippingAddress;
+      },
+      set(payload) {
+        return userProfile().changedShippingAddress(payload);
+      },
+    },
+    profilePicture() {
+      return userProfile().getProfilePic;
+    },
   },
   methods: {
     loadProfileImg: function (event) {
-      this.profilePicture = URL.createObjectURL(event.target.files[0]);
-      console.log(this.profilePicture);
-
+      // this.profilePicture = URL.createObjectURL(event.target.files[0]);
+      // console.log(this.profilePicture);
+      userProfile().uploadProfileImg(event.target.files[0]);
       // need to store the image and load it when user logins
     },
     handleBack() {
       this.$router.go(-1);
     },
+    async updateProfileDetail() {
+      // console.log(this.lastName);
+      const newDetails = {
+        first_name: this.firstName,
+        last_name: this.lastName,
+        about: this.aboutMe,
+        address: this.shippingAddress,
+      };
+      await userProfile().updateProfile(newDetails);
+    },
   },
   components: {
-    Image,
+    Image, Button
   },
   setup() {
     const store = userProfile();
-    const displayInfo = store.displayProfileInfo;
 
-    return { store, displayInfo };
+    store.getProfile();
+    store.getProfileImg();
   },
 };
 </script>
@@ -170,5 +212,9 @@ export default {
 
 .route-leave-active {
   transition: all 0.3s ease-in;
+}
+
+.router-link-exact-active {
+  border-bottom: 1px solid black;
 }
 </style>

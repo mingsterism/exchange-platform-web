@@ -5,8 +5,8 @@ import {createPinia} from 'pinia'
 // import { StripePlugin } from '@vue-stripe/vue-stripe';
 
 function SecretPin(context) {
-    console.log(context.store.rounds)
-    console.log("_______________")
+    // console.log(context.store.rounds)
+    // console.log("_______________")
     return {
         secret: "thedonkeyisfat",
         // does not become reactive
