@@ -7,9 +7,9 @@
       >
         <!-- index to point at the items -->
         <Image
-          v-for="image in productPhotos"
-          :key="image.id"
-          :src="image.src"
+          v-for="(image, index) in productPhotos"
+          :key="index"
+          :src="image"
         />
         <div class="flex flex-col justify-around h-48">
           <input
@@ -41,12 +41,13 @@
           >
         </div>
       </div>
+      <div class="ml-52 mt-2">
+        <p class="text-left text-sm">*Please note that the first photo will be the primary.</p>
+      </div>
     </div>
     <div class="flex px-52">
       <div class="flex flex-col items-start mr-10">
-        <label
-          for="productName"
-          class="text-gray-600 mt-3 h-auto text-left p-2"
+        <label for="productName" class="text-gray-600 mt-3 h-auto text-left p-2"
           >Product Name</label
         >
         <input
@@ -74,9 +75,7 @@
         />
       </div>
       <div class="flex flex-col items-start mr-10">
-        <label
-          for="productQty"
-          class="text-gray-600 mt-3 h-auto text-left p-2"
+        <label for="productQty" class="text-gray-600 mt-3 h-auto text-left p-2"
           >Product Quantity</label
         >
         <input
@@ -139,6 +138,8 @@ import Button from "/@/components/molecule/Button/Button.vue";
 import { userProduct } from "../store/user.product.js";
 import "firebase/auth";
 import firebase from "firebase/app";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "AddProduct",
@@ -150,6 +151,7 @@ export default {
       productQty: null,
       productCondition: "",
       productDescription: "",
+      imgFiles: [],
     };
   },
   methods: {
@@ -157,25 +159,88 @@ export default {
       this.$router.go(-1);
     },
     async createProduct() {
-      const user = firebase.auth().currentUser
+      if (this.productName === null || this.productName === "") {
+        Swal.fire({
+          title: "Uh Oh!",
+          text: "Please key in the product name.",
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+        return;
+      }
+      if (this.productPoints === null || this.productPoints === "") {
+        Swal.fire({
+          title: "Uh Oh!",
+          text: "Please key in the product points.",
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+        return;
+      }
+      if (this.productQty === null || this.productQty === "") {
+        Swal.fire({
+          title: "Uh Oh!",
+          text: "Please key in the product quantity.",
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+        return;
+      }
+      if (this.productCondition === "") {
+        Swal.fire({
+          title: "Uh Oh!",
+          text: "Please key in the product conditions.",
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+        return;
+      }
+      if (this.productDescription === "") {
+        Swal.fire({
+          title: "Uh Oh!",
+          text: "Please key in the product descriptions.",
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+        return;
+      }
+      Swal.fire({
+        icon: "info",
+        title: "Uploading in progress...",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      const user = firebase.auth().currentUser;
       const productDetails = {
         id: Date.now(),
         uploadedBy: user.uid,
         name: this.productName,
-        points: this.productPoints,
-        quantity: this.productQty,
+        points: parseInt(this.productPoints),
+        quantity: parseInt(this.productQty),
         conditions: this.productCondition,
         description: this.productDescription,
         status: "true",
-        photos: this.productPhotos,
+        photos: [],
       };
-      await userProduct().createUserProduct(productDetails);
+      await userProduct().createUserProduct(productDetails, this.imgFiles);
       this.productName = "";
       this.productPoints = "";
       this.productQty = "";
+      this.imgFiles = [];
       this.productPhotos = [];
       this.productCondition = "";
       this.productDescription = "";
+    },
+    uploadProductImage(event) {
+      if (this.productPhotos.length <= 2) {
+        console.log(event.target.files);
+        this.productPhotos.push(URL.createObjectURL(event.target.files[0]));
+        this.imgFiles.push(event.target.files[0]);
+        console.log("Current images: ", this.productPhotos);
+        console.log("Current files: ", this.imgFiles);
+      } else {
+        console.log("Cannot upload more than 3 images...");
+      }
     },
   },
   components: {

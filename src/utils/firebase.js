@@ -18,17 +18,12 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const db = firebaseApp.firestore(); //initate firestore connection
-// const profileCollection = db.collection('profile')
+
 const profileCollection = db.collection("userProfile");
-// const productCollection = db.collection('addproduct')
+
 // Get a reference to the storage service, which is used to create references in your storage bucket
 export const storageRef = firebase.storage().ref(); // Points to root reference
-// const imageRef = storageRef.child("ProfileImages"); // Points to folder name images
-// const spaceRef = imageRef.child(fileName);
 
-// file path
-// const pathName = spaceRef.fullPath; // 'images/fileName'
-// const name = spaceRef.name; // 'fileName'
 
 export const getUserProducts = async () => {
   const user = firebase.auth().currentUser;
@@ -113,7 +108,7 @@ export const getUserProfileDoc = async (uid) => {
   if (getDoc.length === 0) {
     console.log("No such document!");
   } else {
-    console.log("Document data:", getDoc.data());
+    // console.log("Document data:", getDoc.data());
     const data = getDoc.data();
     return data;
   }
@@ -121,7 +116,7 @@ export const getUserProfileDoc = async (uid) => {
 
 export const createProduct = async (productId, productDetails) => {
   const user = firebase.auth().currentUser;
-  console.log("in createProduct: ", user.uid);
+  // console.log("in createProduct: ", user.uid);
   await profileCollection
     .doc(user.uid) // with the ID from the root collection
     .collection("products") // access to the subcollection
@@ -177,7 +172,7 @@ export const forgotPassword = (email) => {
 export const getAllUserProducts = async () => {
   const user = firebase.auth().currentUser;
   // const user = firebase.auth().currentUser
-  // console.log(user.uid);
+  // console.log("user uid is ", user.uid);
   const allUser = await profileCollection.get();
   // console.log(allUser);
   const userContainer = [];
@@ -192,17 +187,19 @@ export const getAllUserProducts = async () => {
     console.log("failed to access products...");
     return;
   }
+  console.log("user available are ", userContainer);
 
   let i = 0;
-  while (i < userContainer.length - 1) {
+  while (i < userContainer.length) {
     let userId = userContainer[i].id;
     // console.log("Current user ID is ", userId);
-    if (userId !== user) {
+    if (userId !== user.uid) {
       let userProducts;
       userProducts = await profileCollection
         .doc(userId)
         .collection("products")
         .get();
+        console.log(`Current id is ${userId} with products of ${userProducts.docs}`);
       if (userProducts.length === 0) {
         i++;
         return;
@@ -258,5 +255,16 @@ export const updateProductDoc = async (
     quantity: newProductQty,
     conditions: newProductConditions,
     description: newProductDescription,
+  });
+};
+
+export const updateProductPhotos = async (productPhotos, prodId) => {
+  const user = firebase.auth().currentUser;
+  const productDocument = profileCollection
+    .doc(user.uid)
+    .collection("products")
+    .doc(prodId);
+  return productDocument.update({
+    photos: productPhotos,
   });
 };

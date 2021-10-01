@@ -120,8 +120,10 @@
 
 <script>
 import Image from "/@/components/molecule/Image/Image.vue";
-import Button from '/@/components/molecule/Button/Button.vue';
+import Button from "/@/components/molecule/Button/Button.vue";
 import { userProfile } from "../store/user.profile.js";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "ProfileMod",
@@ -163,7 +165,7 @@ export default {
     },
   },
   methods: {
-    loadProfileImg: function (event) {
+    loadProfileImg(event) {
       // this.profilePicture = URL.createObjectURL(event.target.files[0]);
       // console.log(this.profilePicture);
       userProfile().uploadProfileImg(event.target.files[0]);
@@ -181,10 +183,17 @@ export default {
         address: this.shippingAddress,
       };
       await userProfile().updateProfile(newDetails);
+      Swal.fire({
+        title: "Success!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
   },
   components: {
-    Image, Button
+    Image,
+    Button,
   },
   setup() {
     const store = userProfile();

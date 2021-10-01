@@ -6,10 +6,14 @@ import {
   getSpecificProduct,
   getUserProducts,
   updateProductDoc,
+  updateProductPhotos,
 } from "../utils/firebase";
 import "firebase/firestore";
 import "firebase/auth";
 import router from "../router/router";
+import { uploadProdImg } from "../utils/storage";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 // useStore could be anything like useUser, useCart
 export const userProduct = defineStore({
@@ -25,7 +29,7 @@ export const userProduct = defineStore({
       // productCondition: "",
       // productDescription: "",
       // productStatus: "",
-      // productPhotos: [],
+      productPhotos: [],
       productDisplay: [],
       productTempId: "",
       editProductName: "",
@@ -35,6 +39,7 @@ export const userProduct = defineStore({
       editProductDescription: "",
       userTempId: "",
       emptyStatus: true, // use to show that there is no products in current user account
+      uploadComplete: false, // use to track the product image upload process
     };
   },
   getters: {
@@ -61,28 +66,33 @@ export const userProduct = defineStore({
     },
   },
   actions: {
-    uploadProductImage(event) {
-      if (this.productPhotos.length <= 6) {
-        this.productPhotos.push({
-          src: URL.createObjectURL(event.target.files[0]),
-        });
-      }
-      // console.log(this.productPhotos);
-    },
     popProductImage() {
       if (this.productPhotos.length > -1) {
         this.productPhotos.pop();
       }
       // console.log(this.productPhotos);
     },
-    async createUserProduct(productDetails) {
+    async createUserProduct(productDetails, files) {
       const prodDocId = String(productDetails.id);
       // console.log(productDetails);
       if (productDetails !== null) {
         await createProduct(prodDocId, productDetails);
-        console.log("Successfully added the product: ", productDetails.name);
-        this.displayUserProduct();
-        alert("Successfully added the product.");
+        await uploadProdImg(files, prodDocId);
+        if (this.uploadComplete) {
+          await updateProductPhotos(this.productPhotos, prodDocId);
+          console.log("Successfully added the product: ", productDetails.name);
+          this.displayUserProduct();
+          // alert("Successfully added the product.");
+          this.productPhotos = [];
+          Swal.fire({
+            title: "Success",
+            icon: "success",
+            text: "Sucessfully added new product.",
+            confirmButtonColor: "#1ea7fd",
+          });
+        } else {
+          console.log("Fail to add product...");
+        }
       } else {
         console.log(error);
       }
@@ -182,6 +192,9 @@ export const userProduct = defineStore({
     },
     changeProductDescription(payload) {
       this.editProductDescription = payload;
+    },
+    addPhotoUrl(payload) {
+      this.productPhotos.push(payload);
     },
   },
 });

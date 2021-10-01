@@ -15,7 +15,8 @@ module.exports = {
       "screen-xl": '1280px'
     },
     minHeight: {
-      '36': '9rem'
+      '30': '7rem',
+      '36': '9rem',
     }
   },
   variants: {
