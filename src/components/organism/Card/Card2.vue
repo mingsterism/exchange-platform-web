@@ -1,10 +1,8 @@
 <template>
   <div className="shadow-md w-80 rounded-lg">
-    <img
-      class="rounded-t-md"
-      src="https://i.imgur.com/hghfnW9.jpg"
-      className="p-0"
-    />
+    <div class="rounded-t-md min-h-30 max-h-48 overflow-hidden">
+      <img class="rounded-t-md" :src="post.photos[0]" className="p-0" />
+    </div>
     <div>
       <div className="py-4 p-3 text-left">
         <div className="pb-2">
@@ -16,6 +14,7 @@
         <div class="min-h-36">
           <p className="break-words">{{ post.description }}</p>
           <p>Price: {{ post.points }} points</p>
+          <p>Current Quantity: {{ post.quanity }}</p>
         </div>
       </div>
       <div className="pb-4">

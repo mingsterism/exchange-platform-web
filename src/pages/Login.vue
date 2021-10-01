@@ -4,22 +4,49 @@
     <div>
       <div class="mt-8">
         <div className="flex flex-col">
-          <label for="email" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Email</label>
-          <input type="text" placeholder="Email" className="storybook-textbox" v-model="email"/>
+          <label
+            for="email"
+            className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
+            >Email</label
+          >
+          <input
+            type="text"
+            placeholder="Email"
+            className="storybook-textbox"
+            v-model="email"
+          />
         </div>
         <div className="flex flex-col">
-          <label for="password" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Password</label>
-          <input @keypress.enter="handleLogin" type="password" placeholder="Password" className="storybook-textbox" v-model="password"/>
+          <label
+            for="password"
+            className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
+            >Password</label
+          >
+          <input
+            @keypress.enter="handleLogin"
+            type="password"
+            placeholder="Password"
+            className="storybook-textbox"
+            v-model="password"
+          />
         </div>
         <!-- <Textbox type="text" text="Email" name="Email" model="email" id="email" />
         <Textbox type="password" text="Password" name="Password" model="password" id="password" /> -->
       </div>
       <div class="mt-10">
-        <Button type="submit" @click="handleLogin" label="Login" :primary="true" size="medium"/>
-        <p className="mt-8">Need an Account?
+        <Button
+          type="submit"
+          @click="handleLogin"
+          label="Login"
+          :primary="true"
+          size="medium"
+        />
+        <p className="mt-8">
+          Need an Account?
           <router-link to="/register">Register Here</router-link>
         </p>
-        <p className="mt-2">Forgot Your Password?
+        <p className="mt-2">
+          Forgot Your Password?
           <router-link to="/forgotpass">Click Here</router-link>
           <!-- <router-link to="/register">Click Here</router-link> -->
         </p>
@@ -29,45 +56,47 @@
 </template>
 
 <script>
-import Textbox from "/@/components/molecule/Textbox/Textbox.vue"
-import Button from "/@/components/molecule/Button/Button.vue"
-import {login, forgotPassword} from '/@/utils/firebase.js'
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
+import Button from "/@/components/molecule/Button/Button.vue";
+import { login, forgotPassword } from "/@/utils/firebase.js";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "Login",
   components: {
     Textbox,
-    Button
+    Button,
   },
   data() {
     return {
       email: "",
-      password: ""
-    }
+      password: "",
+    };
   },
   methods: {
     async handleLogin() {
-      const isLoggedIn = await login(this.email, this.password).catch(err => {
+      const isLoggedIn = await login(this.email, this.password).catch((err) => {
         Swal.fire({
-
-                title: "Uh Oh!",
-                text: err.message,
-                icon: "error",
-                confirmButtonColor: "#1ea7fd"
-
-            })
-      })
+          title: "Uh Oh!",
+          text: err.message,
+          icon: "error",
+          confirmButtonColor: "#1ea7fd",
+        });
+      });
       if (!isLoggedIn) {
-        this.$router.push('/login')
+        this.$router.push("/login");
       } else {
-        this.$router.push('/')
+        Swal.fire({
+          icon: "success",
+          title: "Welcome",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.$router.push("/");
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

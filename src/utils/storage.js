@@ -1,7 +1,11 @@
 import { storageRef } from "./firebase";
 import { userProfile } from "../store/user.profile";
+import { userProduct } from "../store/user.product";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const imageRef = storageRef.child("ProfileImages"); // Points to folder name images
+const prodFolder = storageRef.child("product-images");
 
 export const uploadProfileImage = (file, id) => {
   const spaceRef = imageRef.child(id);
@@ -42,4 +46,24 @@ export const downloadProfilePic = (id) => {
       // Handle any errors
       console.log(error);
     });
+};
+
+export const uploadProdImg = async (files, prodId) => {
+  userProduct().uploadComplete = false;
+  const user = firebase.auth().currentUser;
+  const folderId = user.uid + "&" + prodId;
+  console.log("Folder ID is ", folderId);
+  const spaceRef = prodFolder.child(folderId);
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const fileName = file.name;
+    const fileLocation = spaceRef.child(fileName);
+
+    // https://stackoverflow.com/questions/53574671/how-to-await-the-upload-of-file-to-firebase-storage-in-flutter/53577390
+    const uploadTask = await fileLocation.put(file);
+    const getDownloadUrl = await uploadTask.ref.getDownloadURL();
+    userProduct().addPhotoUrl(getDownloadUrl);
+    console.log("Current urls: ", userProduct().productPhotos);
+  }
+  userProduct().uploadComplete = true;
 };

@@ -1,5 +1,5 @@
 <template>
-  <div className="shadow-md w-80 rounded-lg">
+  <div className="shadow-md w-80 rounded-lg flex flex-col">
     <div class="relative">
       <p
         @click="goToEditor(post.id)"
@@ -32,11 +32,15 @@
         </svg>
       </p>
     </div>
-    <img
+    <!-- <img
       class="rounded-md"
       src="https://i.imgur.com/hghfnW9.jpg"
       className="p-0"
-    />
+    /> -->
+    <div class="rounded-t-md min-h-30 max-h-48 overflow-hidden">
+      <img :src="post.photos[0]" className="p-0" />
+    </div>
+
     <div>
       <div className="py-4 p-3 text-left">
         <div className="flex justify-between pb-2">
@@ -48,6 +52,7 @@
         <div class="min-h-36">
           <p className="break-words overflow-hidden">{{ post.description }}</p>
           <p>Price: {{ post.points }} points</p>
+          <p>Current Quantity: {{ post.quantity }}</p>
         </div>
       </div>
       <!-- <div className="pb-4">
@@ -60,7 +65,8 @@
 <script>
 import Button from "../../molecule/Button/Button.vue";
 import { userProduct } from "/@/store/user.product.js";
-import { usersStore } from "/@/store/users.store";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "Card",
@@ -71,7 +77,22 @@ export default {
 
   methods: {
     removeProduct(prodId) {
-      this.store.deleteProductDoc(prodId);
+      Swal.fire({
+        title: "Do you want to delete this product?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes, please",
+        denyButtonText: `No, Don't delete`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.store.deleteProductDoc(prodId);
+          Swal.fire("Deleted!", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("You did not delete the product.", "", "info");
+        }
+      });
+      // this.store.deleteProductDoc(prodId);
     },
     goToEditor(prodId) {
       this.store.goToEditorPage(prodId);
@@ -80,15 +101,6 @@ export default {
 
   setup() {
     const store = userProduct();
-    // function goToEditor(prodId) {
-    //   const storeId = store.goToEditorPage(prodId);
-    //   if (storeId !== null) {
-    //     // router.push({path: "/playground"})
-    //     console.log("Getting product Id...");
-    //   } else {
-    //     alert("This product does not exist!");
-    //   }
-    // }
 
     return { store };
   },
