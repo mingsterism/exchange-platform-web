@@ -20,12 +20,12 @@ export const userProduct = defineStore({
       id: "",
       uploadedBy: "",
       productName: "",
-      productPoints: "",
-      productQty: "",
-      productCondition: "",
-      productDescription: "",
-      productStatus: "",
-      productPhotos: [],
+      // productPoints: "",
+      // productQty: "",
+      // productCondition: "",
+      // productDescription: "",
+      // productStatus: "",
+      // productPhotos: [],
       productDisplay: [],
       productTempId: "",
       editProductName: "",
@@ -38,43 +38,26 @@ export const userProduct = defineStore({
     };
   },
   getters: {
-    async displayUserProduct() {
-      this.productDisplay = [];
-      const listOfProducts = await getUserProducts();
-      const productDocs = listOfProducts;
-      console.log(productDocs);
-      if (productDocs !== null) {
-        this.emptyStatus = false;
-        this.productDisplay = productDocs;
-      }
+    getProductDisplay: (state) => {
+      return state.productDisplay;
     },
-    async displayForEdit() {
-      const productId = this.productTempId;
-      const productCurrentDetail = await getSpecificProduct(productId);
-      if (productCurrentDetail !== null) {
-        console.log("Product Document: ", productCurrentDetail);
-        this.editProductName = productCurrentDetail.name;
-        this.editProductPoints = productCurrentDetail.points;
-        this.editProductQty = productCurrentDetail.quanity;
-        this.editProductCondition = productCurrentDetail.conditions;
-        this.editProductDescription = productCurrentDetail.description;
-      }
+    getEmptyStatus: (state) => {
+      return state.emptyStatus;
     },
-    async displayProductView() {
-      const productId = this.productTempId;
-      const usersId = this.userTempId;
-      const productCurrentDetail = await getOtherUserProduct(
-        usersId,
-        productId
-      );
-      if (productCurrentDetail !== null) {
-        console.log("Product Document: ", productCurrentDetail);
-        this.editProductName = productCurrentDetail.name;
-        this.editProductPoints = productCurrentDetail.points;
-        this.editProductQty = productCurrentDetail.quanity;
-        this.editProductCondition = productCurrentDetail.conditions;
-        this.editProductDescription = productCurrentDetail.description;
-      }
+    getEditProductName: (state) => {
+      return state.editProductName;
+    },
+    getEditProductPoints: (state) => {
+      return state.editProductPoints;
+    },
+    getEditProductQty: (state) => {
+      return state.editProductQty;
+    },
+    getEditProductCondition: (state) => {
+      return state.editProductCondition;
+    },
+    getEditProductDescription: (state) => {
+      return state.editProductDescription;
     },
   },
   actions: {
@@ -84,54 +67,36 @@ export const userProduct = defineStore({
           src: URL.createObjectURL(event.target.files[0]),
         });
       }
-      console.log(this.productPhotos);
+      // console.log(this.productPhotos);
     },
     popProductImage() {
       if (this.productPhotos.length > -1) {
         this.productPhotos.pop();
       }
-      console.log(this.productPhotos);
+      // console.log(this.productPhotos);
     },
-    async createUserProduct() {
-      const user = await currentUser();
-      const productDetails = {
-        id: Date.now(),
-        uploadedBy: user.uid,
-        name: this.productName,
-        points: this.productPoints,
-        quanity: this.productQty,
-        conditions: this.productCondition,
-        description: this.productDescription,
-        status: "true",
-        photos: this.productPhotos,
-      };
+    async createUserProduct(productDetails) {
       const prodDocId = String(productDetails.id);
-      console.log(productDetails);
+      // console.log(productDetails);
       if (productDetails !== null) {
         await createProduct(prodDocId, productDetails);
         console.log("Successfully added the product: ", productDetails.name);
-        this.displayUserProduct;
+        this.displayUserProduct();
         alert("Successfully added the product.");
-        this.productName = "";
-        this.productPoints = "";
-        this.productQty = "";
-        this.productPhotos = [];
-        this.productCondition = "";
-        this.productDescription = "";
       } else {
         console.log(error);
       }
     },
     goToEditorPage(productId) {
       this.productTempId = String(productId);
-      console.log(this.productTempId);
+      // console.log(this.productTempId);
       router.push("/edit-product");
       return router;
     },
     goToProductPage(userId, productId) {
       this.productTempId = String(productId);
       this.userTempId = userId;
-      console.log(this.productTempId);
+      // console.log(this.productTempId);
       router.push("/view-product");
       return router;
     },
@@ -158,10 +123,65 @@ export const userProduct = defineStore({
       for (let i = 0; i < this.productDisplay.length; i++) {
         const item = this.productDisplay[i];
         if (item.id === parseInt(productId)) {
-          this.productDisplay.splice(index, 1);
+          this.productDisplay.splice(i, 1);
           break;
         }
       }
+    },
+    async displayUserProduct() {
+      this.productDisplay = [];
+      const listOfProducts = await getUserProducts();
+      const productDocs = listOfProducts;
+      // console.log(productDocs);
+      if (productDocs !== null) {
+        this.emptyStatus = false;
+        this.productDisplay = productDocs;
+      } else {
+        this.emptyStatus = true;
+      }
+    },
+    async displayForEdit() {
+      const productId = this.productTempId;
+      const productCurrentDetail = await getSpecificProduct(productId);
+      if (productCurrentDetail !== null) {
+        // console.log("Product Document: ", productCurrentDetail);
+        this.editProductName = productCurrentDetail.name;
+        this.editProductPoints = productCurrentDetail.points;
+        this.editProductQty = productCurrentDetail.quanity;
+        this.editProductCondition = productCurrentDetail.conditions;
+        this.editProductDescription = productCurrentDetail.description;
+      }
+    },
+    async displayProductView() {
+      const productId = this.productTempId;
+      const usersId = this.userTempId;
+      const productCurrentDetail = await getOtherUserProduct(
+        usersId,
+        productId
+      );
+      if (productCurrentDetail !== null) {
+        // console.log("Product Document: ", productCurrentDetail);
+        this.editProductName = productCurrentDetail.name;
+        this.editProductPoints = productCurrentDetail.points;
+        this.editProductQty = productCurrentDetail.quanity;
+        this.editProductCondition = productCurrentDetail.conditions;
+        this.editProductDescription = productCurrentDetail.description;
+      }
+    },
+    changeProductName(payload) {
+      this.editProductName = payload;
+    },
+    changeProductPoints(payload) {
+      this.editProductPoints = payload;
+    },
+    changeProductQty(payload) {
+      this.editProductQty = payload;
+    },
+    changeProductCondition(payload) {
+      this.editProductCondition = payload;
+    },
+    changeProductDescription(payload) {
+      this.editProductDescription = payload;
     },
   },
 });

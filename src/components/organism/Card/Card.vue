@@ -1,8 +1,8 @@
 <template>
-  <div className="shadow-md w-80">
+  <div className="shadow-md w-80 rounded-lg">
     <div class="relative">
       <p
-      @click="goToEditor(post.id)"
+        @click="goToEditor(post.id)"
         class="absolute right-9 -top-3 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-blue-400 cursor-pointer"
       >
         <svg
@@ -17,7 +17,7 @@
         </svg>
       </p>
       <p
-        @click="store.deleteProductDoc(post.id)"
+        @click="removeProduct(post.id)"
         class="absolute -right-2 -top-3 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-red-500 cursor-pointer"
       >
         <svg
@@ -32,20 +32,27 @@
         </svg>
       </p>
     </div>
-    <img src="https://i.imgur.com/hghfnW9.jpg" className="p-0" />
+    <img
+      class="rounded-md"
+      src="https://i.imgur.com/hghfnW9.jpg"
+      className="p-0"
+    />
     <div>
       <div className="py-4 p-3 text-left">
-        <div className="flex flex-row justify-between pb-2">
+        <div className="flex justify-between pb-2">
           <p className="text-2xl font-semibold">{{ post.name }}</p>
           <p className="mr-2 text-lg font-semibold self-center bg-red-100">
             {{ post.shipping }}
           </p>
         </div>
-        <p className="min-h-36 break-words">{{ post.description }}</p>
+        <div class="min-h-36">
+          <p className="break-words overflow-hidden">{{ post.description }}</p>
+          <p>Price: {{ post.points }} points</p>
+        </div>
       </div>
-      <div className="pb-4">
+      <!-- <div className="pb-4">
         <Button label="Button" :primary="true" size="medium" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,7 +60,7 @@
 <script>
 import Button from "../../molecule/Button/Button.vue";
 import { userProduct } from "/@/store/user.product.js";
-import { usersStore } from '/@/store/users.store';
+import { usersStore } from "/@/store/users.store";
 
 export default {
   name: "Card",
@@ -63,27 +70,27 @@ export default {
   props: ["post"],
 
   methods: {
-  //   ...mapState(userProduct, ['storeProdId ']),
-  //   async goToEditor(prodId) {
-  //     await storeProdId(prodId)
-  //     this.$router.push('/playground')
-  //   }
-   },
+    removeProduct(prodId) {
+      this.store.deleteProductDoc(prodId);
+    },
+    goToEditor(prodId) {
+      this.store.goToEditorPage(prodId);
+    },
+  },
 
   setup() {
     const store = userProduct();
-    const forUser = usersStore();
-    function goToEditor(prodId) {
-      const storeId = store.goToEditorPage(prodId)
-      if (storeId !== null) {
-        // router.push({path: "/playground"})
-        console.log("Getting product Id...");
-      } else {
-        alert("This product does not exist!")
-      }
-    }
+    // function goToEditor(prodId) {
+    //   const storeId = store.goToEditorPage(prodId);
+    //   if (storeId !== null) {
+    //     // router.push({path: "/playground"})
+    //     console.log("Getting product Id...");
+    //   } else {
+    //     alert("This product does not exist!");
+    //   }
+    // }
 
-    return { store, goToEditor, forUser };
+    return { store };
   },
 };
 </script>
