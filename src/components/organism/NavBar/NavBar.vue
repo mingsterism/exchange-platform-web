@@ -1,13 +1,14 @@
 <template>
   <nav className="bg-gray-300 p-5 flex flex-row justify-between">
     <div @click="check">
-      <img
-        :src="profileImg"
-        className="h-11 cursor-pointer"
-      />
+      <img :src="profileImg" className="h-11 cursor-pointer" />
     </div>
     <div className="flex flex-row items-center gap-4">
-      <Button label="Cart" className="border-opacity-0 font-semibold" />
+      <Button
+        label="Cart"
+        @click="goToCart"
+        className="border-opacity-0 font-semibold"
+      />
       <Button label="Messages" className="border-opacity-0 font-semibold" />
       <div @click="ifUserMenu">
         <img
@@ -61,6 +62,9 @@ export default {
           this.$router.push("/login");
         }
       });
+    },
+    goToCart() {
+      this.$router.push("/cart");
     },
   },
 };
