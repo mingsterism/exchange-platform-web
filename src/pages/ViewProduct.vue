@@ -11,15 +11,15 @@
             id="productImgCont"
           >
             <!-- index to point at the items -->
-            <Image />
+            <Image :src="productPhotos[0]" />
           </div>
         </div>
         <div class="flex flex-col mt-10 items-start ml-5 justify-around">
           <div class="">
-            <p>Product Name: {{ store.editProductName }}</p>
+            <p>Product Name: {{ productName }}</p>
           </div>
           <div class="">
-            <p>Product Points: {{ store.editProductPoints }}</p>
+            <p>Product Points: {{ productPoints }}</p>
           </div>
           <div class="flex items-center">
             <p>Product Quantity:</p>
@@ -27,28 +27,32 @@
               class="border-2 border-gray-400 rounded-lg p-1.5 ml-2"
               type="number"
               name="productPoints"
-              placeholder="Enter product quantity"
-              v-model="store.editProductQty"
+              v-model="userQty"
               required
+              :max="productQuantity"
+              min="1"
             />
+            <p class="ml-2 text-gray-500">{{ productQuantity }} available</p>
           </div>
           <div>
-            <p>Condition: {{ store.editProductCondition }}</p>
+            <p>Condition: {{ productCondition }}</p>
           </div>
         </div>
       </div>
       <div class="flex flex-col items-start">
         <p class="mt-5 mb-3 ml-2">Description:</p>
-        <p class="text-left border-2 p-1.5 rounded-lg w-8/12 h-96 break-words overflow-scroll">
-          {{ store.editProductDescription }}
+        <p
+          class="text-left border-2 p-1.5 rounded-lg w-8/12 h-80 break-words overflow-auto"
+        >
+          {{ productDescriptions }}
         </p>
         <div class="mt-7">
           <Button
-            class="mb-10 transform hover:scale-125 hover:opacity-75 transition ease-out duration-300"
+            class="mb-10 transform hover:scale-110 hover:opacity-75 transition ease-out duration-300"
             type="submit"
             label="Add to Cart"
             :primary="true"
-            @click="store.addToCart"
+            @click="addItemToCart"
           />
         </div>
       </div>
@@ -59,8 +63,18 @@
 <script>
 import Image from "/@/components/molecule/Image/Image.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
-import { userProduct } from "../store/user.product";
+import { usersStore } from "../store/users.store";
+import { computed } from "@vue/runtime-core";
+import { addToCart } from "../utils/cart";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+// import { userProduct } from "../store/user.product";
 export default {
+  data() {
+    return {
+      userQty: 1,
+    };
+  },
   components: {
     Image,
     Button,
@@ -69,12 +83,57 @@ export default {
     returnToProfile() {
       this.$router.push("/profile");
     },
+    async addItemToCart() {
+      const productDetails = {
+        id: String(Date.now()),
+        name: this.productName,
+        photos: this.productPhotos,
+        points: this.productPoints,
+        desireQuantity: this.userQty,
+        totalPoints: Number(this.userQty * this.productPoints),
+        checkOut: false,
+      };
+      await addToCart(productDetails);
+      Swal.fire({
+        icon: "success",
+          title: "Added to Cart",
+          showConfirmButton: false,
+          timer: 1500,
+      })
+      // console.log(productDetails, " is added to cart");
+    },
   },
   setup() {
-    const store = userProduct();
-    const displayProductDetail = store.displayProductView;
+    const store = usersStore();
+    // store.displayProductView();
+    const productName = computed(() => {
+      return store.getProductName;
+    });
+    const productPoints = computed(() => {
+      return store.getProductPoints;
+    });
+    const productQuantity = computed(() => {
+      return store.getProductQuantity;
+    });
+    const productPhotos = computed(() => {
+      return store.getProductPhotos;
+    });
+    const productDescriptions = computed(() => {
+      return store.getProductDescriptions;
+    });
+    const productCondition = computed(() => {
+      return store.getProductCondition;
+    });
 
-    return { store, displayProductDetail };
+    return {
+      store,
+      productName,
+      productQuantity,
+      productPoints,
+      productPhotos,
+      productDescriptions,
+      productCondition,
+    };
   },
 };
 </script>

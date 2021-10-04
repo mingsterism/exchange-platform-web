@@ -103,13 +103,13 @@ export const userProduct = defineStore({
       router.push("/edit-product");
       return router;
     },
-    goToProductPage(userId, productId) {
-      this.productTempId = String(productId);
-      this.userTempId = userId;
-      // console.log(this.productTempId);
-      router.push("/view-product");
-      return router;
-    },
+    // goToProductPage(userId, productId) {
+    //   this.productTempId = String(productId);
+    //   this.userTempId = userId;
+    //   // console.log(this.productTempId);
+    //   router.push("/view-product");
+    //   return router;
+    // },
     async editProductDetail() {
       const tempProdId = String(this.productTempId);
       const updatingDoc = await updateProductDoc(
@@ -162,22 +162,22 @@ export const userProduct = defineStore({
         this.editProductDescription = productCurrentDetail.description;
       }
     },
-    async displayProductView() {
-      const productId = this.productTempId;
-      const usersId = this.userTempId;
-      const productCurrentDetail = await getOtherUserProduct(
-        usersId,
-        productId
-      );
-      if (productCurrentDetail !== null) {
-        // console.log("Product Document: ", productCurrentDetail);
-        this.editProductName = productCurrentDetail.name;
-        this.editProductPoints = productCurrentDetail.points;
-        this.editProductQty = productCurrentDetail.quanity;
-        this.editProductCondition = productCurrentDetail.conditions;
-        this.editProductDescription = productCurrentDetail.description;
-      }
-    },
+    // async displayProductView() {
+    //   const productId = this.productTempId;
+    //   const usersId = this.userTempId;
+    //   const productCurrentDetail = await getOtherUserProduct(
+    //     usersId,
+    //     productId
+    //   );
+    //   if (productCurrentDetail !== null) {
+    //     // console.log("Product Document: ", productCurrentDetail);
+    //     this.editProductName = productCurrentDetail.name;
+    //     this.editProductPoints = productCurrentDetail.points;
+    //     this.editProductQty = productCurrentDetail.quanity;
+    //     this.editProductCondition = productCurrentDetail.conditions;
+    //     this.editProductDescription = productCurrentDetail.description;
+    //   }
+    // },
     changeProductName(payload) {
       this.editProductName = payload;
     },

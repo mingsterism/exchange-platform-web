@@ -15,6 +15,7 @@ import Profile from '/@/pages/ProfileMod.vue';
 import MyPurchase from '/@/pages/MyPurchase.vue';
 import EditProduct from '../pages/EditProduct.vue';
 import ViewProduct from '../pages/ViewProduct.vue';
+import Cart from '../pages/Cart.vue';
 
 
 // TODO: Need to add route guard
@@ -52,6 +53,11 @@ const routes = [
                 path: "/view-product",
                 name: 'ViewProduct',
                 component: ViewProduct,
+            },
+            {
+                path: "/cart",
+                name: 'Cart',
+                component: Cart,
             },
             {
                 path: "/profile",

@@ -14,13 +14,15 @@
         <div class="min-h-36">
           <p className="break-words">{{ post.description }}</p>
           <p>Price: {{ post.points }} points</p>
-          <p>Current Quantity: {{ post.quanity }}</p>
+          <p>Current Quantity: {{ post.quantity }}</p>
         </div>
       </div>
       <div className="pb-4">
         <Button
-          @click="showProduct(post.uploadedBy, post.id)"
-          label="View"
+          class="hover:scale-110 transform transition ease-linear duration-300"
+          type="button"
+          @click="showProduct(post.id)"
+          label="View Product"
           :primary="true"
           size="medium"
         />
@@ -31,7 +33,8 @@
 
 <script>
 import Button from "../../molecule/Button/Button.vue";
-import { userProduct } from "/@/store/user.product.js";
+import { usersStore } from "/@/store/users.store";
+// import { userProduct } from "/@/store/user.product.js";
 
 export default {
   name: "Card",
@@ -39,19 +42,27 @@ export default {
     Button,
   },
   props: ["post"],
+  // emits: ["view-product"],
+  methods: {
+    showProduct(prodId) {
+      console.log("fire an event");
+      this.store.displayProductView(prodId);
+      this.$router.push('/view-product')
+    },
+  },
   setup() {
-    const store = userProduct();
-    function showProduct(userId, prodId) {
-      const storeId = store.goToProductPage(userId, prodId);
-      if (storeId !== null) {
-        // router.push({path: "/playground"})
-        console.log("Getting product Id...");
-      } else {
-        alert("This product has been sold out!");
-      }
-    }
+    const store = usersStore();
+    // function showProduct(userId, prodId) {
+    //   const storeId = store.goToProductPage(userId, prodId);
+    //   if (storeId !== null) {
+    //     // router.push({path: "/playground"})
+    //     console.log("Getting product Id...");
+    //   } else {
+    //     alert("This product has been sold out!");
+    //   }
+    // }
 
-    return { store, showProduct };
+    return { store };
   },
 };
 </script>

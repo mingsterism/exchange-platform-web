@@ -19,7 +19,7 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const db = firebaseApp.firestore(); //initate firestore connection
 
-const profileCollection = db.collection("userProfile");
+export const profileCollection = db.collection("userProfile");
 
 // Get a reference to the storage service, which is used to create references in your storage bucket
 export const storageRef = firebase.storage().ref(); // Points to root reference
@@ -187,7 +187,7 @@ export const getAllUserProducts = async () => {
     console.log("failed to access products...");
     return;
   }
-  console.log("user available are ", userContainer);
+  // console.log("user available are ", userContainer);
 
   let i = 0;
   while (i < userContainer.length) {
@@ -199,7 +199,7 @@ export const getAllUserProducts = async () => {
         .doc(userId)
         .collection("products")
         .get();
-        console.log(`Current id is ${userId} with products of ${userProducts.docs}`);
+        // console.log(`Current id is ${userId} with products of ${userProducts.docs}`);  
       if (userProducts.length === 0) {
         i++;
         return;
