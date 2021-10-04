@@ -66,6 +66,8 @@ import Button from "/@/components/molecule/Button/Button.vue";
 import { usersStore } from "../store/users.store";
 import { computed } from "@vue/runtime-core";
 import { addToCart } from "../utils/cart";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 // import { userProduct } from "../store/user.product";
 export default {
   data() {
@@ -92,6 +94,12 @@ export default {
         checkOut: false,
       };
       await addToCart(productDetails);
+      Swal.fire({
+        icon: "success",
+          title: "Added to Cart",
+          showConfirmButton: false,
+          timer: 1500,
+      })
       // console.log(productDetails, " is added to cart");
     },
   },

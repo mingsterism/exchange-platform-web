@@ -18,15 +18,15 @@
       <p>Price:</p>
       <p>{{ post.points }} points</p>
     </div>
-    <div>Quantity: {{ post.desireQuantity }}</div>
+    <div>Quantity: {{ post.desireQuantity  }}</div>
     <div class="text-left">
       <p>Total cost:</p>
       <p>{{ post.totalPoints }} points</p>
     </div>
-    <div class="px-3">
+    <!-- <div class="px-3">
       <button
         class="hover:text-red-700 transform transition ease-linear duration-200"
-        @click="removeItem(post.id)"
+        @click="removepost"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,27 +43,16 @@
           />
         </svg>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import Button from "../../molecule/Button/Button.vue";
 import Images from "../../molecule/Image/Image.vue";
-import { usersStore } from "/@/store/users.store";
 export default {
   components: { Images, Button },
   props: ["post"],
-  methods: {
-    removeItem(prodId) {
-      this.store.removeItemFromCart(prodId);
-    },
-  },
-  setup() {
-    const store = usersStore();
-
-    return { store };
-  },
 };
 </script>
 

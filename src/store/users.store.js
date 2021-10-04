@@ -1,5 +1,11 @@
 import { defineStore } from "pinia";
 import router from "../router/router";
+import {
+  addToMyPurchase,
+  getCart,
+  getMyPurchase,
+  removeFromCart,
+} from "../utils/cart";
 import { getAllUserProducts } from "../utils/firebase";
 
 // useStore could be anything like useUser, useCart
@@ -17,6 +23,10 @@ export const usersStore = defineStore({
       productPhotos: null,
       productDescriptions: null,
       productCondition: null,
+      itemsInCart: null,
+      currentTotalPrice: null,
+      myPurchases: null,
+      hasPurchase: false,
     };
   },
   getters: {
@@ -40,6 +50,18 @@ export const usersStore = defineStore({
     },
     getProductCondition: (state) => {
       return state.productCondition;
+    },
+    getItemsInCart: (state) => {
+      return state.itemsInCart;
+    },
+    getCurrentTotal: (state) => {
+      return state.currentTotalPrice;
+    },
+    getMyPurchase: (state) => {
+      return state.myPurchases;
+    },
+    getHasPurchase: (state) => {
+      return state.hasPurchase;
     },
   },
   actions: {
@@ -90,6 +112,38 @@ export const usersStore = defineStore({
       }
       console.log("Successfully read product doc...");
     },
+    async showItemsInCart() {
+      let grandTotal = 0;
+      const getDocs = await getCart();
+      this.setItemsInCart(getDocs);
+      for (let i = 0; i < getDocs.length; i++) {
+        const itemPrice = getDocs[i].totalPoints;
+        grandTotal += itemPrice;
+      }
+      this.setCurrentTotal(grandTotal);
+    },
+    checkOutItems() {
+      addToMyPurchase(this.itemsInCart);
+    },
+    async getMyPurchasedItems() {
+      const docs = await getMyPurchase();
+      if (docs.length > 0) {
+        this.hasPurchase = true;
+        this.setMyPurchase(docs);
+      } else {
+        this.hasPurchase = false;
+      }
+    },
+    async removeItemFromCart(prodId) {
+      await removeFromCart(prodId);
+      for (let i = 0; i < this.itemsInCart.length; i++) {
+        const item = itemsInCart[i];
+        if ((item.id = prodId)) {
+          this.itemsInCart.splice(i, 1);
+        }
+      }
+      console.log("Successfully remove from cart...");
+    },
     setProductName(payload) {
       this.productName = payload;
     },
@@ -110,6 +164,15 @@ export const usersStore = defineStore({
     },
     setProductId(payload) {
       this.productId = payload;
+    },
+    setItemsInCart(payload) {
+      this.itemsInCart = payload;
+    },
+    setCurrentTotal(payload) {
+      this.currentTotalPrice = payload;
+    },
+    setMyPurchase(payload) {
+      this.myPurchases = payload;
     },
   },
 });
