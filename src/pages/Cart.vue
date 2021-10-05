@@ -27,9 +27,6 @@
             :primary="true"
           />
         </div>
-        <div>
-          <p class="text-color">testing the css text</p>
-        </div>
       </div>
     </div>
   </div>

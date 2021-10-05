@@ -24,7 +24,6 @@ export const profileCollection = db.collection("userProfile");
 // Get a reference to the storage service, which is used to create references in your storage bucket
 export const storageRef = firebase.storage().ref(); // Points to root reference
 
-
 export const getUserProducts = async () => {
   const user = firebase.auth().currentUser;
   const listOfDocument = profileCollection.doc(user.uid).collection("products");
@@ -105,8 +104,9 @@ export const getUserProfileDoc = async (uid) => {
   const userDoc = profileCollection.doc(uid);
   const getDoc = await userDoc.get();
   // console.log(getDoc);
-  if (getDoc.length === 0) {
+  if (!getDoc.exists) {
     console.log("No such document!");
+    return null;
   } else {
     // console.log("Document data:", getDoc.data());
     const data = getDoc.data();
@@ -199,7 +199,7 @@ export const getAllUserProducts = async () => {
         .doc(userId)
         .collection("products")
         .get();
-        // console.log(`Current id is ${userId} with products of ${userProducts.docs}`);  
+      // console.log(`Current id is ${userId} with products of ${userProducts.docs}`);
       if (userProducts.length === 0) {
         i++;
         return;

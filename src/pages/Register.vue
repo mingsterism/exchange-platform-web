@@ -93,6 +93,7 @@
           >
           <input
             type="text"
+            placeholder="email"
             v-model="email"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           />
@@ -186,10 +187,11 @@ export default {
         console.log("Created user: ", createUser);
         const userData = {
           id: createUser,
-          name: "default",
+          first_name: "default",
+          last_name: "default",
           email: this.email,
           about: "default",
-          store_address: "default",
+          address: "default",
           points: 0,
         };
         await createProfile(createUser, userData);

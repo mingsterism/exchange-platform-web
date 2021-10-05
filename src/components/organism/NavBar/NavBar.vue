@@ -56,6 +56,7 @@
               >Profile</router-link
             >
             <router-link
+              v-if="isLogin"
               to="/"
               class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
               >About</router-link
@@ -69,6 +70,7 @@
               <router-link
                 class="relative mx-4 text-gray-600 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
                 to="/cart"
+                v-if="isLogin"
               >
                 <svg
                   class="w-5 h-5"
@@ -197,6 +199,8 @@ export default {
         }
       });
     });
+
+    return { store };
   },
 };
 </script>
