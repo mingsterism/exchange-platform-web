@@ -15,16 +15,17 @@ export const signInWithGoogle = async () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-    //   console.log(user.uid, user.email);
+      //   console.log(user);
       const uid = user.uid;
       const email = user.email;
+      const fullName = user.displayName.split(" ");
       const checkForDoc = await getUserProfileDoc(uid);
       if (checkForDoc === null) {
         console.log("User document does not exist. Creating document now...");
         const userData = {
           id: uid,
-          first_name: "default",
-          last_name: "default",
+          first_name: fullName[0],
+          last_name: fullName[1],
           email: email,
           about: "default",
           address: "default",
