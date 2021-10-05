@@ -85,6 +85,6 @@ export default {
 
 <style lang="scss">
 .text-color {
-  color: $secondary-color;
+  color: $secondary;
 }
 </style>
