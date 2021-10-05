@@ -27,6 +27,9 @@
             :primary="true"
           />
         </div>
+        <div>
+          <p class="text-color">testing the css text</p>
+        </div>
       </div>
     </div>
   </div>
@@ -54,13 +57,17 @@ export default {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           this.store.checkOutItems();
-          Swal.fire("Thank you for purchasing in Exchange Platform!", "", "success");
-          this.$router.push("/profile/my-purchase")
+          Swal.fire(
+            "Thank you for purchasing in Exchange Platform!",
+            "",
+            "success"
+          );
+          this.$router.push("/profile/my-purchase");
         } else if (result.isDenied) {
           Swal.fire("Continue Shopping", "", "info");
         }
       });
-    }
+    },
   },
   setup() {
     const store = usersStore();
@@ -76,4 +83,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.text-color {
+  color: $secondary-color;
+}
+</style>

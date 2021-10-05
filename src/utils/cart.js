@@ -25,11 +25,18 @@ export const getCart = async () => {
   return cartDocs;
 };
 
-export const removeFromCart = async(prodId) => {
-  const cartCollection = profileCollection.doc(user.uid).collection("cart");
-  const removeItem = await cartCollection.doc(prodId).delete()
+export const removeFromCart = async (prodId) => {
+  const user = firebase.auth().currentUser;
+  const cartDoc = profileCollection
+    .doc(user.uid)
+    .collection("cart")
+    .doc(prodId);
+  // const removeItem = cartCollection.doc(prodId)
+  await cartDoc
+    .delete()
+    .catch((err) => console.log("Error in deleting: ", err));
   // console.log("Successfully remove from cart...");
-}
+};
 
 export const addToMyPurchase = (products) => {
   const user = firebase.auth().currentUser;
@@ -40,8 +47,28 @@ export const addToMyPurchase = (products) => {
   const prods = products;
   prods.forEach(async (doc) => {
     const currentItem = doc;
-    const saveDoc = await purchaseCollection.doc(doc.id).set(doc);
-    const delDoc = await cartCollection.doc(doc.id).delete();
+    const extProdDocLocation = profileCollection
+      .doc(currentItem.soldBy)
+      .collection("products")
+      .doc(String(currentItem.productId));
+    const getExtDoc = await extProdDocLocation.get();
+    console.log(getExtDoc);
+    if (getExtDoc.exists) {
+      const extProdDoc = getExtDoc.data();
+      console.log("Read existing product document: ", extProdDoc);
+      // * upadting the quanity for the existing product
+      const updateDoc = await profileCollection
+        .doc(currentItem.soldBy)
+        .collection("products")
+        .doc(String(currentItem.productId))
+        .update({
+          quantity: Number(extProdDoc.quantity - doc.desireQuantity),
+        });
+      // * save item to my purchase
+      const saveDoc = await purchaseCollection.doc(currentItem.id).set(currentItem);
+      // * remove item from cart after check out
+      const delDoc = await cartCollection.doc(currentItem.id).delete();
+    }
   });
   console.log("Successfully checkout and save to my purcahse...");
 };

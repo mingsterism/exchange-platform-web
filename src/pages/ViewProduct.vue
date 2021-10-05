@@ -85,21 +85,23 @@ export default {
     },
     async addItemToCart() {
       const productDetails = {
+        productId: this.productId,
         id: String(Date.now()),
         name: this.productName,
         photos: this.productPhotos,
         points: this.productPoints,
-        desireQuantity: this.userQty,
+        desireQuantity: Number(this.userQty),
         totalPoints: Number(this.userQty * this.productPoints),
         checkOut: false,
+        soldBy: this.soldBy,
       };
       await addToCart(productDetails);
       Swal.fire({
         icon: "success",
-          title: "Added to Cart",
-          showConfirmButton: false,
-          timer: 1500,
-      })
+        title: "Added to Cart",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       // console.log(productDetails, " is added to cart");
     },
   },
@@ -124,6 +126,12 @@ export default {
     const productCondition = computed(() => {
       return store.getProductCondition;
     });
+    const productId = computed(() => {
+      return store.getProductId;
+    });
+    const soldBy = computed(() => {
+      return store.getSoldBy;
+    });
 
     return {
       store,
@@ -133,6 +141,8 @@ export default {
       productPhotos,
       productDescriptions,
       productCondition,
+      productId,
+      soldBy,
     };
   },
 };

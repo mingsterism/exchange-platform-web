@@ -67,6 +67,10 @@ export default {
       this.$router.push("/cart");
     },
   },
+  setup() {
+    const store = userProfile();
+    store.getProfileImg();
+  },
 };
 </script>
 

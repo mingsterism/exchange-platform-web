@@ -27,6 +27,7 @@ export const usersStore = defineStore({
       currentTotalPrice: null,
       myPurchases: null,
       hasPurchase: false,
+      soldBy: null,
     };
   },
   getters: {
@@ -63,6 +64,12 @@ export const usersStore = defineStore({
     getHasPurchase: (state) => {
       return state.hasPurchase;
     },
+    getProductId: (state) => {
+      return state.productId;
+    },
+    getSoldBy: (state) => {
+      return state.soldBy;
+    },
   },
   actions: {
     addApparel(name) {
@@ -97,16 +104,18 @@ export const usersStore = defineStore({
       //   usersId,
       //   productId
       // );
+      this.setProductId(productId);
       for (let i = 0; i < this.apparel.length; i++) {
         const product = this.apparel[i];
         if (product.id === productId) {
-          console.log(product);
+          // console.log(product);
           this.setProductName(product.name);
           this.setProductPoints(product.points);
           this.setProductQuantity(product.quantity);
           this.setProductCondition(product.conditions);
           this.setProductDescriptions(product.description);
           this.setProductPhotos(product.photos);
+          this.setSoldBy(product.uploadedBy);
           break;
         }
       }
@@ -123,6 +132,7 @@ export const usersStore = defineStore({
       this.setCurrentTotal(grandTotal);
     },
     checkOutItems() {
+      console.log("items in cart: ", this.itemsInCart);
       addToMyPurchase(this.itemsInCart);
     },
     async getMyPurchasedItems() {
@@ -137,9 +147,10 @@ export const usersStore = defineStore({
     async removeItemFromCart(prodId) {
       await removeFromCart(prodId);
       for (let i = 0; i < this.itemsInCart.length; i++) {
-        const item = itemsInCart[i];
+        const item = this.itemsInCart[i];
         if ((item.id = prodId)) {
           this.itemsInCart.splice(i, 1);
+          this.currentTotalPrice -= item.totalPoints;
         }
       }
       console.log("Successfully remove from cart...");
@@ -173,6 +184,9 @@ export const usersStore = defineStore({
     },
     setMyPurchase(payload) {
       this.myPurchases = payload;
+    },
+    setSoldBy(payload) {
+      this.soldBy = payload;
     },
   },
 });
