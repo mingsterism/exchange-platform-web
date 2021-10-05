@@ -51,16 +51,42 @@
 import Button from "../../molecule/Button/Button.vue";
 import Images from "../../molecule/Image/Image.vue";
 import { usersStore } from "/@/store/users.store";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+
 export default {
   components: { Images, Button },
   props: ["post"],
   methods: {
     removeItem(prodId) {
-      this.store.removeItemFromCart(prodId);
+      Swal.fire({
+        title: "Do you want to remove this item from cart?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes, please",
+        denyButtonText: `No, Don't remove`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          console.log("Removing item from cart...", prodId);
+          this.store.removeItemFromCart(prodId);
+          Swal.fire("Removed!", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("You did not delete the product.", "", "info");
+        }
+      });
+      // const productId = prodId;
+      // console.log("Removing item from cart...", productId);
+      // usersStore().removeItemFromCart(String(productId));
     },
   },
   setup() {
     const store = usersStore();
+
+    // function removeItem(prodId) {
+    //   console.log("Removing item from cart...", prodId);
+    //   store.removeItemFromCart(prodId);
+    // }
 
     return { store };
   },

@@ -15,6 +15,7 @@ export const userProfile = defineStore({
       firstName: "",
       lastName: "",
       profilePic: "",
+      isLogin: false,
     };
   },
   getters: {
@@ -32,6 +33,9 @@ export const userProfile = defineStore({
     },
     getProfilePic: (state) => {
       return state.profilePic;
+    },
+    getIsLogin: (state) => {
+      return state.isLogin;
     },
   },
   actions: {
@@ -99,6 +103,9 @@ export const userProfile = defineStore({
     },
     changeProfilePic(payload) {
       this.profilePic = payload;
+    },
+    changeIsLogin(payload) {
+      this.isLogin = payload;
     },
   },
 });

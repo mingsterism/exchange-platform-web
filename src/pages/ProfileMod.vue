@@ -199,7 +199,7 @@ export default {
     const store = userProfile();
 
     store.getProfile();
-    store.getProfileImg();
+    // store.getProfileImg();
   },
 };
 </script>

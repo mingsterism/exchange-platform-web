@@ -1,16 +1,15 @@
 <template>
-  <div className="absolute shadow-lg rounded-lg bg-white w-60 -ml-48 mt-3">
+  <div className="absolute shadow-lg rounded-lg bg-white w-60 -ml-52 mt-10">
     <div className="pt-1">
-      <div
-        v-for="(item, i) in menu_items"
-        :key="i"
-        className="font-semibold pt-2 pb-2"
-      >
-        <router-link :to="item.component_name">
-          <p>{{ item.title }}</p>
-        </router-link>
+      <div className="flex flex-col h-32 justify-around font-semibold pt-2 pb-2">
+        <router-link v-if="isLogin" to="/">Home</router-link>
+        <router-link v-if="isLogin" to="/profile">Profile</router-link>
+        <router-link v-if="!isLogin" to="/profile">Cart</router-link>
+        <router-link v-if="!isLogin" to="/login">Login</router-link>
+        <router-link v-if="!isLogin" to="/register">Register</router-link>
       </div>
       <Button
+        v-if="isLogin"
         label="Logout"
         v-on:click="logout"
         className="border-opacity-0 font-semibold pb-2"
@@ -25,29 +24,12 @@ import firebase from "firebase";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { userProfile } from "/@/store/user.profile";
+import { computed } from "@vue/runtime-core";
 
 export default {
   name: "UserMenu",
   components: {
     Button,
-  },
-  data() {
-    return {
-      menu_items: [
-        {
-          title: "Home",
-          component_name: "/",
-        },
-        {
-          title: "Profile",
-          component_name: "/profile",
-        },
-        {
-          title: "Top Up",
-          component_name: "/topup",
-        },
-      ],
-    };
   },
   methods: {
     logout: function () {
@@ -75,7 +57,10 @@ export default {
   },
   setup() {
     const user = userProfile();
-    return { user };
+    const isLogin = computed(() => {
+      return user.getIsLogin;
+    });
+    return { user, isLogin };
   },
 };
 </script>
