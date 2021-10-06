@@ -1,17 +1,12 @@
 <template>
-  <!-- <transition appear name="fade-in">
-    <div class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2 mb-20">
-      <h1>Currently there is no transaction.</h1>
-    </div>
-  </transition> -->
-  <div class="mb-10">
+  <div>
     <div
       v-if="!purchase"
-      class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2 mb-20"
+      class="flex flex-wrap items-start gap-10 border-2 p-2"
     >
       <h1>Currently there is no transaction.</h1>
     </div>
-    <div v-else class="px-48">
+    <div class="flex-1" v-else>
       <!-- My purchases card -->
       <PurchaseCard
         :post="item"

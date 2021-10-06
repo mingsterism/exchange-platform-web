@@ -10,14 +10,20 @@ module.exports = {
        })
     },
     maxWidth: {
-      'sm': '18rem',
-      'xs': '17rem',
+      'sm': '24rem',
+      'xs': '18rem',
       "screen-xl": '1280px'
     },
     minHeight: {
       '30': '7rem',
       '36': '9rem',
-    }
+      'full': '100vh',
+    },
+    minWidth: {
+      'xs': '18rem',
+      'sm': '24rem',
+      'md': '30rem',
+     }
   },
   variants: {
     extend: {},

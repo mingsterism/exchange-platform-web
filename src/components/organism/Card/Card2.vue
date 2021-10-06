@@ -1,66 +1,61 @@
 <template>
-  <div className="shadow-md w-80 rounded-lg">
-    <div class="rounded-t-md min-h-30 max-h-48 overflow-hidden">
-      <img class="rounded-t-md" :src="post.photos[0]" className="p-0" />
+  <div
+    class="min-w-xs max-w-xs mx-auto overflow-hidden justify-between bg-white rounded-lg shadow-lg dark:bg-gray-800"
+  >
+    <div class="px-4 py-2 text-left">
+      <h1 class="text-3xl font-bold text-gray-800 uppercase dark:text-white">
+        {{ post.name }}
+      </h1>
+      <p class="mt-1 text-sm truncate text-gray-600 dark:text-gray-400">
+        {{ post.description }}
+      </p>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        Available Quantity: {{ post.quantity }}
+      </p>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        Conditions: {{ post.conditions }}
+      </p>
     </div>
-    <div>
-      <div className="py-4 p-3 text-left">
-        <div className="pb-2">
-          <p className="text-2xl font-semibold">{{ post.name }}</p>
-          <!-- <p className="mr-2 text-lg font-semibold self-center bg-red-100">
-            {{ post.shipping }}
-          </p> -->
-        </div>
-        <div class="min-h-36">
-          <p className="break-words">{{ post.description }}</p>
-          <p>Price: {{ post.points }} points</p>
-          <p>Current Quantity: {{ post.quantity }}</p>
-        </div>
-      </div>
-      <div className="pb-4">
-        <Button
-          class="hover:scale-110 transform transition ease-linear duration-300"
-          type="button"
-          @click="showProduct(post.id)"
-          label="View Product"
-          :primary="true"
-          size="medium"
-        />
-      </div>
+
+    <img
+      class="object-cover w-full h-48 mt-2"
+      :src="post.photos[0]"
+      alt="product image"
+    />
+
+    <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+      <h1 class="text-lg font-bold text-white">{{ post.points }} points</h1>
+      <button
+        type="button"
+        @click="showProduct(post.id)"
+        class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-200 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none"
+      >
+        View Product
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "../../molecule/Button/Button.vue";
+// import Button from "../../molecule/Button/Button.vue";
 import { usersStore } from "/@/store/users.store";
 // import { userProduct } from "/@/store/user.product.js";
 
 export default {
   name: "Card",
-  components: {
-    Button,
-  },
+  // components: {
+  //   Button,
+  // },
   props: ["post"],
-  // emits: ["view-product"],
   methods: {
     showProduct(prodId) {
       console.log("fire an event");
       this.store.displayProductView(prodId);
-      this.$router.push('/view-product')
+      this.$router.push("/view-product");
     },
   },
   setup() {
     const store = usersStore();
-    // function showProduct(userId, prodId) {
-    //   const storeId = store.goToProductPage(userId, prodId);
-    //   if (storeId !== null) {
-    //     // router.push({path: "/playground"})
-    //     console.log("Getting product Id...");
-    //   } else {
-    //     alert("This product has been sold out!");
-    //   }
-    // }
 
     return { store };
   },

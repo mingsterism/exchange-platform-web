@@ -1,55 +1,4 @@
 <template>
-  <!-- <div class="flex flex-col items-center h-screen justify-center">
-    <h1 class="text-xl font-black">Login</h1>
-    <div>
-      <div class="mt-8">
-        <div className="flex flex-col">
-          <label
-            for="email"
-            className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
-            >Email</label
-          >
-          <input
-            type="text"
-            placeholder="Email"
-            className="storybook-textbox"
-            v-model="email"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label
-            for="password"
-            className="mt-3 p-2 h-auto w-52 text-gray-600 text-left"
-            >Password</label
-          >
-          <input
-            @keypress.enter="handleLogin"
-            type="password"
-            placeholder="Password"
-            className="storybook-textbox"
-            v-model="password"
-          />
-        </div>
-      </div>
-      <div class="mt-10">
-        <Button
-          type="submit"
-          @click="handleLogin"
-          label="Login"
-          :primary="true"
-          size="medium"
-        />
-        <p className="mt-8">
-          Need an Account?
-          <router-link to="/register">Register Here</router-link>
-        </p>
-        <p className="mt-2">
-          Forgot Your Password?
-          <router-link to="/forgotpass">Click Here</router-link>
-        </p>
-      </div>
-    </div>
-  </div> -->
   <div class="py-20">
     <div
       class="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800"
@@ -82,10 +31,10 @@
               class="block text-sm text-gray-800 dark:text-gray-200"
               >Password</label
             >
-            <a
-              href="#"
+            <router-link
+              to="/forgotpass"
               class="text-xs text-gray-600 dark:text-gray-400 hover:underline"
-              >Forget Password?</a
+              >Forget Password?</router-link
             >
           </div>
 

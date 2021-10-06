@@ -2,7 +2,7 @@
   <div>
     <div>
       <div
-        class="flex flex-wrap items-start mx-52 gap-10 border-2 p-2"
+        class="flex flex-wrap items-start gap-6 border p-2"
         id="productImgCont"
       >
         <!-- index to point at the items -->
@@ -97,9 +97,9 @@
             name="condition"
             v-model="productCondition"
           >
-            <option value="almostNew">ALMOST NEW</option>
-            <option value="slightlyUsed">SLIGHTLY USED</option>
-            <option value="used">USED</option>
+            <option value="Almost new">ALMOST NEW</option>
+            <option value="Slightly used">SLIGHTLY USED</option>
+            <option value="Frequently used">FREQUENTLY USED</option>
           </select>
         </div>
       </div>

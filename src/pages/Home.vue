@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <div className="text-left p-10 pt-24 pl-14">
-      <p className="text-5xl font-semibold">MarketPlace</p>
+  <div class="px-20 pt-20 pb-24">
+    <div class="pb-6">
+      <p class="text-5xl text-left font-semibold mb-3">Market Place</p>
+      <div class="h-px bg-black"></div>
     </div>
-    <div className="flex flex-col md:flex-row">
-      <div className="pl-11">
+    <div className="flex flex-col md:flex-row mt-5">
+      <!-- <div class="mr-3">
         <FilterBox />
-      </div>
-      <div className="px-20 pb-10 flex flex-wrap gap-9 justify-evenly">
+      </div> -->
+      <!-- <div className="px-20 pb-10 flex flex-wrap gap-7 justify-evenly">
+        <Card2
+          :post="post"
+          v-for="(post, index) in productShowcase"
+          :key="index"
+        />
+      </div> -->
+      <div class="flex-1 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-7 lg:gap-7 justify-items-center">
         <Card2
           :post="post"
           v-for="(post, index) in productShowcase"
@@ -20,7 +28,7 @@
 
 <script>
 import { computed, onBeforeMount } from "vue";
-import FilterBox from "/@/components/organism/FilterBox/FilterBox.vue";
+// import FilterBox from "/@/components/organism/FilterBox/FilterBox.vue";
 import Card2 from "/@/components/organism/Card/Card2.vue";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -29,7 +37,7 @@ import { usersStore } from "../store/users.store";
 export default {
   name: "Home",
   components: {
-    FilterBox,
+    // FilterBox,
     Card2,
   },
   methods: {
