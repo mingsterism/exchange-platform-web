@@ -1,5 +1,5 @@
 <template>
-    <img class="h-48 w-48 border-2" alt="an image">
+    <img class="h-36 w-36 border-2" alt="an image">
 </template>
 <script>
 export default {

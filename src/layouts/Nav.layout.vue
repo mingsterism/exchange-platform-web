@@ -1,22 +1,32 @@
 <template>
-    <NavBar />
+  <div class="flex flex-col min-h-full">
+    <NavBar class="sticky top-0 z-30" />
     <router-view></router-view>
-    <Footer />
+    <Footer class="footer" />
+  </div>
 </template>
 
 <script>
 import NavBar from "/@/components/organism/NavBar/NavBar.vue";
-import Footer from '/@/components/organism/Footer/Footer.vue';
+import Footer from "/@/components/organism/Footer/Footer.vue";
 export default {
   name: "NavLayout",
   components: {
     NavBar,
-    Footer
-  }
-
-}
+    Footer,
+  },
+};
 </script>
 
 <style scoped>
+/* body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} */
 
+.footer {
+  flex: 0 0 50px; /*or just height:50px;*/
+  margin-top: auto;
+}
 </style>

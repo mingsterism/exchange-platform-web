@@ -1,8 +1,8 @@
 <template>
   <nav class="bg-white shadow dark:bg-gray-800">
     <div class="container px-6 py-4 mx-auto">
-      <div class="md:flex md:items-center md:justify-between">
-        <div class="flex items-center justify-between">
+      <div class="relative md:flex md:items-center md:justify-between">
+        <div class="flex flex-1 items-center justify-center">
           <div class="text-xl font-semibold text-gray-700">
             <router-link
               class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
@@ -12,7 +12,7 @@
           </div>
 
           <!-- Mobile menu button -->
-          <div class="flex md:hidden">
+          <!-- <div class="flex md:hidden">
             <button
               type="button"
               class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
@@ -31,12 +31,14 @@
               </svg>
             </button>
             <UserMenu v-if="userMenuShown" />
-          </div>
+          </div> -->
         </div>
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <div class="flex-1 hidden md:flex md:items-center md:justify-between">
-          <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
+        <div
+          class="absolute -right-0 md:flex md:items-center md:justify-between"
+        >
+          <!-- <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
             <router-link
               v-if="!isLogin"
               to="/login"
@@ -61,16 +63,16 @@
               class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
               >About</router-link
             >
-          </div>
+          </div> -->
 
           <div
-            class="hidden md:flex flex-col items-center md:flex-row mt-4 md:mt-0"
+            v-if="isLogin"
+            class="md:flex flex-col items-center md:flex-row mt-4 md:mt-0"
           >
             <div class="flex justify-center md:block">
               <router-link
                 class="relative mx-4 text-gray-600 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
                 to="/cart"
-                v-if="isLogin"
               >
                 <svg
                   class="w-5 h-5"
@@ -93,11 +95,10 @@
               </router-link>
             </div>
             <button
-              v-if="isLogin"
               type="button"
-              class="flex items-center focus:outline-none"
+              class="flex items-center border-2 border-opacity-40 py-1 px-2 rounded-full hover:shadow-md focus:outline-none"
               aria-label="toggle profile dropdown"
-              @click="!showLogOut ? (showLogOut = true) : (showLogOut = false)"
+              @click="!show ? (show = true) : (show = false)"
             >
               <div
                 class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full"
@@ -110,13 +111,25 @@
               </div>
 
               <h3
-                class="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden"
+                class="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200"
               >
-                Khatab wedaa
+                Hi, {{ firstName }}
               </h3>
+              <svg
+                class="w-5 h-5 text-gray-800 dark:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </button>
-            <div
-              v-if="showLogOut"
+            <!-- <div
+              v-if="show"
               class="absolute shadow-lg rounded-lg bg-white w-60 -ml-40 mt-20"
             >
               <Button
@@ -124,6 +137,42 @@
                 v-on:click="logout"
                 className="border-opacity-0 font-semibold pb-2"
               />
+            </div> -->
+            <div
+              v-if="show"
+              class="absolute right-0 top-10 z-20 w-48 py-2 mt-2 text-left bg-white rounded-md shadow-xl dark:bg-gray-800"
+            >
+              <router-link
+                to="/profile"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                View Profile
+              </router-link>
+              <router-link
+                to="/user/my-product"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                My Products
+              </router-link>
+              <router-link
+                to="/user/my-purchase"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Purchase History
+              </router-link>
+              <router-link
+                to="/user/add-product"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Add Products
+              </router-link>
+              <a
+                @click="logout"
+                type="button"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Sign Out
+              </a>
             </div>
           </div>
         </div>
@@ -133,9 +182,9 @@
 </template>
 
 <script>
-import Button from "/@/components/molecule/Button/Button.vue";
+// import Button from "/@/components/molecule/Button/Button.vue";
 import firebase from "firebase";
-import UserMenu from "/@/components/molecule/UserMenu/UserMenu.vue";
+// import UserMenu from "/@/components/molecule/UserMenu/UserMenu.vue";
 import { userProfile } from "/@/store/user.profile";
 import { onBeforeMount } from "@vue/runtime-core";
 import Swal from "sweetalert2";
@@ -143,14 +192,14 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "NavBar",
-  components: {
-    UserMenu,
-    Button,
-  },
+  // components: {
+  //   UserMenu,
+  //   Button,
+  // },
   data() {
     return {
       userMenuShown: false,
-      showLogOut: false,
+      show: false,
     };
   },
   computed: {
@@ -160,6 +209,9 @@ export default {
     isLogin() {
       return userProfile().getIsLogin;
     },
+    firstName() {
+      return userProfile().getFirstName;
+    },
   },
   methods: {
     logout: function () {
@@ -167,7 +219,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.showLogOut = false;
+          this.show = false;
           Swal.fire({
             title: "You Have Logged Out!",
             icon: "success",
@@ -189,6 +241,7 @@ export default {
   setup() {
     const store = userProfile();
     store.getProfileImg();
+    store.getProfile();
 
     onBeforeMount(() => {
       firebase.auth().onAuthStateChanged((user) => {

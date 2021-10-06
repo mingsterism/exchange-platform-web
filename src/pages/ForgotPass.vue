@@ -1,62 +1,98 @@
 <template>
-    <div class="flex flex-col items-center h-screen justify-center">
-    <h1 class="text-xl font-black">Reset Password</h1>
-    <div>
-      <div class="mt-8">
-        <div className="flex flex-col">
-          <label for="email" className="mt-3 p-2 h-auto w-52 text-gray-600 text-left">Email</label>
-          <input type="text" placeholder="Email" className="storybook-textbox" v-model="email"/>
+  <div class="py-44">
+    <div
+      class="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800"
+    >
+      <h1
+        class="text-3xl font-semibold text-center text-gray-700 dark:text-white"
+      >
+        Reset Password
+      </h1>
+
+      <form class="mt-6">
+        <div>
+          <label
+            for="username"
+            class="flex text-sm text-gray-800 dark:text-gray-200"
+            >Email</label
+          >
+          <input
+            type="text"
+            placeholder="email"
+            v-model="email"
+            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          />
         </div>
-      </div>
-      <div class="mt-10">
-        <Button type="submit" @click="handlePass" label="Request" :primary="true" size="medium"/>
-        <p className="mt-8">Need an Account?
-          <router-link to="/register">Register Here</router-link>
-        </p>
-        <p className="mt-2">Have an Account?
-          <router-link to="/login">Login Here</router-link>
-        </p>
-      </div>
+
+        <div class="mt-6">
+          <button
+            type="submit"
+            @click="handlePass"
+            class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+          >
+            Request New Password
+          </button>
+        </div>
+      </form>
+
+      <p class="mt-5 text-xs font-light text-center text-gray-400">
+        Have an account?
+        <router-link
+          to="/login"
+          class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
+          >Login here</router-link
+        >
+      </p>
+
+      <p class="mt-3 text-xs font-light text-center text-gray-400">
+        Don't have an account?
+        <router-link
+          to="/register"
+          class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
+          >Create One</router-link
+        >
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import Button from '/@/components/molecule/Button/Button.vue'
-import {forgotPassword} from '/@/utils/firebase'
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+// import Button from "/@/components/molecule/Button/Button.vue";
+import { forgotPassword } from "/@/utils/firebase";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
-    name: "ForgotPass",
-    components: {
-        Button
+  name: "ForgotPass",
+  // components: {
+  //   Button,
+  // },
+  data() {
+    return {
+      email: "",
+    };
+  },
+  methods: {
+    async handlePass() {
+      await forgotPassword(this.email)
+        .then(() => {
+          Swal.fire({
+            title: "Email Sent!",
+            text:
+              "Please check your registered email to continue your account retrevial process",
+            icon: "success",
+            confirmButtonColor: "#1ea7fd",
+          });
+        })
+        .catch((err) =>
+          Swal.fire({
+            title: "Oh No!",
+            text: err.message,
+            icon: "error",
+            confirmButtonColor: "#1ea7fd",
+          })
+        );
     },
-    data() {
-        return {
-        email: "",
-        }
-    },
-    methods: {
-        async handlePass() {
-            await forgotPassword(this.email).then(() => {
-                Swal.fire({
-                    title: "Email Sent!",
-                    text: "Please check your registered email to continue your account retrevial process",
-                    icon: "success",
-                    confirmButtonColor: "#1ea7fd"
-                })
-            }).catch(err => Swal.fire({
-                title: "Oh No!",
-                text: err.message,
-                icon: "error",
-                confirmButtonColor: "#1ea7fd"
-            }))
-        }
-    }
-}
+  },
+};
 </script>
-
-<style scoped>
-
-</style>
