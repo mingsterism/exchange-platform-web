@@ -1,10 +1,9 @@
 <template>
   <div class="px-20 pt-20 pb-24">
     <div class="pb-6">
-      <p class="text-5xl text-left font-semibold mb-3">Market Place</p>
-      <div class="h-px bg-black"></div>
+      <p class="text-3xl text-left font-semibold pl-6 mb-3">Market Place</p>
     </div>
-    <div className="flex flex-col md:flex-row mt-5">
+    <div className="flex flex-col md:flex-row">
       <!-- <div class="mr-3">
         <FilterBox />
       </div> -->
@@ -15,7 +14,7 @@
           :key="index"
         />
       </div> -->
-      <div class="flex-1 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-7 lg:gap-7 justify-items-center">
+      <div class="flex-1 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 lg:gap-7 justify-items-center">
         <Card2
           :post="post"
           v-for="(post, index) in productShowcase"

@@ -18,19 +18,14 @@ import EditProduct from "../pages/EditProduct.vue";
 import ViewProduct from "../pages/ViewProduct.vue";
 import Cart from "../pages/Cart.vue";
 import User from "../layouts/User.layout.vue";
+import Header from "../layouts/Header.layout.vue";
 
 // TODO: Need to add route guard
 const routes = [
   {
-    path: "/",
-    component: NavLayout,
+    path: "/auth",
+    component: Header,
     children: [
-      {
-        path: "/",
-        name: "Home",
-        component: Home,
-        meta: { requireAuth: true },
-      },
       {
         path: "/login",
         name: "Login",
@@ -48,6 +43,18 @@ const routes = [
         name: "ForgotPass",
         component: ForgotPass,
         meta: { requireAuth: false },
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: NavLayout,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+        meta: { requireAuth: true },
       },
       {
         path: "/edit-Product",
@@ -71,49 +78,29 @@ const routes = [
         path: "/profile",
         component: Profile,
         name: "Profile",
-        // children: [
-        //   {
-        //     path: "/profile",
-        //     name: "MyProduct",
-        //     component: MyProduct,
-        //     meta: { requireAuth: true },
-        //   },
-        //   {
-        //     path: "/profile/add-product",
-        //     name: "AddProduct",
-        //     component: AddProduct,
-        //     meta: { requireAuth: true },
-        //   },
-        //   {
-        //     path: "/profile/my-purchase",
-        //     name: "MyPurchase",
-        //     component: MyPurchase,
-        //     meta: { requireAuth: true },
-        //   },
-        // ],
       },
       {
         path: "/user",
         component: User,
         children: [
-            {
-              path: "/user/my-product",
-              name: "MyProduct",
-              component: MyProduct,
-              meta: { requireAuth: true },
-            },
-            {
-              path: "/user/add-product",
-              name: "AddProduct",
-              component: AddProduct,
-              meta: { requireAuth: true },
-            },
-            {
-              path: "/user/my-purchase",
-              name: "MyPurchase",
-              component: MyPurchase,
-              meta: { requireAuth: true },
-            },
+          {
+            path: "/user/my-product",
+            name: "MyProduct",
+            component: MyProduct,
+            meta: { requireAuth: true },
+          },
+          {
+            path: "/user/add-product",
+            name: "AddProduct",
+            component: AddProduct,
+            meta: { requireAuth: true },
+          },
+          {
+            path: "/user/my-purchase",
+            name: "MyPurchase",
+            component: MyPurchase,
+            meta: { requireAuth: true },
+          },
         ],
       },
       //   {

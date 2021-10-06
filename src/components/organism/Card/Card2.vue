@@ -3,16 +3,16 @@
     class="min-w-xs max-w-xs mx-auto overflow-hidden justify-between bg-white rounded-lg shadow-lg dark:bg-gray-800"
   >
     <div class="px-4 py-2 text-left">
-      <h1 class="text-3xl font-bold text-gray-800 uppercase dark:text-white">
+      <h1 class="text-2xl font-semibold text-gray-800 capitalize dark:text-white">
         {{ post.name }}
       </h1>
-      <p class="mt-1 text-sm truncate text-gray-600 dark:text-gray-400">
+      <p class="mt-1 truncate text-black dark:text-gray-400">
         {{ post.description }}
       </p>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
         Available Quantity: {{ post.quantity }}
       </p>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
         Conditions: {{ post.conditions }}
       </p>
     </div>
@@ -39,7 +39,6 @@
 <script>
 // import Button from "../../molecule/Button/Button.vue";
 import { usersStore } from "/@/store/users.store";
-// import { userProduct } from "/@/store/user.product.js";
 
 export default {
   name: "Card",
