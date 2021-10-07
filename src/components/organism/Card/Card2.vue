@@ -38,9 +38,9 @@
 
     <div
       v-if="visible"
-      class="flex justify-center items-center fixed my-5 h-screen z-10 inset-0 bg-transparent"
+      class="flex justify-center items-center fixed h-screen z-30 inset-0 bg-black bg-opacity-60"
     >
-      <div class="border rounded-lg py-7 px-10 border-gray-200 popOutColor relative shadow-lg">
+      <div class="border rounded-lg py-7 px-10 border-gray-200 bg-white relative shadow-lg">
         <div class="absolute right-2 top-2">
           <button @click="visible = false">
             <svg
@@ -113,8 +113,8 @@
         </div>
         <div class="text-left mb-4">
           <p class="text-black">{{ post.description }}</p>
-          <p class="text-gray-400 text-sm">Condition: {{ post.conditions }}</p>
-          <p class="text-gray-400 text-sm">Quantity: {{ post.quantity }}</p>
+          <p class="text-gray-700 text-sm">Condition: {{ post.conditions }}</p>
+          <p class="text-gray-700 text-sm">Quantity: {{ post.quantity }}</p>
         </div>
         <div class="flex justify-between">
           <div>
@@ -168,9 +168,14 @@ export default {
       // console.log("fire an event");
       // this.store.displayProductView(prodId);
       // this.$router.push("/view-product");
+
       this.photoQty = prodPhotos.length;
       console.log("Photo qty for this product is ", this.photoQty);
       this.visible = true;
+
+      // console.log("fire an event");
+      // this.$emit("view-product")
+      // console.log("emit a function to parent");
     },
     clickLeft() {
       if (this.photoIndex === 0) {

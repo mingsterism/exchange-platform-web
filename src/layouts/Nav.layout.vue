@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-full">
-    <NavBar class="sticky top-0 z-30" />
+    <NavBar class="sticky top-0 z-20" />
     <router-view></router-view>
     <Footer class="footer" />
   </div>
@@ -25,8 +25,8 @@ export default {
   min-height: 100vh;
 } */
 
-.footer {
-  flex: 0 0 50px; /*or just height:50px;*/
+/* .footer {
+  flex: 0 0 50px; 
   margin-top: auto;
-}
+} */
 </style>

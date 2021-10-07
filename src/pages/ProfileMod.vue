@@ -22,7 +22,7 @@
           </p>
           <p>
             <label
-              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
               for="file"
               >Upload Image</label
             >
@@ -77,22 +77,36 @@
         </div>
         <div class="mt-4 flex justify-end">
           <div>
-            <Button
+            <!-- <Button
               class="transform hover:opacity-75 transition ease-out duration-300"
               type="submit"
               @click="updateProfileDetail"
               label="Update Profile"
               :primary="true"
-            />
+            /> -->
+            <button
+              @click="updateProfileDetail"
+              type="button"
+              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            >
+              Update Profile
+            </button>
           </div>
           <div class="ml-2">
-            <Button
+            <!-- <Button
               class="transform hover:opacity-75 transition ease-out duration-300"
               type="button"
               @click="deleteAccount"
               label="Delete Account"
               :primary="true"
-            />
+            /> -->
+            <button
+              @click="deleteAccount"
+              type="button"
+              class="px-4 py-2 font-medium text-white btnRed capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+            >
+              Delete Account
+            </button>
           </div>
         </div>
       </div>
@@ -229,5 +243,9 @@ export default {
 
 .btnBlue {
   background-color: $blue;
+}
+
+.btnRed {
+  background-color: $red;
 }
 </style>
