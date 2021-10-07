@@ -66,21 +66,6 @@ export const getOtherUserProduct = async (prodUserId, prodID) => {
   return productData;
 };
 
-// export const getUserProducts = async (userId) => {
-//   return await profileCollection
-//     .doc(userId)
-//     .collection("products")
-//     .get().then((snapshot) => {
-//     console.log(snapshot.docs);
-//     const listOfProducts = snapshot.docs;
-//     listOfProducts.forEach((docs) => {
-//       const list = docs.data();
-//       console.log(list);
-//     })
-//   })
-//    return products.data();
-// };
-
 export const createProfile = (userId, userInfo) => {
   return profileCollection.doc(userId).set(userInfo);
 };
@@ -142,31 +127,20 @@ export const deleteProduct = async (productId) => {
   }
 };
 
-// export const currentUser = () => {
-//   let userId
-//   firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//       // User is signed in, see docs for a list of available properties
-//       // https://firebase.google.com/docs/reference/js/firebase.User
-//       console.log("User is logged in.");
-//       let uid = user.uid;
-//       console.log(uid);
-//       return userId = uid
-//       // return uid;
-//     } else {
-//       console.log("User is logged out.");
-//     }
-//   });
-//   log
-//   return userId
-// };
-
 export const login = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
 export const forgotPassword = (email) => {
   return firebase.auth().sendPasswordResetEmail(email);
+};
+
+export const deleteAcc = () => {
+  const user = firebase.auth().currentUser;
+  user.delete().then(async () => {
+    const userAcc = profileCollection.doc(user.uid)
+    const deleteAcc = await userAcc.delete()
+  })
 };
 
 export const getAllUserProducts = async () => {

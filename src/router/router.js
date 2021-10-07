@@ -72,7 +72,7 @@ const routes = [
         path: "/cart",
         name: "Cart",
         component: Cart,
-        meta: { requireAuth: false },
+        meta: { requireAuth: true },
       },
       {
         path: "/profile",

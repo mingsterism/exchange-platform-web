@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.addProdLabel {
+  @apply text-gray-600 mt-3 text-sm md:text-base text-left pl-2 pb-1;
+}
+
+.addProdInput {
+  @apply border border-gray-400 rounded-md p-1.5 text-sm md:text-base;
+}
+
+.editProfileLabel {
+  @apply text-gray-600 mt-3 text-left p-1;
+}
+
+.editProfileInput {
+  @apply border-2 rounded-md p-1.5;
+}
