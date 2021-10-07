@@ -21,6 +21,7 @@ export const usersStore = defineStore({
       productPoints: null,
       productQuantity: null,
       productPhotos: null,
+      photoQty: null,
       productDescriptions: null,
       productCondition: null,
       itemsInCart: null,

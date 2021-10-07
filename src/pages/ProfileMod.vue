@@ -22,7 +22,7 @@
           </p>
           <p>
             <label
-              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
               for="file"
               >Upload Image</label
             >
@@ -31,26 +31,18 @@
       </div>
       <div class="flex min-w-md text-sm">
         <div className="flex flex-1 flex-col pr-2">
-          <label
-            for="firstName"
-            class="text-gray-600 mt-3 h-auto w-52 text-left p-1"
-            >First Name:</label
-          >
+          <label for="firstName" class="editProfileLabel">First Name:</label>
           <input
-            class="border-2 rounded-md p-1.5"
+            class="editProfileInput"
             type="text"
             name="firstName"
             v-model="firstName"
           />
         </div>
         <div className="flex flex-1 flex-col pl-2">
-          <label
-            for="lastName"
-            class="text-gray-600 mt-3 h-auto w-52 text-left p-1"
-            >Last Name:</label
-          >
+          <label for="lastName" class="editProfileLabel">Last Name:</label>
           <input
-            class="border-2 rounded-lg p-1.5"
+            class="editProfileInput"
             type="text"
             name="lastName"
             v-model="lastName"
@@ -59,14 +51,10 @@
       </div>
 
       <div className="flex flex-col min-w-md text-sm">
-        <label
-          for="aboutMe"
-          class="text-gray-600 mt-3 h-auto w-52 text-left p-1"
-          >About Me:</label
-        >
+        <label for="aboutMe" class="editProfileLabel">About Me:</label>
         <textarea
           name="aboutMe"
-          class="border-2 rounded-md p-1.5 resize-none"
+          class="editProfileInput resize-none"
           id="aboutMe"
           cols="60"
           rows="3"
@@ -75,14 +63,12 @@
       </div>
       <div className="flex flex-col pb-4 min-w-md text-sm">
         <div className="flex flex-col">
-          <label
-            for="shippingAddress"
-            class="text-gray-600 mt-3 h-auto w-52 text-left p-2"
+          <label for="shippingAddress" class="editProfileLabel"
             >Shipping Address</label
           >
           <textarea
             name="shippingAddress"
-            class="border-2 rounded-md p-1.5 resize-none"
+            class="editProfileInput resize-none"
             id="shippingAddress"
             cols="60"
             rows="3"
@@ -90,34 +76,41 @@
           ></textarea>
         </div>
         <div class="mt-4 flex justify-end">
-          <Button
-            class="transform hover:opacity-75 transition ease-out duration-300"
-            type="submit"
-            @click="updateProfileDetail"
-            label="Update Profile"
-            :primary="true"
-          />
+          <div>
+            <!-- <Button
+              class="transform hover:opacity-75 transition ease-out duration-300"
+              type="submit"
+              @click="updateProfileDetail"
+              label="Update Profile"
+              :primary="true"
+            /> -->
+            <button
+              @click="updateProfileDetail"
+              type="button"
+              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            >
+              Update Profile
+            </button>
+          </div>
+          <div class="ml-2">
+            <!-- <Button
+              class="transform hover:opacity-75 transition ease-out duration-300"
+              type="button"
+              @click="deleteAccount"
+              label="Delete Account"
+              :primary="true"
+            /> -->
+            <button
+              @click="deleteAccount"
+              type="button"
+              class="px-4 py-2 font-medium text-white btnRed capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+            >
+              Delete Account
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <!-- <div>
-      <div class="flex px-24 py-10 justify-around">
-        <router-link to="/profile" class="text-left text-3xl"
-          >My Products</router-link
-        >
-        <router-link to="/profile/my-purchase" class="text-left text-3xl"
-          >My Purchase</router-link
-        >
-        <router-link to="/profile/add-product" class="text-left text-3xl"
-          >Add Product</router-link
-        >
-      </div>
-      <router-view v-slot="{ Component }">
-        <transition name="route" mode="out-in">
-          <component :is="Component"></component>
-        </transition>
-      </router-view>
-    </div> -->
   </div>
 </template>
 
@@ -127,51 +120,52 @@ import Button from "/@/components/molecule/Button/Button.vue";
 import { userProfile } from "../store/user.profile.js";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { deleteAcc } from "../utils/firebase.js";
 
 export default {
   name: "ProfileMod",
   computed: {
     firstName: {
       get() {
-        return userProfile().getFirstName;
+        return this.store.getFirstName;
       },
       set(payload) {
-        return userProfile().changedFirstName(payload);
+        return this.store.changedFirstName(payload);
       },
     },
     lastName: {
       get() {
-        return userProfile().getLastName;
+        return this.store.getLastName;
       },
       set(payload) {
-        return userProfile().changedLastName(payload);
+        return this.store.changedLastName(payload);
       },
     },
     aboutMe: {
       get() {
-        return userProfile().getAboutMe;
+        return this.store.getAboutMe;
       },
       set(payload) {
-        return userProfile().changedAboutMe(payload);
+        return this.store.changedAboutMe(payload);
       },
     },
     shippingAddress: {
       get() {
-        return userProfile().getShippingAddress;
+        return this.store.getShippingAddress;
       },
       set(payload) {
-        return userProfile().changedShippingAddress(payload);
+        return this.store.changedShippingAddress(payload);
       },
     },
     profilePicture() {
-      return userProfile().getProfilePic;
+      return this.store.getProfilePic;
     },
   },
   methods: {
     loadProfileImg(event) {
       // this.profilePicture = URL.createObjectURL(event.target.files[0]);
       // console.log(this.profilePicture);
-      userProfile().uploadProfileImg(event.target.files[0]);
+      this.store.uploadProfileImg(event.target.files[0]);
       // need to store the image and load it when user logins
     },
     handleBack() {
@@ -185,12 +179,30 @@ export default {
         about: this.aboutMe,
         address: this.shippingAddress,
       };
-      await userProfile().updateProfile(newDetails);
+      await this.store.updateProfile(newDetails);
       Swal.fire({
         title: "Success!",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
+      });
+    },
+    deleteAccount() {
+      Swal.fire({
+        title: "Are you sure you want to delete your account?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          deleteAcc();
+          Swal.fire("Succesfully delete account...", "", "success");
+          this.$router.push("/login");
+        } else if (result.isDenied) {
+          Swal.fire("Request canceled", "", "info");
+        }
       });
     },
   },
@@ -201,8 +213,7 @@ export default {
   setup() {
     const store = userProfile();
 
-    // store.getProfile();
-    // store.getProfileImg();
+    return { store };
   },
 };
 </script>
@@ -234,4 +245,7 @@ export default {
   background-color: $blue;
 }
 
+.btnRed {
+  background-color: $red;
+}
 </style>

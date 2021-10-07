@@ -12,6 +12,7 @@ module.exports = {
     maxWidth: {
       'sm': '24rem',
       'xs': '18rem',
+      'md': '30rem',
       "screen-xl": '1280px'
     },
     minHeight: {

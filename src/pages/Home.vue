@@ -7,13 +7,6 @@
       <!-- <div class="mr-3">
         <FilterBox />
       </div> -->
-      <!-- <div className="px-20 pb-10 flex flex-wrap gap-7 justify-evenly">
-        <Card2
-          :post="post"
-          v-for="(post, index) in productShowcase"
-          :key="index"
-        />
-      </div> -->
       <div class="flex-1 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 lg:gap-7 justify-items-center">
         <Card2
           :post="post"
@@ -26,11 +19,11 @@
 </template>
 
 <script>
-import { computed, onBeforeMount } from "vue";
+import { computed } from "vue";
 // import FilterBox from "/@/components/organism/FilterBox/FilterBox.vue";
 import Card2 from "/@/components/organism/Card/Card2.vue";
-import Swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.min.css";
+// import Swal from "sweetalert2";
+// import "sweetalert2/dist/sweetalert2.min.css";
 import { usersStore } from "../store/users.store";
 
 export default {
@@ -45,18 +38,18 @@ export default {
     },
   },
   setup() {
-    onBeforeMount(() => {
-      const route = new URLSearchParams(window.location.search);
+    // onBeforeMount(() => {
+    //   const route = new URLSearchParams(window.location.search);
 
-      if (route.get("success")) {
-        Swal.fire({
-          title: "Payment Success",
-          text: "You may continue shopping :D",
-          icon: "success",
-          confirmButtonColor: "#1ea7fd",
-        });
-      }
-    });
+    //   if (route.get("success")) {
+    //     Swal.fire({
+    //       title: "Payment Success",
+    //       text: "You may continue shopping :D",
+    //       icon: "success",
+    //       confirmButtonColor: "#1ea7fd",
+    //     });
+    //   }
+    // });
 
     const store = usersStore();
 

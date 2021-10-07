@@ -1,11 +1,11 @@
 <template>
   <nav class="bg-white shadow dark:bg-gray-800">
     <div class="container px-6 py-4 mx-auto">
-      <div class="relative md:flex md:items-center md:justify-between">
+      <div class="relative flex items-center md:justify-between">
         <div class="flex flex-1 items-center justify-center">
           <div class="text-xl font-semibold text-gray-700">
             <router-link
-              class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
+              class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300 border-0"
               to="/"
               >EP.</router-link
             >
@@ -36,7 +36,7 @@
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <div
-          class="absolute -right-0 md:flex md:items-center md:justify-between"
+          class="absolute -right-0 flex items-center justify-between"
         >
           <!-- <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
             <router-link
@@ -67,7 +67,7 @@
 
           <div
             v-if="isLogin"
-            class="md:flex flex-col items-center md:flex-row mt-4 md:mt-0"
+            class="flex items-center md:flex-row md:mt-0"
           >
             <div class="flex justify-center md:block">
               <router-link
@@ -101,7 +101,7 @@
               @click="!show ? (show = true) : (show = false)"
             >
               <div
-                class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full"
+                class="hidden md:inline w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full"
               >
                 <img
                   :src="profileImg"
@@ -111,7 +111,7 @@
               </div>
 
               <h3
-                class="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+                class="hidden md:inline mx-2 text-sm font-medium text-gray-700 dark:text-gray-200"
               >
                 Hi, {{ firstName }}
               </h3>
@@ -144,25 +144,25 @@
             >
               <router-link
                 to="/profile"
-                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 View Profile
               </router-link>
               <router-link
                 to="/user/my-product"
-                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 My Products
               </router-link>
               <router-link
                 to="/user/my-purchase"
-                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 Purchase History
               </router-link>
               <router-link
                 to="/user/add-product"
-                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 Add Products
               </router-link>
