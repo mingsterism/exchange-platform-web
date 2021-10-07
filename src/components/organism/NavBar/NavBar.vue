@@ -71,7 +71,7 @@
           >
             <div class="flex justify-center md:block">
               <router-link
-                class="relative mx-4 text-gray-600 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
+                class="relative mx-4 text-gray-600 border-0 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
                 to="/cart"
               >
                 <svg

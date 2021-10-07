@@ -37,6 +37,7 @@ export const userProduct = defineStore({
       editProductQty: "",
       editProductCondition: "",
       editProductDescription: "",
+      editProductPhotos: null,
       userTempId: "",
       emptyStatus: true, // use to show that there is no products in current user account
       uploadComplete: false, // use to track the product image upload process
@@ -63,6 +64,9 @@ export const userProduct = defineStore({
     },
     getEditProductDescription: (state) => {
       return state.editProductDescription;
+    },
+    getEditProductPhotos: (state) => {
+      return state.editProductPhotos;
     },
   },
   actions: {
@@ -157,9 +161,10 @@ export const userProduct = defineStore({
         // console.log("Product Document: ", productCurrentDetail);
         this.editProductName = productCurrentDetail.name;
         this.editProductPoints = productCurrentDetail.points;
-        this.editProductQty = productCurrentDetail.quanity;
+        this.editProductQty = productCurrentDetail.quantity;
         this.editProductCondition = productCurrentDetail.conditions;
         this.editProductDescription = productCurrentDetail.description;
+        this.editProductPhotos = productCurrentDetail.photos;
       }
     },
     // async displayProductView() {
