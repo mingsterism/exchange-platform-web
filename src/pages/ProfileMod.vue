@@ -1,15 +1,15 @@
 <template>
-  <div class="py-10">
-    <div class="flex justify-center">
-      <div class="min-w-md">
-        <p className="text-4xl text-left font-semibold mb-2">My Profile</p>
+  <div class="py-10 px-10 md:px-0">
+    <div class="md:flex justify-center">
+      <div class="md:min-w-md">
+        <p className="text-2xl md:text-3xl text-left font-semibold mb-1">My Profile</p>
         <div class="h-px bg-black"></div>
       </div>
     </div>
     <div className="flex flex-col items-center mt-10">
-      <div class="flex items-center justify-center">
+      <div class="flex flex-col md:flex-row items-center justify-center">
         <Image :src="profilePicture" class="rounded-full" />
-        <div class="ml-5">
+        <div class="md:ml-5 mt-5 md:mt-0">
           <p>
             <input
               class="hidden"
@@ -29,8 +29,8 @@
           </p>
         </div>
       </div>
-      <div class="flex min-w-md text-sm">
-        <div className="flex flex-1 flex-col pr-2">
+      <div class="flex flex-col md:flex-row md:min-w-md text-sm w-full md:w-auto">
+        <div className="flex flex-1 flex-col md:pr-2">
           <label for="firstName" class="editProfileLabel">First Name:</label>
           <input
             class="editProfileInput"
@@ -39,7 +39,7 @@
             v-model="firstName"
           />
         </div>
-        <div className="flex flex-1 flex-col pl-2">
+        <div className="flex flex-1 flex-col md:pl-2">
           <label for="lastName" class="editProfileLabel">Last Name:</label>
           <input
             class="editProfileInput"
@@ -50,18 +50,17 @@
         </div>
       </div>
 
-      <div className="flex flex-col min-w-md text-sm">
+      <div className="flex flex-col md:min-w-md text-sm w-full md:w-auto">
         <label for="aboutMe" class="editProfileLabel">About Me:</label>
         <textarea
           name="aboutMe"
           class="editProfileInput resize-none"
           id="aboutMe"
-          cols="60"
           rows="3"
           v-model="aboutMe"
         ></textarea>
       </div>
-      <div className="flex flex-col pb-4 min-w-md text-sm">
+      <div className="flex flex-col pb-4 md:min-w-md text-sm w-full md:w-auto">
         <div className="flex flex-col">
           <label for="shippingAddress" class="editProfileLabel"
             >Shipping Address</label
@@ -70,7 +69,6 @@
             name="shippingAddress"
             class="editProfileInput resize-none"
             id="shippingAddress"
-            cols="60"
             rows="3"
             v-model="shippingAddress"
           ></textarea>

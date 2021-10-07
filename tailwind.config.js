@@ -13,6 +13,8 @@ module.exports = {
       'sm': '24rem',
       'xs': '18rem',
       'md': '30rem',
+      'lg': '48rem',
+      'xl': '54rem',
       "screen-xl": '1280px'
     },
     minHeight: {

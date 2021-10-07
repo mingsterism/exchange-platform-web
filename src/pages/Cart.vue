@@ -1,22 +1,22 @@
 <template>
-  <div class="flex justify-center">
-    <div class="py-10 px-5 w-8/12">
+  <div class="flex justify-center py-10 md:py-14">
+    <div class="w-10/12 md:w-9/12 lg:w-8/12 xl:w-5/12">
       <div class="mb-3">
-        <h1 class="text-3xl text-left">Shopping Cart</h1>
-        <hr />
+        <h1 class="text-2xl text-left">Shopping Cart</h1>
+        <div class="h-px bg-black"></div>
       </div>
-      <div class="">
+      <div class="pl-2">
         <!-- Cart cards -->
         <CartCard
           :post="item"
-          v-for="(item, index) in cartItems"
-          :key="index"
+          v-for="(item, id) in cartItems"
+          :key="id"
         />
       </div>
       <div class="flex flex-col items-end mt-8">
         <!-- checkout footer -->
         <div class="mb-2">
-          <p class="text-xl font-semibold">Total Price: {{ total }} points</p>
+          <p class="text-lg font-semibold">Total Price: {{ total }} points</p>
         </div>
         <div>
           <Button
@@ -59,7 +59,7 @@ export default {
             "",
             "success"
           );
-          this.$router.push("/profile/my-purchase");
+          this.$router.push("/user/my-purchase");
         } else if (result.isDenied) {
           Swal.fire("Continue Shopping", "", "info");
         }

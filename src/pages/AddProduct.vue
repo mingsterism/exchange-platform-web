@@ -3,7 +3,7 @@
     <div>
       <div>
         <div
-          class="flex flex-wrap items-start gap-3 border border-gray-400 rounded-md p-2"
+          class="flex flex-wrap items-start gap-3 border border-gray-400 rounded-md p-2 h-40 overflow-y-scroll"
           id="productImgCont"
         >
           <!-- index to point at the items -->

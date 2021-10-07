@@ -81,7 +81,7 @@
 import { createProfile } from "../utils/firebase";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export default {
   name: "Register",
@@ -129,7 +129,6 @@ export default {
         };
         await createProfile(createUser, userData);
         this.$router.push({ name: "Home" });
-        return;
       } else {
         Swal.fire({
           title: "Uh Oh!",

@@ -132,6 +132,15 @@ export const usersStore = defineStore({
       }
       this.setCurrentTotal(grandTotal);
     },
+    // newTotalPrice() {
+    //   let grandTotal = 0;
+    //   for (let i = 0; i < this.itemsInCart.length; i++) {
+    //     const itemPrice = this.itemsInCart[i].totalPoints;
+    //     grandTotal += itemPrice;
+    //   }
+    //   this.setCurrentTotal(grandTotal);
+    //   console.log("Updated total cost...");
+    // },
     checkOutItems() {
       console.log("items in cart: ", this.itemsInCart);
       addToMyPurchase(this.itemsInCart);

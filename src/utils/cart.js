@@ -65,7 +65,9 @@ export const addToMyPurchase = (products) => {
           quantity: Number(extProdDoc.quantity - doc.desireQuantity),
         });
       // * save item to my purchase
-      const saveDoc = await purchaseCollection.doc(currentItem.id).set(currentItem);
+      const saveDoc = await purchaseCollection
+        .doc(currentItem.id)
+        .set(currentItem);
       // * remove item from cart after check out
       const delDoc = await cartCollection.doc(currentItem.id).delete();
     }
@@ -86,4 +88,14 @@ export const getMyPurchase = async () => {
   });
   console.log("Successfully read from my purcahse.");
   return purchaseDocs;
+};
+
+export const updateTotalPrice = async (qty, newTotal, prodId) => {
+  const user = firebase.auth().currentUser;
+  const cartCollection = profileCollection.doc(user.uid).collection("cart").doc(prodId);
+  const updateDoc = await cartCollection.update({
+    desireQuantity: qty,
+    totalPoints: newTotal,
+  });
+  console.log("Updated with latest qty and total price...");
 };

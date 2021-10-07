@@ -1,5 +1,5 @@
 <template>
-  <div class="px-20 pt-20 pb-24">
+  <div class="px-10 md:px-20 pt-20 pb-24">
     <div class="pb-6">
       <p class="text-3xl text-left font-semibold pl-6 mb-3">Market Place</p>
     </div>
@@ -7,7 +7,7 @@
       <!-- <div class="mr-3">
         <FilterBox />
       </div> -->
-      <div class="flex-1 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 lg:gap-7 justify-items-center">
+      <div class="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-10 lg:gap-7 justify-items-center">
         <Card2
           :post="post"
           v-for="(post, index) in productShowcase"
