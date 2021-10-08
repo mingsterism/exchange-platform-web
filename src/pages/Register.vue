@@ -50,13 +50,14 @@
           <input
             type="password"
             v-model="retype"
+            @keypress.enter="register"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           />
         </div>
 
         <div class="mt-6">
           <button
-            type="submit"
+            type="button"
             @click="register"
             class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
           >
@@ -109,26 +110,38 @@ export default {
         return;
       }
       if (this.password === this.retype) {
-        const firebaseAuth = firebase.auth();
-        const createUser = await firebaseAuth
+        // const firebaseAuth = firebase.auth();
+        console.log("creating user now...");
+        firebase
+          .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then((cred) => {
+          .then(async (cred) => {
             console.log(cred.user);
             console.log(cred.user.uid);
-            return cred.user.uid;
+            console.log("Created user: ", cred);
+            const uid = cred.user.uid;
+            const userData = {
+              id: uid,
+              first_name: "default",
+              last_name: "default",
+              email: this.email,
+              about: "default",
+              address: "default",
+              points: 0,
+            };
+            await createProfile(uid, userData);
+            console.log("Created user profile...");
+            this.$router.push({ name: "Home" });
+            // return cred.user.uid;
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: "Uh Oh!",
+              text: err,
+              icon: "error",
+              confirmButtonColor: "#1ea7fd",
+            });
           });
-        console.log("Created user: ", createUser);
-        const userData = {
-          id: createUser,
-          first_name: "default",
-          last_name: "default",
-          email: this.email,
-          about: "default",
-          address: "default",
-          points: 0,
-        };
-        await createProfile(createUser, userData);
-        this.$router.push({ name: "Home" });
       } else {
         Swal.fire({
           title: "Uh Oh!",

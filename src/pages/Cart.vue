@@ -2,10 +2,10 @@
   <div class="flex justify-center py-10 md:py-14">
     <div class="w-10/12 md:w-9/12 lg:w-8/12 xl:w-5/12">
       <div class="mb-3">
-        <h1 class="text-2xl text-left">Shopping Cart</h1>
+        <h1 class="text-2xl text-left font-semibold">Shopping Cart</h1>
         <div class="h-px bg-black"></div>
       </div>
-      <div class="pl-2">
+      <div>
         <!-- Cart cards -->
         <CartCard
           :post="item"
@@ -16,16 +16,23 @@
       <div class="flex flex-col items-end mt-8">
         <!-- checkout footer -->
         <div class="mb-2">
-          <p class="text-lg font-semibold">Total Price: {{ total }} points</p>
+          <p class="md:text-lg font-medium">Total Price: {{ total }} points</p>
         </div>
         <div>
-          <Button
+          <!-- <Button
             class="ml-5 transform hover:scale-110 hover:opacity-75 transition ease-out duration-300"
             type="button"
             @click="checkOut"
             label="Check Out"
             :primary="true"
-          />
+          /> -->
+          <button
+              @click="checkOut"
+              type="button"
+              class="px-4 py-2 text-sm md:text-base font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+            >
+              Check Out
+            </button>
         </div>
       </div>
     </div>
@@ -34,14 +41,14 @@
 
 <script>
 import CartCard from "../components/organism/Cart/CartCard.vue";
-import Button from "../components/molecule/Button/Button.vue";
+// import Button from "../components/molecule/Button/Button.vue";
 import { usersStore } from "../store/users.store";
 import { computed } from "@vue/runtime-core";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
-  components: { CartCard, Button },
+  components: { CartCard },
   methods: {
     checkOut() {
       Swal.fire({

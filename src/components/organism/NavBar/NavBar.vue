@@ -94,6 +94,7 @@
                 ></span>
               </router-link>
             </div>
+
             <button
               type="button"
               class="flex items-center border-2 border-opacity-40 py-1 px-2 rounded-full hover:shadow-md focus:outline-none"
@@ -144,24 +145,28 @@
             >
               <router-link
                 to="/profile"
+                @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 View Profile
               </router-link>
               <router-link
                 to="/user/my-product"
+                @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 My Products
               </router-link>
               <router-link
                 to="/user/my-purchase"
+                @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 Purchase History
               </router-link>
               <router-link
                 to="/user/add-product"
+                @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 Add Products

@@ -3,7 +3,7 @@
     <div v-if="isEmpty" class="border rounded-md p-2">
       <h1>Currently there is no product here.</h1>
     </div>
-    <div className="flex flex-wrap gap-9 mb-10">
+    <div className="grid grid-cols-2 xl:flex flex-wrap gap-2 md:gap-6 mb-10">
       <transition-group name="card">
         <Card
           :post="post"
