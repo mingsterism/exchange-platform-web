@@ -6,7 +6,7 @@
     >
       <h1>Currently there is no transaction.</h1>
     </div>
-    <div class="flex-1" v-else>
+    <div class="flex-1 md:flex md:flex-wrap gap-x-3 pl-1" v-else>
       <!-- My purchases card -->
       <PurchaseCard
         :post="item"

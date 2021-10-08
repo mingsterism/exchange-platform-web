@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col items-center py-12">
-      <div class="flex items-center justify-between w-10/12 lg:w-8/12">
+      <div class="flex items-center justify-between w-11/12 lg:w-8/12 xl:w-7/12">
         <div class="hidden md:flex items-center pr-4">
           <!-- user icon -->
           <router-link
@@ -27,7 +27,9 @@
             </router-link>
           </div>
         </div>
-        <div class="flex-1 grid grid-cols-3 justify-items-stretch text-xs md:text-base bg-white">
+        <div
+          class="flex-1 grid grid-cols-3 justify-items-stretch text-xs md:text-base bg-white"
+        >
           <!-- tabs -->
           <router-link to="/user/my-product" class="pt-2 border"
             >My Products</router-link
@@ -41,10 +43,13 @@
         </div>
       </div>
 
-      <div class="flex justify-between w-10/12 lg:w-8/12 mt-5">
+      <div class="flex justify-between w-11/12 lg:w-8/12 xl:w-7/12 mt-3">
         <div class="hidden md:flex flex-col flex-initial text-left text-sm">
           <!-- side bar -->
-          <router-link to="/user/my-product" class="flex items-center pt-2 border-0">
+          <router-link
+            to="/user/my-product"
+            class="flex items-center pt-2 border-0"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -60,7 +65,10 @@
             <span class="ml-2">My Products</span>
           </router-link>
 
-          <router-link to="/user/my-purchase" class="flex items-center pt-2 border-0">
+          <router-link
+            to="/user/my-purchase"
+            class="flex items-center pt-2 border-0"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -78,7 +86,10 @@
             </svg>
             <span class="ml-2">Purchase History</span>
           </router-link>
-          <router-link to="/user/add-product" class="flex items-center pt-2 border-0">
+          <router-link
+            to="/user/add-product"
+            class="flex items-center pt-2 border-0"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -98,7 +109,11 @@
           </router-link>
         </div>
         <div class="flex-1 md:pl-5">
-          <router-view></router-view>
+          <router-view v-slot="{ Component }">
+            <transition name="route" mode="out-in">
+              <component :is="Component"></component>
+            </transition>
+          </router-view>
         </div>
       </div>
     </div>
@@ -127,6 +142,24 @@ export default {
 </script>
 
 <style lang="scss">
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.route-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+
 .router-link-exact-active {
   border-bottom: 1px solid $purple;
   color: $purple;

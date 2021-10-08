@@ -1,7 +1,9 @@
 <template>
-  <div class="flex flex-col min-h-full">
-    <NavBar class="sticky top-0 z-20" />
-    <router-view></router-view>
+  <div class="flex flex-col justify-between min-h-full screenHeight">
+    <div>
+      <NavBar class="sticky top-0 z-20" />
+      <router-view></router-view>
+    </div>
     <Footer class="footer" />
   </div>
 </template>
@@ -29,4 +31,7 @@ export default {
   flex: 0 0 50px; 
   margin-top: auto;
 } */
+.screenHeight {
+  min-height: 100vh;
+}
 </style>

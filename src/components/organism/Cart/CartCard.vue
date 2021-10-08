@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex justify-between items-center p-3 border mb-2 rounded-md bg-white shadow-md max-w-xl xl:max-w-lg"
+    class="flex justify-between items-center p-2 border mb-2 rounded-md bg-white shadow-md max-w-xl xl:max-w-lg"
   >
     <!-- rectangular card -->
     <div class="flex items-center">
-      <div class="w-32 max-h-20 overflow-hidden">
+      <div class="w-32 max-h-24 md:max-h-20 overflow-hidden">
         <!-- <Images :src="productPhotos" /> -->
         <img :src="post.photos[0]" />
       </div>
-      <div class="ml-3 text-left">
+      <div class="ml-2 text-left">
         <p class="md:text-lg font-semibold">{{ post.name }}</p>
         <!-- <div>
       Product Description
@@ -19,6 +19,7 @@
           <input
             class="border border-gray-400 px-1 py-0.5 w-9 md:w-10"
             @keydown.enter="updateTotal"
+            @mouseleave="updateTotal"
             type="number"
             :min="post.desireQuantity"
             v-model="quantity"
@@ -44,20 +45,20 @@
       </p>
     </div> -->
 
-    <div class="flex justify-between md:w-4/12">
+    <div class="flex justify-between items-center md:w-4/12">
       <div class="hidden md:inline text-left text-sm">
         <p>Total cost:</p>
         <p>{{ post.totalPoints }} points</p>
       </div>
-      <div class="md:px-3">
+      <div class="md:inline md:px-3">
         <button
-          class="hover:text-red-700 transform transition ease-linear duration-200"
+          class="text-red-700 lg:text-black hover:text-red-700 transform transition ease-linear duration-200"
           @click="removeItem(post.id)"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            class="bi bi-trash md:w-7 w-5"
+            class="bi bi-trash md:w-6 w-5"
             viewBox="0 0 16 16"
           >
             <path

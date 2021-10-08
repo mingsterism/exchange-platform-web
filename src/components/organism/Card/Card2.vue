@@ -1,36 +1,36 @@
 <template>
   <div
-    class="min-w-xs max-w-xs mx-auto overflow-hidden justify-between bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    class="w-full md:w-auto md:min-w-xs max-w-xs mx-auto overflow-hidden justify-between bg-white rounded-lg shadow-lg dark:bg-gray-800"
   >
-    <div class="px-4 py-2 text-left">
+    <div class="px-2 md:px-4 py-2 text-left">
       <h1
-        class="text-2xl font-semibold truncate text-gray-800 capitalize dark:text-white"
+        class="md:text-2xl font-semibold truncate text-gray-800 capitalize dark:text-white"
       >
         {{ post.name }}
       </h1>
-      <p class="mt-1 truncate text-black dark:text-gray-400">
+      <p class="text-xs md:text-base mt-1 truncate text-black dark:text-gray-400">
         {{ post.description }}
       </p>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+      <p class="mt-1 text-xs md:text-sm text-gray-500 dark:text-gray-400">
         Available Quantity: {{ post.quantity }}
       </p>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+      <p class="mt-1 text-xs md:text-sm text-gray-500 dark:text-gray-400">
         Conditions: {{ post.conditions }}
       </p>
     </div>
 
     <img
-      class="object-cover w-full h-48 mt-2"
+      class="object-cover w-full h-28 md:h-48 mt-2"
       :src="post.photos[0]"
       alt="product image"
     />
 
-    <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
-      <h1 class="text-lg font-bold text-white">{{ post.points }} points</h1>
+    <div class="flex items-center justify-between px-2 md:px-4 py-1 md:py-2 bg-gray-900">
+      <h1 class="text-xs md:text-lg font-medium md:font-bold text-white">{{ post.points }} points</h1>
       <button
         type="button"
         @click="showProduct(post.photos)"
-        class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-200 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none"
+        class="px-1 md:px-2 py-0.5 md:py-1 btnText font-semibold text-gray-900 uppercase transition-colors duration-200 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none"
       >
         View Product
       </button>
@@ -40,7 +40,7 @@
       v-if="visible"
       class="flex justify-center items-center fixed h-screen z-30 inset-0 bg-black bg-opacity-60"
     >
-      <div class="border rounded-lg py-7 px-10 border-gray-200 bg-white relative shadow-lg">
+      <div class="w-10/12 md:w-auto border rounded-lg py-2 md:py-7 px-4 md:px-10 border-gray-200 bg-white relative shadow-lg">
         <div class="absolute right-2 top-2">
           <button @click="visible = false">
             <svg
@@ -111,12 +111,12 @@
             </svg>
           </button>
         </div>
-        <div class="text-left mb-4">
-          <p class="text-black">{{ post.description }}</p>
+        <div class="text-left mb-4 w-80">
+          <p class="text-black text-sm md:text-base">{{ post.description }}</p>
           <p class="text-gray-700 text-sm">Condition: {{ post.conditions }}</p>
           <p class="text-gray-700 text-sm">Quantity: {{ post.quantity }}</p>
         </div>
-        <div class="flex justify-between">
+        <div class="flex justify-between text-sm md:text-base">
           <div>
             <label for="qty">Quantity:</label>
             <input
@@ -170,7 +170,7 @@ export default {
       // this.$router.push("/view-product");
 
       this.photoQty = prodPhotos.length;
-      console.log("Photo qty for this product is ", this.photoQty);
+      // console.log("Photo qty for this product is ", this.photoQty);
       this.visible = true;
 
       // console.log("fire an event");
@@ -227,5 +227,8 @@ export default {
 <style lang="scss">
 .popOutColor {
   background-color: $pop-out;
+}
+.btnText {
+  font-size: 10px;
 }
 </style>

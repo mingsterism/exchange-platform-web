@@ -2,7 +2,9 @@
   <div class="py-10 px-10 md:px-0">
     <div class="md:flex justify-center">
       <div class="md:min-w-md">
-        <p className="text-2xl md:text-3xl text-left font-semibold mb-1">My Profile</p>
+        <p className="text-2xl md:text-3xl text-left font-semibold mb-1">
+          My Profile
+        </p>
         <div class="h-px bg-black"></div>
       </div>
     </div>
@@ -22,14 +24,16 @@
           </p>
           <p>
             <label
-              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              class="px-4 py-2 text-sm md:text-base font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
               for="file"
               >Upload Image</label
             >
           </p>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row md:min-w-md text-sm w-full md:w-auto">
+      <div
+        class="flex flex-col md:flex-row md:min-w-md text-sm w-full md:w-auto"
+      >
         <div className="flex flex-1 flex-col md:pr-2">
           <label for="firstName" class="editProfileLabel">First Name:</label>
           <input
@@ -85,7 +89,7 @@
             <button
               @click="updateProfileDetail"
               type="button"
-              class="px-4 py-2 font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              class="px-4 py-2 text-sm md:text-base font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
             >
               Update Profile
             </button>
@@ -101,7 +105,7 @@
             <button
               @click="deleteAccount"
               type="button"
-              class="px-4 py-2 font-medium text-white btnRed capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+              class="px-4 py-2 text-sm md:text-base font-medium text-white btnRed capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
             >
               Delete Account
             </button>
@@ -169,20 +173,34 @@ export default {
     handleBack() {
       this.$router.go(-1);
     },
-    async updateProfileDetail() {
+    updateProfileDetail() {
       // console.log(this.lastName);
-      const newDetails = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        about: this.aboutMe,
-        address: this.shippingAddress,
-      };
-      await this.store.updateProfile(newDetails);
       Swal.fire({
-        title: "Success!",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
+        title: "Are you sure you want to update your profile?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`,
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          const newDetails = {
+            first_name: this.firstName,
+            last_name: this.lastName,
+            about: this.aboutMe,
+            address: this.shippingAddress,
+          };
+          await this.store.updateProfile(newDetails);
+          Swal.fire({
+            title: "Success!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else if (result.isDenied) {
+          // Swal.fire("Remain", "", "info");
+          return;
+        }
       });
     },
     deleteAccount() {
