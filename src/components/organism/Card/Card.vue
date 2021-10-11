@@ -4,7 +4,7 @@
   >
     <div class="relative">
       <p
-        @click="goToEditor(post.id)"
+        @click="goToEditor()"
         class="absolute right-7 md:right-11 top-1 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-blue-400 cursor-pointer"
       >
         <svg
@@ -19,7 +19,7 @@
         </svg>
       </p>
       <p
-        @click="removeProduct(post.id)"
+        @click="removeProduct()"
         class="absolute right-1 top-1 border-2 rounded-lg p-1 bg-white hover:shadow-lg hover:bg-red-500 cursor-pointer"
       >
         <svg
@@ -40,7 +40,9 @@
       >
         {{ post.name }}
       </h1>
-      <p class="text-xs md:text-base mt-1 truncate text-black dark:text-gray-400">
+      <p
+        class="text-xs md:text-base mt-1 truncate text-black dark:text-gray-400"
+      >
         {{ post.description }}
       </p>
       <p class="mt-1 text-xs md:text-sm text-gray-500 dark:text-gray-400">
@@ -57,8 +59,12 @@
       alt="product image"
     />
 
-    <div class="flex items-center justify-between px-2 md:px-4 py-1 md:py-2 bg-gray-900">
-      <h1 class="text-xs md:text-lg font-bold text-white">{{ post.points }} points</h1>
+    <div
+      class="flex items-center justify-between px-2 md:px-4 py-1 md:py-2 bg-gray-900"
+    >
+      <h1 class="text-xs md:text-lg font-bold text-white">
+        {{ post.points }} points
+      </h1>
     </div>
   </div>
 </template>
@@ -77,26 +83,27 @@ export default {
   props: ["post"],
 
   methods: {
-    removeProduct(prodId) {
+    removeProduct() {
       Swal.fire({
         title: "Do you want to delete this product?",
         showDenyButton: true,
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonText: "Yes, please",
         denyButtonText: `No, Don't delete`,
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          this.store.deleteProductDoc(prodId);
+          const prodInfo = this.post;
+          console.log("Prodinfo: ", prodInfo);
+          this.store.deleteProductDoc(prodInfo);
           Swal.fire("Deleted!", "", "success");
         } else if (result.isDenied) {
           Swal.fire("You did not delete the product.", "", "info");
         }
       });
-      // this.store.deleteProductDoc(prodId);
     },
-    goToEditor(prodId) {
-      this.store.goToEditorPage(prodId);
+    goToEditor() {
+      const productDetail = this.post;
+      this.store.goToEditorPage(productDetail);
     },
   },
 

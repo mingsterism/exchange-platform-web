@@ -58,7 +58,7 @@
 
 <script>
 // import Button from "/@/components/molecule/Button/Button.vue";
-import { forgotPassword } from "/@/utils/firebase";
+import { forgotPassword } from "/@/utils/auth";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 

@@ -79,10 +79,9 @@
 <script>
 // import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 // import Button from "/@/components/molecule/Button/Button.vue";
-import { createProfile } from "../utils/firebase";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import firebase from "firebase/app";
+import { createAcc } from "../utils/auth";
 
 export default {
   name: "Register",
@@ -112,36 +111,7 @@ export default {
       if (this.password === this.retype) {
         // const firebaseAuth = firebase.auth();
         console.log("creating user now...");
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(async (cred) => {
-            console.log(cred.user);
-            console.log(cred.user.uid);
-            console.log("Created user: ", cred);
-            const uid = cred.user.uid;
-            const userData = {
-              id: uid,
-              first_name: "default",
-              last_name: "default",
-              email: this.email,
-              about: "default",
-              address: "default",
-              points: 0,
-            };
-            await createProfile(uid, userData);
-            console.log("Created user profile...");
-            this.$router.push({ name: "Home" });
-            // return cred.user.uid;
-          })
-          .catch((err) => {
-            Swal.fire({
-              title: "Uh Oh!",
-              text: err,
-              icon: "error",
-              confirmButtonColor: "#1ea7fd",
-            });
-          });
+        createAcc(this.email, this.password);
       } else {
         Swal.fire({
           title: "Uh Oh!",

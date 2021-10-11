@@ -1,10 +1,24 @@
 <template>
   <div class="py-10 px-10 md:px-0">
+    <div
+      v-if="inProgress"
+      class="flex items-center justify-center z-40 inset-0 w-screen h-screen bg-gray-500 bg-opacity-50 absolute"
+    >
+      <svg viewBox="0 0 50 50" class="spinning">
+        <circle class="ring" cx="25" cy="25" r="20"></circle>
+        <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+      </svg>
+    </div>
     <div class="md:flex justify-center">
       <div class="md:min-w-md">
-        <p className="text-2xl md:text-3xl text-left font-semibold mb-1">
-          My Profile
-        </p>
+        <div class="flex justify-between items-center">
+          <p className="text-2xl md:text-3xl text-left font-semibold mb-1">
+            My Profile
+          </p>
+          <p class="text-sm font-medium text-gray-400">
+            Wallet: {{ wallet }} points
+          </p>
+        </div>
         <div class="h-px bg-black"></div>
       </div>
     </div>
@@ -120,12 +134,18 @@
 import Image from "/@/components/molecule/Image/Image.vue";
 import Button from "/@/components/molecule/Button/Button.vue";
 import { userProfile } from "../store/user.profile.js";
+import { deleteAcc } from "../utils/auth.js";
+import { deleteProfilePhoto } from "../utils/storage.js";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { deleteAcc } from "../utils/firebase.js";
 
 export default {
   name: "ProfileMod",
+  data() {
+    return {
+      inProgress: false,
+    };
+  },
   computed: {
     firstName: {
       get() {
@@ -158,6 +178,9 @@ export default {
       set(payload) {
         return this.store.changedShippingAddress(payload);
       },
+    },
+    wallet() {
+      return this.store.getWallet;
     },
     profilePicture() {
       return this.store.getProfilePic;
@@ -210,10 +233,13 @@ export default {
         showCancelButton: true,
         confirmButtonText: "Yes",
         denyButtonText: `No`,
-      }).then((result) => {
+      }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          deleteAcc();
+          this.inProgress = true;
+          deleteProfilePhoto();
+          await deleteAcc();
+          this.inProgress = false;
           Swal.fire("Succesfully delete account...", "", "success");
           this.$router.push("/login");
         } else if (result.isDenied) {

@@ -64,7 +64,7 @@
           </p>
           <div class="h-px bg-black"></div>
         </div>
-        <div class="flex mb-3">
+        <div class="flex justify-center mb-3">
           <button
             type="button"
             class="hover:scale-125 transform transition ease-in-out duration-200"
@@ -86,7 +86,7 @@
           </button>
 
           <img
-            class="object-cover w-full h-48 mt-2 mx-2"
+            class="object-cover w-full md:w-auto h-48 mt-2 mx-2"
             :src="post.photos[photoIndex]"
             alt="product image"
           />
@@ -218,7 +218,7 @@ export default {
   },
   setup() {
     const store = usersStore();
-
+  
     return { store };
   },
 };

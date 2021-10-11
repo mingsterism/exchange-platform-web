@@ -67,3 +67,26 @@ export const uploadProdImg = async (files, prodId) => {
   }
   userProduct().uploadComplete = true;
 };
+
+export const deleteProfilePhoto = () => {
+  const user = firebase.auth().currentUser;
+  const uid = user.uid;
+  const fileLocation = imageRef.child(uid);
+  fileLocation
+    .delete()
+    .then(() => console.log("Successfully delete profile photo"))
+    .catch((err) => console.log("err"));
+};
+
+export const deleteProdImg = (folderName, fileLink) => {
+  const array = fileLink.split("%");
+  const array2 = array[3].split("?");
+  const fileName = array2[0].substring(2, array2[0].length);
+  // console.log("file name is ", fileName);
+  const folderRef = prodFolder.child(folderName);
+  const fileRef = folderRef.child(fileName);
+  fileRef
+    .delete()
+    .then(() => console.log("Successfully delete profile photo"))
+    .catch((err) => console.log(err));
+};

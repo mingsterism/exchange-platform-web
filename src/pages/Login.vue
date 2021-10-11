@@ -100,12 +100,10 @@
 <script>
 // import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
 // import Button from "/@/components/molecule/Button/Button.vue";
-import { login } from "/@/utils/firebase.js";
+import { login } from "/@/utils/auth.js";
+import { signInWithGoogle } from "../utils/auth.google";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { signInWithGoogle } from "../utils/auth.google";
-// import { usersStore } from "../store/users.store";
-// import { userProfile } from "../store/user.profile";
 
 export default {
   name: "Login",
@@ -121,26 +119,36 @@ export default {
   },
   methods: {
     handleLogin() {
-      const isLoggedIn = login(this.email, this.password).catch((err) => {
+      if (this.email === "" || this.password === "") {
         Swal.fire({
-          title: "Uh Oh!",
-          text: err.message,
           icon: "error",
-          confirmButtonColor: "#1ea7fd",
-        });
-      });
-      if (!isLoggedIn) {
-        this.$router.push("/login");
-      } else {
-        Swal.fire({
-          icon: "success",
-          title: "Welcome",
+          title: "Please key in your email and password",
           showConfirmButton: false,
           timer: 1500,
         });
-        // this.store.setIsLogin(true);
-        this.$router.push("/");
       }
+      login(this.email, this.password)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Welcome",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // this.store.setIsLogin(true);
+          this.$router.push("/");
+        })
+        .catch((err) =>
+          Swal.fire({
+            title: "Uh Oh!",
+            text: err.message,
+            icon: "error",
+            confirmButtonColor: "#1ea7fd",
+          })
+        );
+      // if (!isLoggedIn) {
+      //   this.$router.push("/login");
+      // }
     },
     async loginWithGoogle() {
       console.log("Logging in using google account...");
@@ -155,11 +163,6 @@ export default {
       this.$router.push("/");
     },
   },
-  // setup() {
-  //   const store = userProfile();
-
-  //   return { store };
-  // },
 };
 </script>
 <style lang="scss">

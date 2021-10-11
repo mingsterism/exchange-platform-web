@@ -1,5 +1,14 @@
 <template>
   <div class="md:px-5">
+    <div
+      v-if="uploading"
+      class="flex items-center justify-center z-40 inset-0 w-screen h-screen bg-gray-500 bg-opacity-50 absolute"
+    >
+      <svg viewBox="0 0 50 50" class="spinning">
+        <circle class="ring" cx="25" cy="25" r="20"></circle>
+        <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+      </svg>
+    </div>
     <div>
       <div>
         <div
@@ -148,6 +157,7 @@ export default {
       productCondition: "",
       productDescription: "",
       imgFiles: [],
+      uploading: false,
     };
   },
   methods: {
@@ -200,6 +210,7 @@ export default {
         });
         return;
       }
+      this.uploading = true;
       Swal.fire({
         icon: "info",
         title: "Uploading in progress...",
@@ -208,7 +219,7 @@ export default {
       });
       const user = firebase.auth().currentUser;
       const productDetails = {
-        id: Date.now(),
+        id: String(Date.now()),
         uploadedBy: user.uid,
         name: this.productName,
         points: parseInt(this.productPoints),
@@ -226,6 +237,7 @@ export default {
       this.productPhotos = [];
       this.productCondition = "";
       this.productDescription = "";
+      this.uploading = false;
     },
     uploadProductImage(event) {
       if (this.productPhotos.length <= 2) {

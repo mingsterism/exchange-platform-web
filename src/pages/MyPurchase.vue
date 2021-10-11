@@ -21,13 +21,20 @@
 import { computed } from "@vue/runtime-core";
 import PurchaseCard from "../components/organism/Cart/PurchaseCard.vue";
 import { usersStore } from "../store/users.store";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export default {
   name: "MyPurchase",
   components: { PurchaseCard },
   setup() {
     const store = usersStore();
-    store.getMyPurchasedItems();
+
+    firebase.auth().onAuthStateChanged((user) => {
+      const uid = user.uid;
+      store.getMyPurchasedItems(uid);
+    });
+
     const purchasedItem = computed(() => {
       return store.getMyPurchase;
     });

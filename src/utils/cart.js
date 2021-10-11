@@ -12,10 +12,10 @@ export const addToCart = async (productDetails) => {
   console.log("Successfully add to cart...");
 };
 
-export const getCart = async () => {
+export const getCart = async (uid) => {
   const cartDocs = [];
-  const user = firebase.auth().currentUser;
-  const cartCollection = profileCollection.doc(user.uid).collection("cart");
+  // const user = firebase.auth().currentUser;
+  const cartCollection = profileCollection.doc(uid).collection("cart");
   const getDoc = await cartCollection.get();
   getDoc.forEach((docs) => {
     const cartDoc = docs.data();
@@ -75,11 +75,11 @@ export const addToMyPurchase = (products) => {
   console.log("Successfully checkout and save to my purcahse...");
 };
 
-export const getMyPurchase = async () => {
+export const getMyPurchase = async (uid) => {
   const purchaseDocs = [];
-  const user = firebase.auth().currentUser;
+  // const user = firebase.auth().currentUser;
   const purchaseCollection = profileCollection
-    .doc(user.uid)
+    .doc(uid)
     .collection("My Purchase");
   const getDoc = await purchaseCollection.get();
   getDoc.forEach((docs) => {
@@ -92,10 +92,55 @@ export const getMyPurchase = async () => {
 
 export const updateTotalPrice = async (qty, newTotal, prodId) => {
   const user = firebase.auth().currentUser;
-  const cartCollection = profileCollection.doc(user.uid).collection("cart").doc(prodId);
+  const cartCollection = profileCollection
+    .doc(user.uid)
+    .collection("cart")
+    .doc(prodId);
   const updateDoc = await cartCollection.update({
     desireQuantity: qty,
     totalPoints: newTotal,
   });
   console.log("Updated with latest qty and total price...");
+};
+
+// export const deleteMyPurchaseAndCart = async (uid) => {
+//   const cartCollection = profileCollection.doc(uid).collection("cart");
+//   const purchaseCollection = profileCollection
+//     .doc(uid)
+//     .collection("My Purchase");
+//   const getCartDocs = await cartCollection.get();
+//   const getPurchaseDocs = await purchaseCollection.get();
+
+//   getCartDocs.forEach((doc) => {
+//     const cartDoc = doc.data();
+//     const delCartDoc = cartCollection
+//       .doc(cartDoc.id)
+//       .delete()
+//       .catch((err) => console.log(err));
+//   });
+
+//   getPurchaseDocs.forEach((doc) => {
+//     const purchaseDoc = doc.data();
+//     const delPurchaseDoc = purchaseCollection
+//       .doc(purchaseDoc.id)
+//       .delete()
+//       .catch((err) => console.log(err));
+//   });
+
+//   console.log(
+//     "Successfully delete purchase collection and delete collection..."
+//   );
+// };
+
+export const removeMyPurchase = async (prodId) => {
+  const user = firebase.auth().currentUser;
+  const purchaseDoc = profileCollection
+    .doc(user.uid)
+    .collection("My Purchase")
+    .doc(prodId);
+  // const removeItem = cartCollection.doc(prodId)
+  await purchaseDoc
+    .delete()
+    .catch((err) => console.log("Error in deleting: ", err));
+  // console.log("Successfully remove from cart...");
 };
