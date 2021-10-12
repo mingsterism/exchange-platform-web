@@ -11,64 +11,12 @@
             >
           </div>
 
-          <!-- Mobile menu button -->
-          <!-- <div class="flex md:hidden">
-            <button
-              type="button"
-              class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
-              aria-label="toggle menu"
-              @click="
-                !userMenuShown
-                  ? (userMenuShown = true)
-                  : (userMenuShown = false)
-              "
-            >
-              <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                ></path>
-              </svg>
-            </button>
-            <UserMenu v-if="userMenuShown" />
-          </div> -->
         </div>
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <div
-          class="absolute -right-0 flex items-center justify-between"
-        >
-          <!-- <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
-            <router-link
-              v-if="!isLogin"
-              to="/login"
-              class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-              >Login</router-link
-            >
-            <router-link
-              v-if="!isLogin"
-              to="/register"
-              class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-              >Register</router-link
-            >
-            <router-link
-              v-if="isLogin"
-              to="/Profile"
-              class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-              >Profile</router-link
-            >
-            <router-link
-              v-if="isLogin"
-              to="/"
-              class="px-2 py-1 mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-              >About</router-link
-            >
-          </div> -->
+        <div class="absolute -right-0 flex items-center justify-between">
 
-          <div
-            v-if="isLogin"
-            class="flex items-center md:flex-row md:mt-0"
-          >
+          <div v-if="isLogin" class="flex items-center md:flex-row md:mt-0">
             <div class="flex justify-center md:block">
               <router-link
                 class="relative mx-4 text-gray-600 border-0 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
@@ -129,16 +77,6 @@
                 />
               </svg>
             </button>
-            <!-- <div
-              v-if="show"
-              class="absolute shadow-lg rounded-lg bg-white w-60 -ml-40 mt-20"
-            >
-              <Button
-                label="Logout"
-                v-on:click="logout"
-                className="border-opacity-0 font-semibold pb-2"
-              />
-            </div> -->
             <div
               v-if="show"
               class="absolute right-0 top-10 z-20 w-48 py-2 mt-2 text-left bg-white rounded-md shadow-xl dark:bg-gray-800"
@@ -209,13 +147,13 @@ export default {
   },
   computed: {
     profileImg() {
-      return userProfile().getProfilePic;
+      return this.store.getProfilePic;
     },
     isLogin() {
-      return userProfile().getIsLogin;
+      return this.store.getIsLogin;
     },
     firstName() {
-      return userProfile().getFirstName;
+      return this.store.getFirstName;
     },
   },
   methods: {

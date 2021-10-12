@@ -25,7 +25,9 @@
             v-model="quantity"
           />
         </p>
-        <p class="md:hidden text-xs md:text-sm mt-1">Total cost: {{ post.totalPoints }} points</p>
+        <p class="md:hidden text-xs md:text-sm mt-1">
+          Total cost: {{ post.totalPoints }} points
+        </p>
       </div>
     </div>
     <!-- <div class="text-left text-sm">
@@ -91,17 +93,12 @@ export default {
       quantity: this.post.desireQuantity,
     };
   },
-  computed: {
-    // quantity() {
-    //   return this.post.desireQuantity;
-    // },
-  },
   methods: {
     removeItem(prodId) {
       Swal.fire({
         title: "Do you want to remove this item from cart?",
         showDenyButton: true,
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonText: "Yes, please",
         denyButtonText: `No, Don't remove`,
       }).then((result) => {
@@ -124,19 +121,15 @@ export default {
       }
       const newTotal = this.quantity * this.post.points;
       await updateTotalPrice(this.quantity, newTotal, this.post.id);
-      await this.store.showItemsInCart();
-      // this.post.desireQuantity = this.quantity;
-      // this.post.totalPoints = newTotal;
+      // await this.store.showItemsInCart();
+      this.post.desireQuantity = this.quantity;
+      this.post.totalPoints = newTotal;
+      await this.store.updateTotalCost();
       console.log("update complete");
     },
   },
   setup() {
     const store = usersStore();
-
-    // function removeItem(prodId) {
-    //   console.log("Removing item from cart...", prodId);
-    //   store.removeItemFromCart(prodId);
-    // }
 
     return { store };
   },

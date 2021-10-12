@@ -5,11 +5,7 @@ import Home from "/@/pages/Home.vue";
 import NavLayout from "/@/layouts/Nav.layout.vue";
 import Login from "/@/pages/Login.vue";
 import Register from "/@/pages/Register.vue";
-// import Checkout from "/@/pages/Checkout.vue";
 import ForgotPass from "/@/pages/ForgotPass.vue";
-// import Topup from "/@/pages/Topup.vue";
-// import Terms from "/@/pages/Terms.vue";
-// import Policy from "/@/pages/Policy.vue";
 import AddProduct from "/@/pages/AddProduct.vue";
 import MyProduct from "/@/pages/MyProduct.vue";
 import Profile from "/@/pages/ProfileMod.vue";
@@ -103,26 +99,6 @@ const routes = [
           },
         ],
       },
-      //   {
-      //     path: "/checkout",
-      //     name: "Checkout",
-      //     component: Checkout,
-      //   },
-      //   {
-      //     path: "/topup",
-      //     name: "Topup",
-      //     component: Topup,
-      //   },
-      //   {
-      //     path: "/terms",
-      //     name: "Terms",
-      //     component: Terms,
-      //   },
-      //   {
-      //     path: "/policy",
-      //     name: "Policy",
-      //     component: Policy,
-      //   },
     ],
   },
 ];

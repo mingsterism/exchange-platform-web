@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { createProfile, getUserProfileDoc } from "./firebase";
+import { createProfile, getUserProfileDoc } from "./profile";
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
