@@ -43,11 +43,11 @@ export default {
 </script>
 
 <style scoped>
-.card-enter-from {
+/* .card-enter-from {
   transform: scale(0);
 }
 
 .card-enter-active {
-  transition: all 2s ease;
-}
+  transition: all 0.5s ease;
+} */
 </style>
