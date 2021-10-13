@@ -154,6 +154,7 @@ export const usersStore = defineStore({
       const deduction = -this.currentTotalPrice;
       updateWallet(uid, deduction);
       addToMyPurchase(this.itemsInCart);
+      profile.getProfile();
       router.push("/user/my-purchase");
       return Swal.fire(
         "Thank you for purchasing in Exchange Platform!",
@@ -174,7 +175,7 @@ export const usersStore = defineStore({
       await removeFromCart(prodId);
       for (let i = 0; i < this.itemsInCart.length; i++) {
         const item = this.itemsInCart[i];
-        if ((item.id = prodId)) {
+        if (item.id === prodId) {
           this.itemsInCart.splice(i, 1);
           this.currentTotalPrice -= item.totalPoints;
         }

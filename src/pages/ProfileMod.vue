@@ -15,16 +15,16 @@
           <p className="text-2xl md:text-3xl text-left font-semibold mb-1">
             My Profile
           </p>
-          <p class="text-sm font-medium text-gray-400">
+          <!-- <p class="text-sm font-medium text-gray-400">
             Wallet: {{ wallet }} points
-          </p>
+          </p> -->
         </div>
         <div class="h-px bg-black"></div>
       </div>
     </div>
     <div className="flex flex-col items-center mt-10">
       <div class="flex flex-col md:flex-row items-center justify-center">
-        <Image :src="profilePicture" class="rounded-full" />
+        <Image :srcImg="profilePicture" class="rounded-full" />
         <div class="md:ml-5 mt-5 md:mt-0">
           <p>
             <input
@@ -138,6 +138,8 @@ import { deleteAcc } from "../utils/auth.js";
 import { deleteProfilePhoto } from "../utils/storage.js";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { usersStore } from "../store/users.store.js";
+import { userProduct } from "../store/user.product.js";
 
 export default {
   name: "ProfileMod",
@@ -179,9 +181,9 @@ export default {
         return this.store.changedShippingAddress(payload);
       },
     },
-    wallet() {
-      return this.store.getWallet;
-    },
+    // wallet() {
+    //   return this.store.getWallet;
+    // },
     profilePicture() {
       return this.store.getProfilePic;
     },
@@ -242,6 +244,9 @@ export default {
           this.inProgress = false;
           Swal.fire("Succesfully delete account...", "", "success");
           this.$router.push("/login");
+          this.store.$reset();
+          this.cart.$reset();
+          this.productDir.$reset();
         } else if (result.isDenied) {
           Swal.fire("Request canceled", "", "info");
         }
@@ -254,8 +259,10 @@ export default {
   },
   setup() {
     const store = userProfile();
+    const cart = usersStore();
+    const productDir = userProduct();
 
-    return { store };
+    return { store, cart, productDir };
   },
 };
 </script>

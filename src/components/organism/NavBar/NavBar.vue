@@ -10,13 +10,17 @@
               >EP.</router-link
             >
           </div>
-
         </div>
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <div class="absolute -right-0 flex items-center justify-between">
-
           <div v-if="isLogin" class="flex items-center md:flex-row md:mt-0">
+            <div>
+              <p class="text-xs md:text-sm font-medium text-gray-400">
+                {{ wallet }} points
+              </p>
+            </div>
+
             <div class="flex justify-center md:block">
               <router-link
                 class="relative mx-4 text-gray-600 border-0 md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
@@ -132,6 +136,8 @@ import { userProfile } from "/@/store/user.profile";
 import { onBeforeMount } from "@vue/runtime-core";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { usersStore } from "/@/store/users.store";
+import { userProduct } from "/@/store/user.product";
 
 export default {
   name: "NavBar",
@@ -155,6 +161,9 @@ export default {
     firstName() {
       return this.store.getFirstName;
     },
+    wallet() {
+      return this.store.getWallet;
+    },
   },
   methods: {
     logout: function () {
@@ -169,6 +178,8 @@ export default {
             confirmButtonColor: "#1ea7fd",
           });
           this.store.$reset();
+          this.cart.$reset();
+          this.productDir.$reset();
           this.$router.push("/login");
         })
         .catch((err) => {
@@ -183,6 +194,8 @@ export default {
   },
   setup() {
     const store = userProfile();
+    const cart = usersStore();
+    const productDir = userProduct();
     store.getProfileImg();
     store.getProfile();
 
@@ -196,7 +209,7 @@ export default {
       });
     });
 
-    return { store };
+    return { store, cart, productDir };
   },
 };
 </script>
