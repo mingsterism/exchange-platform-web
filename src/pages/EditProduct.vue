@@ -1,51 +1,49 @@
 <template>
-  <div class="p-10 md:px-20">
-    <div class="flex justify-center">
+  <div class="py-10">
+    <div class="flex justify-center w-screen">
       <div>
-        <div class="mb-2 lg:max-w-md">
+        <div class="mb-2 lg:min-w-md">
           <h1 class="text-xl text-left">Edit Product</h1>
           <div class="h-px bg-black"></div>
         </div>
-        <div class="lg:max-w-md">
+        <div class="lg:min-w-md">
           <div
-            class="flex flex-wrap items-start gap-3 border border-gray-400 rounded-md p-2 h-40 overflow-y-auto"
+            class="flex flex-wrap items-start gap-3 rounded-md p-2"
             id="productImgCont"
           >
             <!-- index to point at the items -->
             <Image
               v-for="(image, index) in productPhotos"
               :key="index"
-              :src="image"
+              :srcImg="image"
             />
-            <!-- <div class="flex flex-col justify-around h-40 text-sm">
+            <div
+              class="flex items-center justify-center h-36 w-36 border rounded-md text-sm bg-white cursor-not-allowed"
+            >
               <input
-                class="hidden"
+                class="hidden cursor-not-allowed"
                 type="file"
                 accept="image/*"
                 name="image"
                 id="uploadProductImg"
                 @change="uploadProductImage($event)"
+                disabled
               />
               <label
-                class="px-3 py-2 text-white rounded-md btnBlue hover:opacity-70 transition ease-linear duration-300"
+                class="hover:opacity-50 transition ease-out duration-300"
                 for="uploadProductImg"
                 style="cursor: pointer"
-                >Upload</label
-              >
-              <input
-                class="hidden"
-                type="button"
-                name="popImage"
-                id="popProductImage"
-                @click="popProductImage()"
-              />
-              <label
-                class="px-3 py-2 text-white rounded-md btnBlue hover:opacity-70 transition ease-linear duration-300"
-                for="popProductImage"
-                style="cursor: pointer"
-                >Delete</label
-              >
-            </div> -->
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="bi bi-plus h-10 cursor-not-allowed"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                  /></svg
+              ></label>
+            </div>
           </div>
           <div class="mt-2">
             <p class="text-left text-xs">
@@ -122,21 +120,35 @@
             placeholder="Enter product description here."
             v-model="productDescription"
           ></textarea>
-          <div class="flex justify-end w-full mt-5">
-            <Button
+          <div class="flex items-center justify-end w-full mt-5">
+            <!-- <Button
               class="mb-10 transform hover:scale-125 hover:opacity-75 transition ease-out duration-300"
               type="button"
               label="Update"
               :primary="true"
               @click="updateDetails"
-            />
-            <Button
+            /> -->
+            <!-- <Button
               class="mb-10 ml-3 transform hover:scale-125 hover:opacity-75 transition ease-out duration-300"
               type="submit"
               label="Cancel"
               :primary="true"
               @click="returnToProfile"
-            />
+            /> -->
+            <button
+              @click="returnToProfile"
+              type="button"
+              class="px-4 py-2 mr-2 font-medium capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+            >
+              Cancel
+            </button>
+            <button
+              @click="updateDetails"
+              type="button"
+              class="px-4 py-2 font-medium text-white btnDark capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+            >
+              Update
+            </button>
           </div>
         </div>
       </div>

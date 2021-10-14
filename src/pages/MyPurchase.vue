@@ -1,12 +1,15 @@
 <template>
   <div>
+    <div class="mb-5">
+      <h1 class="text-3xl text-left font-semibold">Purchase History</h1>
+    </div>
     <div
       v-if="!purchase"
       class="flex flex-wrap items-start gap-10 border-2 p-2"
     >
       <h1>Currently there is no transaction.</h1>
     </div>
-    <div class="flex-1 md:flex md:flex-wrap gap-x-3 pl-1" v-else>
+    <div class="flex flex-col" v-else>
       <!-- My purchases card -->
       <PurchaseCard
         :post="item"

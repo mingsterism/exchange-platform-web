@@ -1,5 +1,8 @@
 <template>
   <div class="md:px-5">
+    <div class="mb-5">
+      <h1 class="text-3xl text-left font-semibold">Add Product</h1>
+    </div>
     <div
       v-if="uploading"
       class="flex items-center justify-center z-40 inset-0 w-screen h-screen bg-gray-500 bg-opacity-50 absolute"
@@ -12,16 +15,19 @@
     <div>
       <div>
         <div
-          class="flex flex-wrap items-start gap-3 border border-gray-400 rounded-md p-2 h-40 overflow-y-scroll"
+          class="flex flex-wrap items-start gap-3 rounded-md p-2"
           id="productImgCont"
         >
           <!-- index to point at the items -->
           <Image
             v-for="(image, index) in productPhotos"
             :key="index"
-            :src="image"
+            :srcImg="image"
+            @pop-product-img="popProductImage()"
           />
-          <div class="flex flex-col justify-around h-40 text-sm">
+          <div
+            class="flex items-center justify-center h-36 w-36 border rounded-md text-sm bg-white"
+          >
             <input
               class="hidden"
               type="file"
@@ -31,12 +37,20 @@
               @change="uploadProductImage($event)"
             />
             <label
-              class="px-3 py-2 text-white rounded-md btnBlue hover:opacity-70 transition ease-linear duration-300"
+              class="hover:opacity-50 transition ease-out duration-300"
               for="uploadProductImg"
               style="cursor: pointer"
-              >Upload</label
-            >
-            <input
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="bi bi-plus h-10"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                /></svg
+            ></label>
+            <!-- <input
               class="hidden"
               type="button"
               name="popImage"
@@ -48,11 +62,11 @@
               for="popProductImage"
               style="cursor: pointer"
               >Delete</label
-            >
+            > -->
           </div>
         </div>
         <div class="mt-2">
-          <p class="text-left text-xs">
+          <p class="text-left text-xs text-gray-400">
             *Please note that the first photo will be the primary.
           </p>
         </div>
@@ -117,20 +131,27 @@
         <label for="productDescription" class="addProdLabel">Description</label>
         <textarea
           name="productDescription"
-          class="border border-gray-400 text-sm rounded-lg p-1.5 w-full resize-none"
+          class="border border-gray-400 text-sm rounded-lg p-1.5 w-full xl:w-9/12 resize-none"
           id="productDescription"
           rows="6"
           placeholder="Enter product description here."
           v-model="productDescription"
         ></textarea>
-        <div class="flex justify-end w-full mt-5">
-          <Button
+        <div class="flex justify-end w-full xl:w-9/12 mt-5">
+          <!-- <Button
             class="transform hover:opacity-75 transition ease-out duration-300"
             type="submit"
             @click="createProduct"
             label="Add Product"
             :primary="true"
-          />
+          /> -->
+          <button
+            @click="createProduct"
+            type="button"
+            class="px-4 py-2 font-medium text-white btnDark capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

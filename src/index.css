@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .addProdLabel {
-  @apply text-gray-600 mt-3 text-sm md:text-base text-left pl-2 pb-1;
+  @apply text-gray-400 mt-3 text-sm md:text-base text-left pl-2 pb-1;
 }
 
 .addProdInput {

@@ -14,17 +14,60 @@
       Product Description
       </div> -->
         <p class="text-xs md:text-sm">{{ post.points }} points</p>
-        <p class="text-xs md:text-sm mt-2">
+        <!-- <p class="text-xs md:text-sm mt-2">
           Quantity:
           <input
             class="border border-gray-400 px-1 py-0.5 w-9 md:w-10"
             @keydown.enter="updateTotal"
-            @mouseleave="updateTotal"
+            @blur="updateTotal"
             type="number"
             :min="post.desireQuantity"
             v-model="quantity"
           />
-        </p>
+        </p> -->
+        <div class="flex items-center">
+          <p class="text-xs md:text-sm">Quantity:</p>
+          <div
+            class="flex items-center border border-collapse border-gray-300 rounded-md ml-1"
+          >
+            <button type="button" class="hover:opacity-60" @click="addQty">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="bi bi-plus h-4 px-1"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                />
+              </svg>
+            </button>
+
+            <input
+              class="border-l border-r border-gray-300 text-sm text-center p-1 w-9"
+              @keydown.enter="updateTotal"
+              @blur="updateTotal"
+              @change="updateTotal"
+              type="number"
+              :min="1"
+              v-model="quantity"
+            />
+
+            <button type="button" class="hover:opacity-60" @click="deductQty">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="bi bi-dash h-4 px-1"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
         <p class="md:hidden text-xs md:text-sm mt-1">
           Total cost: {{ post.totalPoints }} points
         </p>
@@ -126,6 +169,24 @@ export default {
       this.post.totalPoints = newTotal;
       await this.store.updateTotalCost();
       console.log("update complete");
+    },
+    async addQty() {
+      // this.quantity === this.post.currentQty ? null : this.quantity++;
+      if (this.quantity === this.post.currentQty) {
+        return;
+      } else {
+        this.quantity++;
+        await this.updateTotal();
+      }
+    },
+    async deductQty() {
+      // this.quantity === 1 ? null : this.quantity--;
+      if (this.quantity === 1) {
+        return;
+      } else {
+        this.quantity--;
+        await this.updateTotal();
+      }
     },
   },
   setup() {

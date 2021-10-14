@@ -1,9 +1,12 @@
 <template>
   <div>
+    <div class="mb-5">
+      <h1 class="text-3xl text-left font-semibold">My Product</h1>
+    </div>
     <div v-if="isEmpty" class="border rounded-md p-2">
       <h1>Currently there is no product here.</h1>
     </div>
-    <div className="grid grid-cols-2 xl:flex flex-wrap gap-2 md:gap-6 mb-10">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mb-10">
       <transition-group name="card">
         <Card :post="post" v-for="(post, index) in myProducts" :key="index" />
       </transition-group>
