@@ -86,28 +86,28 @@
               class="absolute right-0 top-10 z-20 w-48 py-2 mt-2 text-left bg-white rounded-md shadow-xl dark:bg-gray-800"
             >
               <router-link
-                to="/profile"
+                :to="{ name: 'Profile' }"
                 @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 View Profile
               </router-link>
               <router-link
-                to="/user/my-product"
+                :to="{ name: 'MyProduct' }"
                 @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 My Products
               </router-link>
               <router-link
-                to="/user/my-purchase"
+                :to="{ name: 'MyPurchase' }"
                 @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
                 Purchase History
               </router-link>
               <router-link
-                to="/user/add-product"
+                :to="{ name: 'AddProduct' }"
                 @click.once="show = false"
                 class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
               >
@@ -180,7 +180,7 @@ export default {
           this.store.$reset();
           this.cart.$reset();
           this.productDir.$reset();
-          this.$router.push("/login");
+          this.$router.push("/auth/login");
         })
         .catch((err) => {
           Swal.fire({

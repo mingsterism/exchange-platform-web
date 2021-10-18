@@ -18,48 +18,48 @@ import router from "../router/router";
 // useStore could be anything like useUser, useCart
 export const usersStore = defineStore({
   // unique id of the store across your application
-  id: Math.random(),
+  id: "usersStore",
   state() {
     return {
       allProducts: [],
       isLoading: true,
-      productId: "",
-      productName: null,
-      productPoints: null,
-      productQuantity: null,
-      productPhotos: null,
-      photoQty: null,
-      productDescriptions: null,
-      productCondition: null,
+      // productId: "",
+      // productName: null,
+      // productPoints: null,
+      // productQuantity: null,
+      // productPhotos: null,
+      // photoQty: null,
+      // productDescriptions: null,
+      // productCondition: null,
       itemsInCart: null,
       currentTotalPrice: null,
       myPurchases: null,
       hasPurchase: false,
-      soldBy: null,
+      // soldBy: null,
     };
   },
   getters: {
     getAllProducts: (state) => {
       return state.allProducts;
     },
-    getProductName: (state) => {
-      return state.productName;
-    },
-    getProductPoints: (state) => {
-      return state.productPoints;
-    },
-    getProductQuantity: (state) => {
-      return state.productQuantity;
-    },
-    getProductPhotos: (state) => {
-      return state.productPhotos;
-    },
-    getProductDescriptions: (state) => {
-      return state.productDescriptions;
-    },
-    getProductCondition: (state) => {
-      return state.productCondition;
-    },
+    // getProductName: (state) => {
+    //   return state.productName;
+    // },
+    // getProductPoints: (state) => {
+    //   return state.productPoints;
+    // },
+    // getProductQuantity: (state) => {
+    //   return state.productQuantity;
+    // },
+    // getProductPhotos: (state) => {
+    //   return state.productPhotos;
+    // },
+    // getProductDescriptions: (state) => {
+    //   return state.productDescriptions;
+    // },
+    // getProductCondition: (state) => {
+    //   return state.productCondition;
+    // },
     getItemsInCart: (state) => {
       return state.itemsInCart;
     },
@@ -72,12 +72,12 @@ export const usersStore = defineStore({
     getHasPurchase: (state) => {
       return state.hasPurchase;
     },
-    getProductId: (state) => {
-      return state.productId;
-    },
-    getSoldBy: (state) => {
-      return state.soldBy;
-    },
+    // getProductId: (state) => {
+    //   return state.productId;
+    // },
+    // getSoldBy: (state) => {
+    //   return state.soldBy;
+    // },
     getLoading: (state) => {
       return state.isLoading;
     },
@@ -89,14 +89,14 @@ export const usersStore = defineStore({
       const userDocContainer = [];
       this.allProducts = [];
       const otherUsers = await profileCollection.where("id", "!=", uid).get();
-      console.log("in progress...");
+      // console.log("in progress...");
       if (otherUsers.length !== 0) {
         otherUsers.forEach((doc) => {
           const profileDoc = doc.data();
           userDocContainer.push(profileDoc);
         });
       } else {
-        console.log("Failed to read other user document...");
+        // console.log("Failed to read other user document...");
       }
 
       for (let i = 0; i < userDocContainer.length; i++) {
@@ -111,7 +111,7 @@ export const usersStore = defineStore({
         });
       }
       this.isLoading = false;
-      console.log("Successfully fetched all products...");
+      // console.log("Successfully fetched all products...");
     },
     async showItemsInCart(uid) {
       let grandTotal = 0;
@@ -134,7 +134,7 @@ export const usersStore = defineStore({
       }
       this.setCurrentTotal(grandTotal);
     },
-    checkOutItems() {
+    async checkOutItems() {
       const profile = userProfile();
       const user = firebase.auth().currentUser;
       const uid = user.uid;
@@ -152,7 +152,7 @@ export const usersStore = defineStore({
 
       // console.log("items in cart: ", this.itemsInCart);
       const deduction = -this.currentTotalPrice;
-      updateWallet(uid, deduction);
+      await updateWallet(uid, deduction);
       addToMyPurchase(this.itemsInCart);
       profile.getProfile();
       router.push("/user/my-purchase");
@@ -180,29 +180,29 @@ export const usersStore = defineStore({
           this.currentTotalPrice -= item.totalPoints;
         }
       }
-      console.log("Successfully remove from cart...");
+      // console.log("Successfully remove from cart...");
     },
-    setProductName(payload) {
-      this.productName = payload;
-    },
-    setProductPoints(payload) {
-      this.productPoints = payload;
-    },
-    setProductQuantity(payload) {
-      this.productQuantity = payload;
-    },
-    setProductCondition(payload) {
-      this.productCondition = payload;
-    },
-    setProductDescriptions(payload) {
-      this.productDescriptions = payload;
-    },
-    setProductPhotos(payload) {
-      this.productPhotos = payload;
-    },
-    setProductId(payload) {
-      this.productId = payload;
-    },
+    // setProductName(payload) {
+    //   this.productName = payload;
+    // },
+    // setProductPoints(payload) {
+    //   this.productPoints = payload;
+    // },
+    // setProductQuantity(payload) {
+    //   this.productQuantity = payload;
+    // },
+    // setProductCondition(payload) {
+    //   this.productCondition = payload;
+    // },
+    // setProductDescriptions(payload) {
+    //   this.productDescriptions = payload;
+    // },
+    // setProductPhotos(payload) {
+    //   this.productPhotos = payload;
+    // },
+    // setProductId(payload) {
+    //   this.productId = payload;
+    // },
     setItemsInCart(payload) {
       this.itemsInCart = payload;
     },
@@ -212,11 +212,11 @@ export const usersStore = defineStore({
     setMyPurchase(payload) {
       this.myPurchases = payload;
     },
-    setSoldBy(payload) {
-      this.soldBy = payload;
-    },
-    setAllProducts(payload) {
-      this.allProducts.payload;
-    },
+    // setSoldBy(payload) {
+    //   this.soldBy = payload;
+    // },
+    // setAllProducts(payload) {
+    //   this.allProducts.payload;
+    // },
   },
 });

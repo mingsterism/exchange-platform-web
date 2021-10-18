@@ -14,18 +14,18 @@ export const getUserProducts = async (userId) => {
   return docContainer;
 };
 
-export const getSpecificProduct = async (uid, prodID) => {
-  // const user = firebase.auth().currentUser;
-  const productDoc = await profileCollection
-    .doc(uid)
-    .collection("products")
-    .doc(prodID)
-    .get();
-  const productData = productDoc.data();
-  console.log(productData);
-  console.log("Product name: ", productData.name);
-  return productData;
-};
+// export const getSpecificProduct = async (uid, prodID) => {
+//   // const user = firebase.auth().currentUser;
+//   const productDoc = await profileCollection
+//     .doc(uid)
+//     .collection("products")
+//     .doc(prodID)
+//     .get();
+//   const productData = productDoc.data();
+//   console.log(productData);
+//   console.log("Product name: ", productData.name);
+//   return productData;
+// };
 
 export const createProduct = async (uid, productDetails) => {
   //   const user = firebase.auth().currentUser;

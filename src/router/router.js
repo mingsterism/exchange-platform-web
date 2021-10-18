@@ -8,10 +8,9 @@ import Register from "/@/pages/Register.vue";
 import ForgotPass from "/@/pages/ForgotPass.vue";
 import AddProduct from "/@/pages/AddProduct.vue";
 import MyProduct from "/@/pages/MyProduct.vue";
-import Profile from "/@/pages/ProfileMod.vue";
+import Profile from "/@/pages/Profile.vue";
 import MyPurchase from "/@/pages/MyPurchase.vue";
 import EditProduct from "../pages/EditProduct.vue";
-import ViewProduct from "../pages/ViewProduct.vue";
 import Cart from "../pages/Cart.vue";
 import User from "../layouts/User.layout.vue";
 import Header from "../layouts/Header.layout.vue";
@@ -23,19 +22,19 @@ const routes = [
     component: Header,
     children: [
       {
-        path: "/login",
+        path: "login",
         name: "Login",
         component: Login,
         meta: { requireAuth: false },
       },
       {
-        path: "/register",
+        path: "register",
         name: "Register",
         component: Register,
         meta: { requireAuth: false },
       },
       {
-        path: "/forgotpass",
+        path: "forgotpass",
         name: "ForgotPass",
         component: ForgotPass,
         meta: { requireAuth: false },
@@ -59,12 +58,6 @@ const routes = [
         meta: { requireAuth: true },
       },
       {
-        path: "/view-product",
-        name: "ViewProduct",
-        component: ViewProduct,
-        meta: { requireAuth: true },
-      },
-      {
         path: "/cart",
         name: "Cart",
         component: Cart,
@@ -80,19 +73,19 @@ const routes = [
         component: User,
         children: [
           {
-            path: "/user/my-product",
+            path: "my-product",
             name: "MyProduct",
             component: MyProduct,
             meta: { requireAuth: true },
           },
           {
-            path: "/user/add-product",
+            path: "add-product",
             name: "AddProduct",
             component: AddProduct,
             meta: { requireAuth: true },
           },
           {
-            path: "/user/my-purchase",
+            path: "my-purchase",
             name: "MyPurchase",
             component: MyPurchase,
             meta: { requireAuth: true },

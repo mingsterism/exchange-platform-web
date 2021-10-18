@@ -38,7 +38,7 @@
       <p class="mt-5 text-xs font-light text-center text-gray-400">
         Have an account?
         <router-link
-          to="/login"
+          :to="{ name: 'Login' }"
           class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
           >Login here</router-link
         >
@@ -47,7 +47,7 @@
       <p class="mt-3 text-xs font-light text-center text-gray-400">
         Don't have an account?
         <router-link
-          to="/register"
+          :to="{ name: 'Register' }"
           class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
           >Create One</router-link
         >

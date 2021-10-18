@@ -19,8 +19,19 @@ export default {
     onBeforeMount(() => {
       firebase.auth().onAuthStateChanged((user) => {
         if (!user) {
-          router.replace("/login");
-        } else if (route.path === "/login") {
+          if (
+            route.path === "/auth/login" ||
+            route.path === "/auth/register" ||
+            route.path === "/auth/forgotpass"
+          ) {
+            return
+          }
+          router.replace("/auth/login");
+        } else if (
+          route.path === "/auth/login" ||
+          route.path === "/auth/register" ||
+          route.path === "/auth/forgotpass"
+        ) {
           router.replace("/");
         }
       });

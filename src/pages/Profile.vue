@@ -243,7 +243,7 @@ export default {
           await deleteAcc();
           this.inProgress = false;
           Swal.fire("Succesfully delete account...", "", "success");
-          this.$router.push("/login");
+          this.$router.push("/auth/login");
           this.store.$reset();
           this.cart.$reset();
           this.productDir.$reset();
@@ -268,28 +268,6 @@ export default {
 </script>
 
 <style lang="scss">
-.route-enter-from {
-  opacity: 0;
-  transform: translateX(100px);
-}
-
-.route-leave-to {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-.route-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.route-leave-active {
-  transition: all 0.3s ease-in;
-}
-
-.router-link-exact-active {
-  border-bottom: 1px solid black;
-}
-
 .btnBlue {
   background-color: $blue;
 }

@@ -5,7 +5,6 @@ import "firebase/auth";
 import {
   createProduct,
   deleteProduct,
-  getSpecificProduct,
   getUserProducts,
   updateProductDoc,
   updateProductPhotos,
@@ -196,21 +195,21 @@ export const userProduct = defineStore({
         this.emptyStatus = true;
       }
     },
-    async displayForEdit() {
-      const user = firebase.auth().currentUser;
-      const uid = user.uid;
-      const productId = this.productTempId;
-      const productCurrentDetail = await getSpecificProduct(uid, productId);
-      if (productCurrentDetail !== null) {
-        // console.log("Product Document: ", productCurrentDetail);
-        this.editProductName = productCurrentDetail.name;
-        this.editProductPoints = productCurrentDetail.points;
-        this.editProductQty = productCurrentDetail.quantity;
-        this.editProductCondition = productCurrentDetail.conditions;
-        this.editProductDescription = productCurrentDetail.description;
-        this.editProductPhotos = productCurrentDetail.photos;
-      }
-    },
+    // async displayForEdit() {
+    //   const user = firebase.auth().currentUser;
+    //   const uid = user.uid;
+    //   const productId = this.productTempId;
+    //   const productCurrentDetail = await getSpecificProduct(uid, productId);
+    //   if (productCurrentDetail !== null) {
+    //     // console.log("Product Document: ", productCurrentDetail);
+    //     this.editProductName = productCurrentDetail.name;
+    //     this.editProductPoints = productCurrentDetail.points;
+    //     this.editProductQty = productCurrentDetail.quantity;
+    //     this.editProductCondition = productCurrentDetail.conditions;
+    //     this.editProductDescription = productCurrentDetail.description;
+    //     this.editProductPhotos = productCurrentDetail.photos;
+    //   }
+    // },
     changeProductName(payload) {
       this.editProductName = payload;
     },
