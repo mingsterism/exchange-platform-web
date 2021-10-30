@@ -2,7 +2,17 @@
   <div class="py-10 px-10 md:px-0">
     <div
       v-if="inProgress"
-      class="flex items-center justify-center z-40 inset-0 w-screen h-screen bg-gray-500 bg-opacity-50 absolute"
+      class="
+        flex
+        items-center
+        justify-center
+        z-40
+        inset-0
+        w-screen
+        h-screen
+        bg-gray-500 bg-opacity-50
+        absolute
+      "
     >
       <svg viewBox="0 0 50 50" class="spinning">
         <circle class="ring" cx="25" cy="25" r="20"></circle>
@@ -15,16 +25,21 @@
           <p className="text-2xl md:text-3xl text-left font-semibold mb-1">
             My Profile
           </p>
-          <!-- <p class="text-sm font-medium text-gray-400">
-            Wallet: {{ wallet }} points
-          </p> -->
         </div>
         <div class="h-px bg-black"></div>
       </div>
     </div>
     <div className="flex flex-col items-center mt-10">
       <div class="flex flex-col md:flex-row items-center justify-center">
-        <Image :srcImg="profilePicture" class="rounded-full" />
+        <Image
+          :srcImg="
+            profilePicture === ''
+              ? (profilePicture =
+                  'https://pbs.twimg.com/profile_images/1176237957851881472/CHOXLj9b_400x400.jpg')
+              : profilePicture
+          "
+          class="rounded-full"
+        />
         <div class="md:ml-5 mt-5 md:mt-0">
           <p>
             <input
@@ -38,7 +53,25 @@
           </p>
           <p>
             <label
-              class="px-4 py-2 text-sm md:text-base font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              class="
+                px-4
+                py-2
+                text-sm
+                md:text-base
+                font-medium
+                text-white
+                btnBlue
+                capitalize
+                transition-colors
+                duration-300
+                transform
+                rounded-md
+                hover:opacity-75
+                focus:outline-none
+                focus:ring
+                focus:ring-blue-300
+                focus:ring-opacity-80
+              "
               for="file"
               >Upload Image</label
             >
@@ -93,33 +126,55 @@
         </div>
         <div class="mt-4 flex justify-end">
           <div>
-            <!-- <Button
-              class="transform hover:opacity-75 transition ease-out duration-300"
-              type="submit"
-              @click="updateProfileDetail"
-              label="Update Profile"
-              :primary="true"
-            /> -->
             <button
               @click="updateProfileDetail"
               type="button"
-              class="px-4 py-2 text-sm md:text-base font-medium text-white btnBlue capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              class="
+                px-4
+                py-2
+                text-sm
+                md:text-base
+                font-medium
+                text-white
+                btnBlue
+                capitalize
+                transition-colors
+                duration-300
+                transform
+                rounded-md
+                hover:opacity-75
+                focus:outline-none
+                focus:ring
+                focus:ring-blue-300
+                focus:ring-opacity-80
+              "
             >
               Update Profile
             </button>
           </div>
           <div class="ml-2">
-            <!-- <Button
-              class="transform hover:opacity-75 transition ease-out duration-300"
-              type="button"
-              @click="deleteAccount"
-              label="Delete Account"
-              :primary="true"
-            /> -->
             <button
               @click="deleteAccount"
               type="button"
-              class="px-4 py-2 text-sm md:text-base font-medium text-white btnRed capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+              class="
+                px-4
+                py-2
+                text-sm
+                md:text-base
+                font-medium
+                text-white
+                btnRed
+                capitalize
+                transition-colors
+                duration-300
+                transform
+                rounded-md
+                hover:opacity-75
+                focus:outline-none
+                focus:ring
+                focus:ring-red-300
+                focus:ring-opacity-80
+              "
             >
               Delete Account
             </button>
@@ -131,15 +186,15 @@
 </template>
 
 <script>
-import Image from "/@/components/molecule/Image/Image.vue";
-import Button from "/@/components/molecule/Button/Button.vue";
+import Image from "/@/components/Image/Image.vue";
 import { userProfile } from "../store/user.profile.js";
-import { deleteAcc } from "../utils/auth.js";
-import { deleteProfilePhoto } from "../utils/storage.js";
+import { deleteAcc } from "../firebase/auth.js";
+import { deleteProfilePhoto } from "../firebase/storage.js";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { usersStore } from "../store/users.store.js";
 import { userProduct } from "../store/user.product.js";
+import { usersStore } from "../store/user.store.js";
+// will add the store for userStore and userProduct later on
 
 export default {
   name: "ProfileMod",
@@ -245,8 +300,9 @@ export default {
           Swal.fire("Succesfully delete account...", "", "success");
           this.$router.push("/auth/login");
           this.store.$reset();
-          this.cart.$reset();
-          this.productDir.$reset();
+          this.productStore.$reset()
+          this.shoppingStore.$reset()
+          // will add the store for userStore and userProduct later on
         } else if (result.isDenied) {
           Swal.fire("Request canceled", "", "info");
         }
@@ -255,14 +311,13 @@ export default {
   },
   components: {
     Image,
-    Button,
   },
   setup() {
     const store = userProfile();
-    const cart = usersStore();
-    const productDir = userProduct();
+    const productStore = userProduct();
+    const shoppingStore = usersStore();
 
-    return { store, cart, productDir };
+    return { store, productStore, shoppingStore };
   },
 };
 </script>

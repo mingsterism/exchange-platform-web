@@ -1,7 +1,16 @@
 <template>
   <div class="py-20">
     <div
-      class="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800"
+      class="
+        w-full
+        max-w-sm
+        p-6
+        m-auto
+        bg-white
+        rounded-md
+        shadow-md
+        dark:bg-gray-800
+      "
     >
       <h1
         class="text-3xl font-semibold text-center text-gray-700 dark:text-white"
@@ -20,7 +29,21 @@
             type="text"
             placeholder="Email"
             v-model="email"
-            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            class="
+              block
+              w-full
+              px-4
+              py-2
+              mt-2
+              text-gray-700
+              bg-white
+              border
+              rounded-md
+              dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
+              focus:border-blue-500
+              dark:focus:border-blue-500
+              focus:outline-none focus:ring
+            "
           />
         </div>
 
@@ -32,7 +55,7 @@
               >Password</label
             >
             <router-link
-              :to="{name: 'ForgotPass'}"
+              to="forgotpass"
               class="text-xs text-gray-600 dark:text-gray-400 hover:underline"
               >Forget Password?</router-link
             >
@@ -42,7 +65,21 @@
             type="password"
             v-model="password"
             @keypress.enter="handleLogin"
-            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            class="
+              block
+              w-full
+              px-4
+              py-2
+              mt-2
+              text-gray-700
+              bg-white
+              border
+              rounded-md
+              dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
+              focus:border-blue-500
+              dark:focus:border-blue-500
+              focus:outline-none focus:ring
+            "
           />
         </div>
 
@@ -50,7 +87,20 @@
           <button
             type="button"
             @click="handleLogin"
-            class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+            class="
+              w-full
+              px-4
+              py-2
+              tracking-wide
+              text-white
+              transition-colors
+              duration-200
+              transform
+              bg-gray-700
+              rounded-md
+              hover:bg-gray-600
+              focus:outline-none focus:bg-gray-600
+            "
           >
             Login
           </button>
@@ -62,7 +112,12 @@
 
         <a
           href="#"
-          class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline"
+          class="
+            text-xs text-center text-gray-500
+            uppercase
+            dark:text-gray-400
+            hover:underline
+          "
           >or login with Social Media</a
         >
 
@@ -73,7 +128,25 @@
         <button
           type="button"
           @click="loginWithGoogle"
-          class="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none"
+          class="
+            flex
+            items-center
+            justify-center
+            w-full
+            px-6
+            py-2
+            mx-2
+            text-sm
+            font-medium
+            text-white
+            transition-colors
+            duration-200
+            transform
+            bg-blue-500
+            rounded-md
+            hover:bg-blue-400
+            focus:bg-blue-400 focus:outline-none
+          "
         >
           <svg class="w-4 h-4 mx-2 fill-current" viewBox="0 0 24 24">
             <path
@@ -88,7 +161,7 @@
       <p class="mt-8 text-xs font-light text-center text-gray-400">
         Don't have an account?
         <router-link
-          :to="{name: 'Register'}"
+          to="register"
           class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
           >Create One</router-link
         >
@@ -98,19 +171,13 @@
 </template>
 
 <script>
-// import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
-// import Button from "/@/components/molecule/Button/Button.vue";
-import { login } from "/@/utils/auth.js";
-import { signInWithGoogle } from "../utils/auth.google";
+import { login } from "/@/firebase/auth.js";
+import { signInWithGoogle } from "../firebase/auth.google";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 export default {
   name: "Login",
-  // components: {
-  //   Textbox,
-  //   Button,
-  // },
   data() {
     return {
       email: "",
@@ -135,7 +202,6 @@ export default {
             showConfirmButton: false,
             timer: 1500,
           });
-          // this.store.setIsLogin(true);
           this.$router.push("/");
         })
         .catch((err) =>
@@ -146,9 +212,6 @@ export default {
             confirmButtonColor: "#1ea7fd",
           })
         );
-      // if (!isLoggedIn) {
-      //   this.$router.push("/login");
-      // }
     },
     async loginWithGoogle() {
       console.log("Logging in using google account...");
@@ -159,12 +222,12 @@ export default {
         showConfirmButton: false,
         timer: 1500,
       });
-      // this.store.setIsLogin(true);
       this.$router.push("/");
     },
   },
 };
 </script>
+
 <style lang="scss">
 body {
   background-color: $light;

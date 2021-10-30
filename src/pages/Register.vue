@@ -68,7 +68,7 @@
       <p class="mt-5 text-xs font-light text-center text-gray-400">
         Have an account?
         <router-link
-          :to="{ name: 'Login' }"
+          to="login"
           class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
           >Login here</router-link
         >
@@ -76,25 +76,19 @@
     </div>
   </div>
 </template>
+
 <script>
-// import Textbox from "/@/components/molecule/Textbox/Textbox.vue";
-// import Button from "/@/components/molecule/Button/Button.vue";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { createAcc } from "../utils/auth";
+import { createAcc } from "../firebase/auth";
 
 export default {
   name: "Register",
-  // components: {
-  //   Textbox,
-  //   Button,
-  // },
   data() {
     return {
       email: "",
       password: "",
       retype: "",
-      // userName: "",
     };
   },
   methods: {
@@ -124,13 +118,3 @@ export default {
   },
 };
 </script>
-
-<style lang="css" scoped>
-.storybook-textbox {
-  border-width: 4px;
-  --tw-border-opacity: 1;
-  border-color: rgba(156, 163, 175, var(--tw-border-opacity));
-  border-radius: 0.5rem;
-  padding: 0.375rem;
-}
-</style>

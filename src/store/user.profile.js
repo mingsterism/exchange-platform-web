@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { getUserProfileDoc, updateUserProfile } from "../utils/profile";
-import { downloadProfilePic, uploadProfileImage } from "../utils/storage";
+import { getUserProfileDoc, updateUserProfile } from "../firebase/profile";
+import { downloadProfilePic, uploadProfileImage } from "../firebase/storage";
 
 // useStore could be anything like useUser, useCart
-export const userProfile = defineStore({
-  // unique id of the store across your application
-  id: "userProfile",
+// the first argument is a unique id of the store across your application
+export const userProfile = defineStore("profile", {
   state() {
     return {
       aboutMe: "",
@@ -54,10 +53,16 @@ export const userProfile = defineStore({
           this.changedLastName(userDetails.last_name);
           this.changedShippingAddress(userDetails.address);
           this.changeWallet(userDetails.points);
-          // console.log("user details in state: ", userDetails);
-          // console.log("Successfully read user profile...");
         } else {
           console.log("Fail to read user profile");
+        }
+      });
+    },
+    getProfileImg() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const uid = user.uid;
+          downloadProfilePic(uid);
         }
       });
     },
@@ -83,14 +88,6 @@ export const userProfile = defineStore({
         if (user) {
           const uid = user.uid;
           uploadProfileImage(file, uid);
-        }
-      });
-    },
-    getProfileImg() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          const uid = user.uid;
-          downloadProfilePic(uid);
         }
       });
     },

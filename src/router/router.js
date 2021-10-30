@@ -1,22 +1,66 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import firebase from "firebase/app";
-import "firebase/auth";
-import Home from "/@/pages/Home.vue";
-import NavLayout from "/@/layouts/Nav.layout.vue";
-import Login from "/@/pages/Login.vue";
-import Register from "/@/pages/Register.vue";
-import ForgotPass from "/@/pages/ForgotPass.vue";
-import AddProduct from "/@/pages/AddProduct.vue";
-import MyProduct from "/@/pages/MyProduct.vue";
-import Profile from "/@/pages/Profile.vue";
-import MyPurchase from "/@/pages/MyPurchase.vue";
+import Home from "../pages/Home.vue";
+import Header from "../layouts/Header.layout.vue";
+import Login from "../pages/Login.vue";
+import Register from "../pages/Register.vue";
+import ForgotPassword from "../pages/ForgotPassword.vue";
+import NavBar from "../layouts/NavBar.layout.vue";
+import Profile from "../pages/Profile.vue";
+import User from "../layouts/User.layout.vue";
+import AddProduct from "../pages/AddProduct.vue";
+import MyProduct from "../pages/MyProduct.vue";
 import EditProduct from "../pages/EditProduct.vue";
 import Cart from "../pages/Cart.vue";
-import User from "../layouts/User.layout.vue";
-import Header from "../layouts/Header.layout.vue";
+import MyPurchase from "../pages/MyPurchase.vue";
 
-// TODO: Need to add route guard
 const routes = [
+  {
+    path: "/",
+    component: NavBar,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+      },
+      {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
+      },
+      {
+        path: "/user",
+        component: User,
+        children: [
+          {
+            path: "add-product",
+            name: "AddProduct",
+            component: AddProduct,
+          },
+          {
+            path: "my-product",
+            name: "MyProduct",
+            component: MyProduct,
+          },
+          {
+            path: "my-purchase",
+            name: "MyPurchase",
+            component: MyPurchase,
+          },
+        ],
+      },
+      {
+        path: "/edit-product",
+        name: "EditProduct",
+        component: EditProduct,
+      },
+      {
+        path: "/cart",
+        name: "Cart",
+        component: Cart,
+      },
+    ],
+  },
   {
     path: "/auth",
     component: Header,
@@ -25,72 +69,16 @@ const routes = [
         path: "login",
         name: "Login",
         component: Login,
-        meta: { requireAuth: false },
       },
       {
         path: "register",
         name: "Register",
         component: Register,
-        meta: { requireAuth: false },
       },
       {
         path: "forgotpass",
-        name: "ForgotPass",
-        component: ForgotPass,
-        meta: { requireAuth: false },
-      },
-    ],
-  },
-  {
-    path: "/",
-    component: NavLayout,
-    children: [
-      {
-        path: "/",
-        name: "Home",
-        component: Home,
-        meta: { requireAuth: true },
-      },
-      {
-        path: "/edit-Product",
-        name: "EditProduct",
-        component: EditProduct,
-        meta: { requireAuth: true },
-      },
-      {
-        path: "/cart",
-        name: "Cart",
-        component: Cart,
-        meta: { requireAuth: true },
-      },
-      {
-        path: "/profile",
-        component: Profile,
-        name: "Profile",
-      },
-      {
-        path: "/user",
-        component: User,
-        children: [
-          {
-            path: "my-product",
-            name: "MyProduct",
-            component: MyProduct,
-            meta: { requireAuth: true },
-          },
-          {
-            path: "add-product",
-            name: "AddProduct",
-            component: AddProduct,
-            meta: { requireAuth: true },
-          },
-          {
-            path: "my-purchase",
-            name: "MyPurchase",
-            component: MyPurchase,
-            meta: { requireAuth: true },
-          },
-        ],
+        name: "ForgotPassword",
+        component: ForgotPassword,
       },
     ],
   },
@@ -102,16 +90,5 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-// router.beforeEach((to, from, next) => {
-//   const user = firebase.auth().currentUser;
-//   if (to.meta.requireAuth) {
-//     if (user) {
-//       next();
-//     } else {
-//       next({ name: "Login" });
-//     }
-//   }
-// });
 
 export default router;

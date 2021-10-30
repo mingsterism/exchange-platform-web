@@ -1,40 +1,24 @@
 {
-  "name": "exchange-platform",
+  "name": "exchange-platform-web-app",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "host": "vite --host",
     "build": "vite build",
-    "serve": "vite preview",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "serve": "vite preview"
   },
   "dependencies": {
-    "@vue-stripe/vue-stripe": "^4.2.5",
-    "axios": "^0.21.1",
-    "browserify": "^17.0.0",
-    "dotenv-webpack": "^1.7.0",
     "firebase": "^8.6.5",
-    "pinia": "^2.0.0-beta.3",
-    "stripe": "^8.160.0",
-    "sweetalert2": "^11.0.18",
-    "vue": "^3.0.5",
-    "vue-router": "^4.0.8"
+    "pinia": "^2.0.0-rc.13",
+    "sweetalert2": "^11.1.8",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.3.1",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/vue3": "^6.3.1",
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vue/compiler-sfc": "^3.0.5",
-    "autoprefixer": "^10.2.6",
-    "babel-loader": "^8.2.2",
-    "postcss": "^8.3.0",
-    "sass": "^1.42.1",
-    "tailwindcss": "^2.2.4",
-    "vite": "^2.2.3",
-    "vue-loader": "^16.2.0"
+    "@vitejs/plugin-vue": "^1.9.3",
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9",
+    "sass": "^1.43.2",
+    "tailwindcss": "^2.2.17",
+    "vite": "^2.6.4"
   }
 }

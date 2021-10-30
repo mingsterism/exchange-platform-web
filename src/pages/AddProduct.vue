@@ -5,7 +5,17 @@
     </div>
     <div
       v-if="uploading"
-      class="flex items-center justify-center z-40 inset-0 w-screen h-screen bg-gray-500 bg-opacity-50 absolute"
+      class="
+        flex
+        items-center
+        justify-center
+        z-40
+        inset-0
+        w-screen
+        h-screen
+        bg-gray-500 bg-opacity-50
+        absolute
+      "
     >
       <svg viewBox="0 0 50 50" class="spinning">
         <circle class="ring" cx="25" cy="25" r="20"></circle>
@@ -18,7 +28,6 @@
           class="flex flex-wrap items-start gap-3 rounded-md p-2"
           id="productImgCont"
         >
-          <!-- index to point at the items -->
           <Image
             v-for="(image, index) in productPhotos"
             :key="index"
@@ -26,7 +35,17 @@
             @pop-product-img="popProductImage()"
           />
           <div
-            class="flex items-center justify-center h-36 w-36 border rounded-md text-sm bg-white"
+            class="
+              flex
+              items-center
+              justify-center
+              h-36
+              w-36
+              border
+              rounded-md
+              text-sm
+              bg-white
+            "
           >
             <input
               class="hidden"
@@ -50,19 +69,6 @@
                   d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
                 /></svg
             ></label>
-            <!-- <input
-              class="hidden"
-              type="button"
-              name="popImage"
-              id="popProductImage"
-              @click="popProductImage()"
-            />
-            <label
-              class="px-3 py-2 text-white rounded-md btnBlue hover:opacity-70 transition ease-linear duration-300"
-              for="popProductImage"
-              style="cursor: pointer"
-              >Delete</label
-            > -->
           </div>
         </div>
         <div class="mt-2">
@@ -131,24 +137,41 @@
         <label for="productDescription" class="addProdLabel">Description</label>
         <textarea
           name="productDescription"
-          class="border border-gray-400 text-sm rounded-lg p-1.5 w-full xl:w-9/12 resize-none"
+          class="
+            border border-gray-400
+            text-sm
+            rounded-lg
+            p-1.5
+            w-full
+            xl:w-9/12
+            resize-none
+          "
           id="productDescription"
           rows="6"
           placeholder="Enter product description here."
           v-model="productDescription"
         ></textarea>
         <div class="flex justify-end w-full xl:w-9/12 mt-5">
-          <!-- <Button
-            class="transform hover:opacity-75 transition ease-out duration-300"
-            type="submit"
-            @click="createProduct"
-            label="Add Product"
-            :primary="true"
-          /> -->
           <button
             @click="createProduct"
             type="button"
-            class="px-4 py-2 font-medium text-white btnDark capitalize transition-colors duration-300 transform rounded-md hover:opacity-75 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
+            class="
+              px-4
+              py-2
+              font-medium
+              text-white
+              btnDark
+              capitalize
+              transition-colors
+              duration-300
+              transform
+              rounded-md
+              hover:opacity-75
+              focus:outline-none
+              focus:ring
+              focus:ring-indigo-300
+              focus:ring-opacity-80
+            "
           >
             Add to Cart
           </button>
@@ -159,8 +182,7 @@
 </template>
 
 <script>
-import Image from "/@/components/molecule/Image/Image.vue";
-import Button from "/@/components/molecule/Button/Button.vue";
+import Image from "/@/components/Image/Image.vue";
 import { userProduct } from "../store/user.product.js";
 import "firebase/auth";
 import firebase from "firebase/app";
@@ -278,7 +300,6 @@ export default {
   },
   components: {
     Image,
-    Button,
   },
   setup() {
     const store = userProduct();
@@ -289,7 +310,29 @@ export default {
 </script>
 
 <style lang="scss">
-.btnBlue {
-  background-color: $blue;
+.btnDark {
+  background-color: $dark;
+}
+
+.spinning {
+  width: 3.75em;
+  animation: 1.5s spin ease infinite;
+}
+
+.ring {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 2;
+}
+
+.ball {
+  fill: #000000;
+  stroke: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

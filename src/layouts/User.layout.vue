@@ -12,7 +12,7 @@
           </router-link>
           <div class="ml-3 text-left">
             <p class="text-sm">{{ firstName }} {{ lastName }}</p>
-            <router-link :to="{ name: 'Profile' }" class="text-sm flex hover:underline">
+            <router-link to="/profile" class="text-sm flex hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -30,7 +30,7 @@
         <div class="hidden md:flex flex-col flex-initial text-left text-sm">
           <!-- side bar -->
           <router-link
-            :to="{ name: 'MyProduct' }"
+            to="my-product"
             class="flex items-center pt-2 border-0"
           >
             <svg
@@ -49,7 +49,7 @@
           </router-link>
 
           <router-link
-            :to="{ name: 'MyPurchase' }"
+            to="my-purchase"
             class="flex items-center pt-2 border-0"
           >
             <svg
@@ -70,7 +70,7 @@
             <span class="ml-2">Purchase History</span>
           </router-link>
           <router-link
-            :to="{ name: 'AddProduct' }"
+            to="add-product"
             class="flex items-center pt-2 border-0"
           >
             <svg
@@ -93,9 +93,7 @@
         </div>
       </div>
 
-      <div
-        class="flex justify-between md:w-10/12 lg:w-10/12 xl:w-8/12 2xl:w-6/12"
-      >
+      <div class="flex justify-between md:w-10/12 lg:w-10/12 xl:w-8/12 2xl:w-6/12">
         <div class="flex-1 md:pl-5">
           <router-view v-slot="{ Component }">
             <transition name="route" mode="out-in">
@@ -149,7 +147,6 @@ export default {
 }
 
 .router-link-exact-active {
-  border-bottom: 1px solid $purple;
   color: $purple;
 }
 </style>

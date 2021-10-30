@@ -8,14 +8,14 @@
     </div>
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mb-10">
       <transition-group name="card">
-        <Card :post="post" v-for="(post, index) in myProducts" :key="index" />
+        <ProductCard :item="item" v-for="(item, index) in myProducts" :key="index" />
       </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import Card from "/@/components/organism/Card/Card.vue";
+import ProductCard from "/@/components/Cards/ProductCard.vue";
 import { userProduct } from "../store/user.product.js";
 import { computed } from "@vue/runtime-core";
 import firebase from "firebase/app";
@@ -29,7 +29,7 @@ export default {
     },
   },
   components: {
-    Card,
+    ProductCard,
   },
   setup() {
     const store = userProduct();
@@ -44,13 +44,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* .card-enter-from {
-  transform: scale(0);
-}
-
-.card-enter-active {
-  transition: all 0.5s ease;
-} */
-</style>

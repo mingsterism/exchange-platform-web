@@ -4,17 +4,17 @@ import "firebase/firestore";
 import "firebase/auth";
 import {
   createProduct,
-  deleteProduct,
-  getUserProducts,
-  updateProductDoc,
   updateProductPhotos,
-} from "../utils/product";
-import { deleteProdImg, uploadProdImg } from "../utils/storage";
-import { updateWallet } from "../utils/profile";
-import router from "../router/router";
+  getUserProducts,
+  deleteProduct,
+  updateProductDoc,
+} from "../firebase/product";
+import { uploadProdImg, deleteProdImg } from "../firebase/storage";
+import { updateWallet } from "../firebase/profile";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { userProfile } from "./user.profile";
+import router from "../router/router";
 
 // useStore could be anything like useUser, useCart
 export const userProduct = defineStore({
@@ -23,7 +23,6 @@ export const userProduct = defineStore({
   state() {
     return {
       id: "",
-      // uploadedBy: "",
       productToEdit: [],
       productPhotos: [],
       productDisplay: [],
@@ -75,7 +74,6 @@ export const userProduct = defineStore({
       const uid = user.uid;
       const prodDocId = productDetails.id;
       const totalPoints = productDetails.points * productDetails.quantity;
-      // console.log(productDetails);
       if (productDetails !== null) {
         await createProduct(uid, productDetails);
         await updateWallet(uid, totalPoints);
@@ -85,7 +83,6 @@ export const userProduct = defineStore({
           await updateProductPhotos(uid, this.productPhotos, prodDocId);
           console.log("Successfully added the product: ", productDetails.name);
           this.displayUserProduct();
-          // alert("Successfully added the product.");
           this.productPhotos = [];
           Swal.fire({
             title: "Success",
@@ -100,60 +97,20 @@ export const userProduct = defineStore({
         console.log(error);
       }
     },
-    goToEditorPage(product) {
-      this.productToEdit = [];
-      this.productToEdit.push(product);
-      // console.log(this.productTempId);
-      this.editProductName = this.productToEdit[0].name;
-      this.editProductPoints = this.productToEdit[0].points;
-      this.editProductQty = this.productToEdit[0].quantity;
-      this.editProductCondition = this.productToEdit[0].conditions;
-      this.editProductDescription = this.productToEdit[0].description;
-      this.editProductPhotos = this.productToEdit[0].photos;
-      router.push("/edit-product");
-      return router;
+    addPhotoUrl(payload) {
+      this.productPhotos.push(payload);
     },
-    async editProductDetail(newDetails) {
-      // const tempProdId = String(this.productTempId);
-      // this.productPhotos = [];
-      console.log("updating product document...");
-      const user = firebase.auth().currentUser;
-      const uid = user.uid;
-      console.log("before updating...");
-      const updatingDoc = await updateProductDoc(uid, newDetails, this.productToEdit[0].id);
-      // if (newImgFiles.length > 0) {
-      //   await uploadProdImg(newImgFiles, newDetails.id);
-      // }
-      // if (removedFiles.length > 0) {
-
-      // }
-      // if (this.uploadComplete) {
-      //   await updateProductPhotos(uid, this.productPhotos, newDetails.id);
-      //   console.log("Successfully added the product: ", productDetails.name);
-      //   this.displayUserProduct(uid);
-      //   // alert("Successfully added the product.");
-      //   this.productPhotos = [];
-      //   Swal.fire({
-      //     title: "Success",
-      //     icon: "success",
-      //     text: "Sucessfully update product detail.",
-      //     confirmButtonColor: "#1ea7fd",
-      //   });
-      // } else {
-      //   console.log("Fail to update product...");
-      // }
-      console.log("after updating...");
-      if (updatingDoc !== null) {
-        this.displayUserProduct(uid)
-        router.push("/user/my-product");
-        return Swal.fire({
-          title: "Success",
-          icon: "success",
-          text: "Sucessfully updated product details.",
-          confirmButtonColor: "#1ea7fd",
-        });
+    async displayUserProduct(userId) {
+      this.productDisplay = [];
+      const listOfProducts = await getUserProducts(userId);
+      const productDocs = listOfProducts;
+      // console.log(productDocs);
+      if (productDocs.length > 0) {
+        this.emptyStatus = false;
+        this.productDisplay = productDocs;
+        // console.log(this.productDisplay);
       } else {
-        console.log("Failed to update product details...");
+        this.emptyStatus = true;
       }
     },
     async deleteProductDoc(productInfo) {
@@ -176,40 +133,55 @@ export const userProduct = defineStore({
       }
       for (let i = 0; i < this.productDisplay.length; i++) {
         const item = this.productDisplay[i];
-        if (item.id === parseInt(productInfomation.id)) {
+        if (item.id === productInfomation.id) {
           this.productDisplay.splice(i, 1);
           break;
         }
       }
     },
-    async displayUserProduct(userId) {
-      this.productDisplay = [];
-      const listOfProducts = await getUserProducts(userId);
-      const productDocs = listOfProducts;
-      // console.log(productDocs);
-      if (productDocs.length > 0) {
-        this.emptyStatus = false;
-        this.productDisplay = productDocs;
-        // console.log(this.productDisplay);
+    goToEditorPage(product) {
+      this.productToEdit = [];
+      this.productToEdit.push(product);
+      // console.log(this.productTempId);
+      this.editProductName = this.productToEdit[0].name;
+      this.editProductPoints = this.productToEdit[0].points;
+      this.editProductQty = this.productToEdit[0].quantity;
+      this.editProductCondition = this.productToEdit[0].conditions;
+      this.editProductDescription = this.productToEdit[0].description;
+      this.editProductPhotos = this.productToEdit[0].photos;
+      router.push("/edit-product");
+      return router;
+    },
+    async editProductDetail() {
+      console.log("updating product document...");
+      const newDetails = {
+        name: this.editProductName,
+        quantity: this.editProductQty,
+        conditions: this.editProductCondition,
+        description: this.editProductDescription,
+      };
+      const user = firebase.auth().currentUser;
+      const uid = user.uid;
+      console.log("before updating...");
+      const updatingDoc = await updateProductDoc(
+        uid,
+        newDetails,
+        this.productToEdit[0].id
+      );
+      console.log("after updating...");
+      if (updatingDoc !== null) {
+        this.displayUserProduct(uid);
+        router.push("/user/my-product");
+        return Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: "Sucessfully updated product details.",
+          confirmButtonColor: "#1ea7fd",
+        });
       } else {
-        this.emptyStatus = true;
+        console.log("Failed to update product details...");
       }
     },
-    // async displayForEdit() {
-    //   const user = firebase.auth().currentUser;
-    //   const uid = user.uid;
-    //   const productId = this.productTempId;
-    //   const productCurrentDetail = await getSpecificProduct(uid, productId);
-    //   if (productCurrentDetail !== null) {
-    //     // console.log("Product Document: ", productCurrentDetail);
-    //     this.editProductName = productCurrentDetail.name;
-    //     this.editProductPoints = productCurrentDetail.points;
-    //     this.editProductQty = productCurrentDetail.quantity;
-    //     this.editProductCondition = productCurrentDetail.conditions;
-    //     this.editProductDescription = productCurrentDetail.description;
-    //     this.editProductPhotos = productCurrentDetail.photos;
-    //   }
-    // },
     changeProductName(payload) {
       this.editProductName = payload;
     },
@@ -224,9 +196,6 @@ export const userProduct = defineStore({
     },
     changeProductDescription(payload) {
       this.editProductDescription = payload;
-    },
-    addPhotoUrl(payload) {
-      this.productPhotos.push(payload);
     },
   },
 });

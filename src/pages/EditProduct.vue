@@ -1,6 +1,6 @@
 <template>
   <div class="py-10">
-    <div class="flex justify-center w-screen">
+    <div class="flex justify-center">
       <div>
         <div class="mb-2 lg:min-w-md">
           <h1 class="text-xl text-left">Edit Product</h1>
@@ -121,20 +121,7 @@
             v-model="productDescription"
           ></textarea>
           <div class="flex items-center justify-end w-full mt-5">
-            <!-- <Button
-              class="mb-10 transform hover:scale-125 hover:opacity-75 transition ease-out duration-300"
-              type="button"
-              label="Update"
-              :primary="true"
-              @click="updateDetails"
-            /> -->
-            <!-- <Button
-              class="mb-10 ml-3 transform hover:scale-125 hover:opacity-75 transition ease-out duration-300"
-              type="submit"
-              label="Cancel"
-              :primary="true"
-              @click="returnToProfile"
-            /> -->
+
             <button
               @click="returnToProfile"
               type="button"
@@ -157,48 +144,19 @@
 </template>
 
 <script>
-import Image from "/@/components/molecule/Image/Image.vue";
-import Button from "/@/components/molecule/Button/Button.vue";
+import Image from "/@/components/Image/Image.vue";
 import { userProduct } from "../store/user.product";
 export default {
   components: {
     Image,
-    Button,
   },
-  // data() {
-  //   return {
-  //     imgFiles: [],
-  //     removedImg: [],
-  //   };
-  // },
   methods: {
     returnToProfile() {
       this.$router.push("/user/my-product");
     },
     updateDetails() {
-      const newDetails = {
-        name: this.productName,
-        quantity: this.productQty,
-        conditions: this.condition,
-        description: this.productDescription,
-      };
-      this.store.editProductDetail(newDetails);
+      this.store.editProductDetail();
     },
-    // uploadProductImage(event) {
-    //   if (this.productPhotos.length <= 2) {
-    //     console.log(event.target.files);
-    //     this.productPhotos.push(URL.createObjectURL(event.target.files[0]));
-    //     this.imgFiles.push(event.target.files[0]);
-    //     console.log("Current images: ", this.productPhotos);
-    //     console.log("Current files: ", this.imgFiles);
-    //   } else {
-    //     console.log("Cannot upload more than 3 images...");
-    //   }
-    // },
-    // popProductImage() {
-    //   this.removedImg.push(this.productPhotos.pop());
-    //   this.imgFiles.pop();
-    // },
   },
   computed: {
     productName: {
@@ -256,4 +214,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.btnDark {
+  background-color: $dark;
+}
+</style>

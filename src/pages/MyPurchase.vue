@@ -22,8 +22,8 @@
 
 <script>
 import { computed } from "@vue/runtime-core";
-import PurchaseCard from "../components/organism/Cart/PurchaseCard.vue";
-import { usersStore } from "../store/users.store";
+import PurchaseCard from "../components/Cards/PurchaseCard.vue";
+import { usersStore } from "../store/user.store";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -33,9 +33,9 @@ export default {
   setup() {
     const store = usersStore();
 
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async(user) => {
       const uid = user.uid;
-      store.getMyPurchasedItems(uid);
+      await store.getMyPurchasedItems(uid);
     });
 
     const purchasedItem = computed(() => {
@@ -49,14 +49,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.fade-in-enter-from {
-  opacity: 0;
-  transform: translateX(-60px);
-}
-
-.fade-in-enter-active {
-  transition: all 1s ease;
-}
-</style>

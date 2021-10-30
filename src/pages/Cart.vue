@@ -15,13 +15,6 @@
           <p class="md:text-lg font-medium">Total Price: {{ total }} points</p>
         </div>
         <div>
-          <!-- <Button
-            class="ml-5 transform hover:scale-110 hover:opacity-75 transition ease-out duration-300"
-            type="button"
-            @click="checkOut"
-            label="Check Out"
-            :primary="true"
-          /> -->
           <button
             @click="checkOut"
             type="button"
@@ -36,9 +29,8 @@
 </template>
 
 <script>
-import CartCard from "../components/organism/Cart/CartCard.vue";
-// import Button from "../components/molecule/Button/Button.vue";
-import { usersStore } from "../store/users.store";
+import CartCard from "/@/components/Cards/CartCard.vue";
+import { usersStore } from "/@/store/user.store";
 import { computed } from "@vue/runtime-core";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -56,15 +48,8 @@ export default {
         confirmButtonText: "Yes, please",
         denyButtonText: `No, continue shopping`,
       }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           await this.store.checkOutItems();
-          // Swal.fire(
-          //   "Thank you for purchasing in Exchange Platform!",
-          //   "",
-          //   "success"
-          // );
-          // this.$router.push("/user/my-purchase");
         } else if (result.isDenied) {
           Swal.fire("Continue Shopping", "", "info");
         }
@@ -91,6 +76,6 @@ export default {
 
 <style lang="scss">
 .text-color {
-  color: $secondary;
+  color: $dark-purple;
 }
 </style>
